@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 07:07:29 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/17 13:14:23 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/20 21:11:12 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	_assert(bool expr, const char *str)
 {
 	if (expr == false)
 	{
-		ft_dprintf(STDERR_FILENO, "Error\n");
-		ft_dprintf(STDERR_FILENO, str);
+		printf("Error\n%s", str);
 		exit(EXIT_FAILURE);
 	}
 }
