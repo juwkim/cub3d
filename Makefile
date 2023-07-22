@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/23 05:49:07 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/23 06:33:03 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,15 +90,15 @@ STEP				:=	100
 #    Define the target                                                         #
 # ---------------------------------------------------------------------------- #
 
-NAME				:=	game
+NAME				:=	cub3D
 
 # ---------------------------------------------------------------------------- #
 #    Define the rules                                                          #
 # ---------------------------------------------------------------------------- #
 
 all:
-	@$(MAKE) -C $(LIBFT)
 	@$(MAKE) -C $(LIBMLX)
+	@$(MAKE) -C $(LIBFT)
 	@$(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
@@ -115,13 +115,13 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
 clean:
 	@$(MAKE) -C $(LIBFT) clean
 	@$(MAKE) -C $(LIBMLX) clean
-	@$(RM) -r $(BUILD_DIR)
+	@$(RM) -r mandatory/build bonus/build
 	@printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 
 fclean:
 	@$(MAKE) -C $(LIBFT) fclean
 	@$(MAKE) -C $(LIBMLX) fclean
-	@$(RM) -r $(BUILD_DIR) $(NAME)
+	@$(RM) -r mandatory/build bonus/build $(NAME)
 	@printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 	@printf "$(CYAN)[$(NAME)] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 

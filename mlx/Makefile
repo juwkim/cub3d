@@ -7,7 +7,7 @@ SRC+= mlx_png.c mlx_mouse.m
 OBJ1=$(SRC:.c=.o)
 OBJ=$(OBJ1:.m=.o)
 CFLAGS+=-O2
-
+ARFLAGS             := 	-rcs
 # ---------------------------------------------------------------------------- #
 #    Define the variables for progress bar                                     #
 # ---------------------------------------------------------------------------- #
@@ -24,8 +24,7 @@ all:
 	@$(MAKE) -j $(NOM)
 
 $(NOM):	$(OBJ)
-	@$(AR) -rcs $(NOM) $(OBJ)
-	@ranlib $(NOM)
+	@$(AR) $(ARFLAGS) $@ $^
 	@printf "\n$(MAGENTA)[MLX] Linking Success\n$(DEF_COLOR)"
 
 %.o: %.m
@@ -53,6 +52,7 @@ fclean: clean
 
 re: clean all
 
+.PHONY:	all clean fclean re
 # ---------------------------------------------------------------------------- #
 #    Define the colors                                                         #
 # ---------------------------------------------------------------------------- #
