@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.h                                           :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/16 00:20:39 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 02:29:07 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/22 15:41:36 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/22 15:44:51 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UPDATE_H
-# define UPDATE_H
+#ifndef PRINT_H
+# define PRINT_H
 
 # include "cub3d.h"
 
-# define MARGIN		16
-# define MV_SPEED	8.0f
-# define RT_SPEED	0.05f
+void	print_map(const t_map *const map);
 
-bool	update(t_cub3d *const cub3d, const t_key *const key);
-
-#endif // __UPDATE_H__
+#endif // __PRINT_H__

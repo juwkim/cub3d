@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/18 00:01:21 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 02:28:53 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@
 # define IMAGE_COUNT		4
 # define COLOR_COUNT		2
 
-# define MV_SPEED			0.13f
-# define RT_SPEED			0.03f
-# define LR					0.01f
+# define LR					0.05f
 
 # define TEX_WIDTH			64
 # define TEX_HEIGHT			64
@@ -47,28 +45,10 @@
 # define AOF				1.0
 
 typedef unsigned int	t_color;
-typedef enum e_event
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTORY = 17
-}	t_event;
-
-typedef enum e_mask
-{
-	KEY_PRESS_MASK = (1L << 0),
-	KEY_RELEASE_MASK = (1L << 1),
-	BUTTON_PRESS_MASK = (1L << 2),
-	BUTTON_RELEASE_MASK = (1L << 3),
-}	t_mask;
 
 # ifdef __linux__
 
-typedef enum e_key
+enum e_key
 {
 	KEY_W = 119,
 	KEY_A = 97,
@@ -78,11 +58,11 @@ typedef enum e_key
 	KEY_LEFT = 65361,
 	KEY_RIGHT = 65363,
 	KEY_RELESED = 255
-}	t_key;
+};
 
 # else
 
-typedef enum e_key
+enum e_key
 {
 	KEY_W = 13,
 	KEY_A = 0,
@@ -92,10 +72,20 @@ typedef enum e_key
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_RELESED = 255
-}	t_key;
+};
 # endif // __linux__
 
-typedef enum e_direction
+enum e_mapchar
+{
+	C_NORTH = 'N',
+	C_SOUTH = 'S',
+	C_WEST = 'W',
+	C_EAST = 'E',
+	C_EMPTY = '0',
+	C_FILLED = '1'
+};
+
+enum e_wall
 {
 	NORTH,
 	SOUTH,
@@ -104,12 +94,12 @@ typedef enum e_direction
 	FLOOR,
 	CEILING,
 	NONE
-}	t_direction;
+};
 
 typedef struct s_pos
 {
-	double	i;
-	double	j;
+	int	i;
+	int	j;
 }	t_pos;
 
 typedef struct s_img
@@ -133,7 +123,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_pos	pos;
-	double	direction;
+	double	lookat;
 }	t_player;
 
 typedef struct s_texture
@@ -143,6 +133,14 @@ typedef struct s_texture
 	int		start;
 	int		end;
 }	t_texture;
+
+typedef struct s_key
+{
+	int		vertical;
+	int		horizontal;
+	int		rotation;
+	bool	esc;
+}	t_key;
 
 typedef struct s_cub3d
 {
@@ -154,8 +152,6 @@ typedef struct s_cub3d
 	t_img			img[IMAGE_COUNT];
 	t_color			color[IMAGE_COUNT + COLOR_COUNT];
 	t_player		player;
-	unsigned int	*bg;
-	unsigned int	*buf;
 }	t_cub3d;
 
 #endif // __CUB3D_H__

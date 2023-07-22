@@ -6,75 +6,94 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:19:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/19 11:54:04 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 02:39:15 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "update.h"
+#include "event.h"
 
-static bool	move(const char **board, t_pos *const pos, double direction)
+static bool		rotate(const int rotation, double *const lookat);
+static bool		move(const t_key *const key, const char *const *const board, \
+	t_player *const p);
+static double	get_moving_direction(const t_key *const key, double lookat);
+
+bool	update(t_cub3d *const cub3d, const t_key *const key)
 {
-	const double	i = pos->i + cos(direction) * MV_SPEED;
-	const double	j = pos->j + sin(direction) * MV_SPEED;
-	bool			moved;
-
-	moved = false;
-	if (board[(int)i][(int)pos->j] != '1')
-	{
-		pos->i = i;
-		moved = true;
-	}
-	if (board[(int)pos->i][(int)j] != '1')
-	{
-		pos->j = j;
-		moved = true;
-	}
-	return (moved);
-}
-
-static bool	rotate(t_cub3d *cub3d)
-{
+	bool	rotated;
 	bool	moved;
 
-	moved = false;
-	if (cub3d->key == KEY_LEFT)
-	{
-		cub3d->player.direction += RT_SPEED;
-		moved = true;
-	}
-	else if (cub3d->key == KEY_RIGHT)
-	{
-		cub3d->player.direction -= RT_SPEED;
-		moved = true;
-	}
-	if (cub3d->player.direction > 2 * M_PI)
-		cub3d->player.direction -= 2 * M_PI;
-	else if (cub3d->player.direction < 0)
-		cub3d->player.direction += 2 * M_PI;
-	return (moved);
+	if (key->esc == true)
+		destroy(cub3d);
+	rotated = rotate(key->rotation, &cub3d->player.lookat);
+	moved = move(key, (const char *const *const)cub3d->map.board, \
+		&cub3d->player);
+	return (rotated | moved);
 }
 
-bool	update(t_cub3d *cub3d)
+static bool	rotate(const int rotation, double *const lookat)
+{
+	if (rotation == KEY_RELESED)
+		return (false);
+	if (rotation == KEY_LEFT)
+		*lookat += RT_SPEED;
+	else if (rotation == KEY_RIGHT)
+		*lookat -= RT_SPEED;
+	if (*lookat >= 2 * M_PI)
+		*lookat -= 2 * M_PI;
+	else if (*lookat < 0)
+		*lookat += 2 * M_PI;
+	return (true);
+}
+
+static bool	move(const t_key *const key, const char *const *const board, \
+	t_player *const p)
 {
 	double	direction;
+	int		di;
+	int		dj;
 	bool	moved;
 
-	moved = false;
-	direction = -1.0f;
-	if (cub3d->key == KEY_W)
-		direction = cub3d->player.direction + 0 * M_PI / 2;
-	else if (cub3d->key == KEY_A)
-		direction = cub3d->player.direction + 1 * M_PI / 2;
-	else if (cub3d->key == KEY_S)
-		direction = cub3d->player.direction + 2 * M_PI / 2;
-	else if (cub3d->key == KEY_D)
-		direction = cub3d->player.direction + 3 * M_PI / 2;
-	if (direction > 0)
+	if (key->vertical == KEY_RELESED && key->horizontal == KEY_RELESED)
+		return (false);
+	direction = get_moving_direction(key, p->lookat);
+	di = round(cos(direction) * MV_SPEED);
+	if ((di >= 0 && board[p->pos.i + di + MARGIN][p->pos.j] == C_EMPTY) || \
+		(di < 0 && board[p->pos.i + di - MARGIN][p->pos.j] == C_EMPTY))
 	{
-		moved = move((const char **)cub3d->map.board, \
-			&cub3d->player.pos, direction);
-		return (moved);
+		p->pos.i += di;
+		moved = true;
 	}
-	moved = rotate(cub3d);
+	dj = round(sin(direction) * MV_SPEED);
+	if ((dj >= 0 && board[p->pos.i][p->pos.j + dj + MARGIN] == C_EMPTY) || \
+		(dj < 0 && board[p->pos.i][p->pos.j + dj - MARGIN] == C_EMPTY))
+	{
+		p->pos.j += dj;
+		moved = true;
+	}
 	return (moved);
+}
+
+static double	get_moving_direction(const t_key *const key, double lookat)
+{
+	double	direction;
+
+	direction = lookat;
+	if (key->vertical == KEY_W && key->horizontal == KEY_A)
+		direction += M_PI_4;
+	else if (key->vertical == KEY_S && key->horizontal == KEY_A)
+		direction += M_PI_2 + M_PI_4;
+	else if (key->vertical == KEY_S && key->horizontal == KEY_D)
+		direction += M_PI + M_PI_4;
+	else if (key->vertical == KEY_W && key->horizontal == KEY_D)
+		direction += M_PI + M_PI_2 + M_PI_4;
+	else if (key->vertical == KEY_W)
+		direction += 0.0f;
+	else if (key->horizontal == KEY_A)
+		direction += M_PI_2;
+	else if (key->vertical == KEY_S)
+		direction += M_PI;
+	else if (key->horizontal == KEY_D)
+		direction += M_PI + M_PI_2;
+	return (direction);
 }

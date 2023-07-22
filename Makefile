@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/20 13:08:36 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/23 00:35:55 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ DEP_DIR				:=	$(BUILD_DIR)/dependency
 #    Define the source files                                                   #
 # ---------------------------------------------------------------------------- #
 
-SRCS_FILES			:=	main.c utils.c parse_texture.c parse_map.c event.c update.c render.c raycasting.c
+SRCS_FILES			:=	main.c utils.c parse_texture.c parse_map.c event.c update.c render.c raycasting.c print.c
 ifdef BONUS
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
 endif
@@ -93,8 +93,8 @@ NAME				:=	cub3D
 
 all:
 	@$(MAKE) -C $(LIBFT)
-	@$(MAKE) -C $(LIBMLX) 2> /dev/null
-	@$(MAKE) $(NAME)
+	@$(MAKE) -C $(LIBMLX)
+	@$(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)

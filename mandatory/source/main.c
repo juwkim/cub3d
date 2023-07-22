@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/20 21:13:52 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 01:30:03 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utils.h"
 #include "update.h"
 #include "render.h"
+#include "print.h"
 
 static void	init(t_cub3d *const cub3d, t_img *const	screen);
 static int	game_loop(t_cub3d *cub3d);
@@ -30,9 +31,8 @@ int	main(int argc, char *argv[])
 	init(&cub3d, &cub3d.screen);
 	parse_texture(&cub3d, fd);
 	parse_map(&cub3d, fd);
-	render_background(&cub3d);
-	mlx_hook(cub3d.win, ON_KEYDOWN, KEY_PRESS_MASK, key_down, &cub3d);
-	mlx_hook(cub3d.win, ON_KEYUP, KEY_RELEASE_MASK, key_up, &cub3d);
+	mlx_hook(cub3d.win, ON_KEYDOWN, KEY_PRESS_MASK, key_down, &cub3d.key);
+	mlx_hook(cub3d.win, ON_KEYUP, KEY_RELEASE_MASK, key_up, &cub3d.key);
 	mlx_hook(cub3d.win, ON_DESTORY, BUTTON_PRESS_MASK, destroy, &cub3d);
 	mlx_loop_hook(cub3d.mlx, game_loop, &cub3d);
 	mlx_loop(cub3d.mlx);
@@ -51,16 +51,12 @@ static void	init(t_cub3d *const cub3d, t_img *const	screen)
 	screen->addr = mlx_get_data_addr(screen->pixels, &screen->bpp, \
 		&screen->len, &screen->endian);
 	_assert(screen->addr != NULL, "mlx_get_data_addr() failed\n");
-	cub3d->key = KEY_RELESED;
-	cub3d->map.capacity = 128;
+	cub3d->key.vertical = KEY_RELESED;
+	cub3d->key.horizontal = KEY_RELESED;
+	cub3d->key.rotation = KEY_RELESED;
+	cub3d->map.capacity = 1024;
 	cub3d->map.board = (char **)malloc(sizeof(char *) * cub3d->map.capacity);
 	_assert(cub3d->map.board != NULL, "malloc() failed\n");
-	cub3d->bg = (unsigned int *)malloc(sizeof(unsigned int) * WIN_HEIGHT * \
-		WIN_WIDTH);
-	_assert(cub3d->bg != NULL, "malloc() failed\n");
-	cub3d->buf = (unsigned int *)malloc(sizeof(unsigned int) * WIN_HEIGHT * \
-		WIN_WIDTH);
-	_assert(cub3d->buf != NULL, "malloc() failed\n");
 }
 
 static int	game_loop(t_cub3d *cub3d)
@@ -69,6 +65,6 @@ static int	game_loop(t_cub3d *cub3d)
 
 	if (updated)
 		render(cub3d);
-	updated = update(cub3d);
+	updated = update(cub3d, &cub3d->key);
 	return (0);
 }

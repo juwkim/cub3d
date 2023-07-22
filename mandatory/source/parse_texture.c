@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 06:16:22 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/17 20:04:05 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 02:09:30 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 
 static void			set_texture(t_cub3d *const cub3d, const char *line);
-static t_direction	get_texture_identifier(const char *line);
+static enum e_wall	get_texture_identifier(const char *line);
 static void			set_texture_image(void *mlx_ptr, t_img *const img, \
 							const char *image_path);
 static void			set_texture_color(t_color *const color_ptr, char **rgb);
@@ -42,7 +42,7 @@ void	parse_texture(t_cub3d *const cub3d, const int fd)
 
 static void	set_texture(t_cub3d *const cub3d, const char *line)
 {
-	const t_direction	id = get_texture_identifier(line);
+	const enum e_wall	id = get_texture_identifier(line);
 	char				**rgb;
 	int					index;
 
@@ -62,7 +62,7 @@ static void	set_texture(t_cub3d *const cub3d, const char *line)
 	}
 }
 
-static t_direction	get_texture_identifier(const char *line)
+static enum e_wall	get_texture_identifier(const char *line)
 {
 	if (ft_strncmp(line, "NO ", ft_strlen("NO ")) == 0)
 		return (NORTH);

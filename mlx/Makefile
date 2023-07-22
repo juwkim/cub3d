@@ -17,37 +17,39 @@ COMPILED_FILES		:=	0
 STEP				:=	100
 
 # add to match string put with X11 in size and position
-CFLAGS+= -DSTRINGPUTX11
+CFLAGS+= -DSTRINGPUTX11 -Wno-deprecated-declarations
+MLX					:=	MLX
 
-all: $(NOM)
+all:
+	@$(MAKE) -j $(NOM)
 
 $(NOM):	$(OBJ)
-	@ar -r $(NOM) $(OBJ)
+	@$(AR) -rcs $(NOM) $(OBJ)
 	@ranlib $(NOM)
-	@printf "\n$(MAGENTA)[$(NOM)] Linking Success\n$(DEF_COLOR)"
+	@printf "\n$(MAGENTA)[MLX] Linking Success\n$(DEF_COLOR)"
 
 %.o: %.m
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
 	@$(eval PROGRESS = $(shell expr $(COMPILED_FILES) "*" $(STEP) / $(TOTAL_FILES)))
 	@printf "                                                                                                   \r"
-	@printf "$(YELLOW)[$(NOM)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
+	@printf "$(YELLOW)[MLX] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
 	@$(eval PROGRESS = $(shell expr $(COMPILED_FILES) "*" $(STEP) / $(TOTAL_FILES)))
 	@printf "                                                                                                   \r"
-	@printf "$(YELLOW)[$(NOM)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
+	@printf "$(YELLOW)[MLX] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 clean:
 	@$(RM) -f $(NOM) $(OBJ) *~
 	@$(RM) -f mlx_app
-	@printf "$(BLUE)[LIBMLX] obj. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@printf "$(BLUE)[MLX] obj. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 
 fclean: clean
 	@$(RM) -f mlx_app
-	@printf "$(CYAN)[LIBMLX] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@printf "$(CYAN)[MLX] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 
 re: clean all
 
