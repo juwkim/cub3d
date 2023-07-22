@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 07:07:29 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/20 21:11:12 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 03:21:41 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,28 @@ int	_strfind(const char *s, char c)
 	while (*cur != '\0' && *cur != c)
 		++cur;
 	return (cur - s);
+}
+
+void	print_map(const t_map *const map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->size)
+	{
+		printf("line[%04d]: ", i);
+		j = 0;
+		while (map->board[i][j])
+		{
+			if (j / 8 >= 1 && j % 8 == 0)
+				printf(" ");
+			printf("%c", map->board[i][j]);
+			++j;
+		}
+		++i;
+		printf("\n");
+		if (i / 8 >= 1 && i % 8 == 0)
+			printf("\n");
+	}
 }

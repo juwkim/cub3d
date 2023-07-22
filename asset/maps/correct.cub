@@ -1,7 +1,8 @@
-NO ./asset/xpm/north.xpm
-SO ./asset/xpm/south.xpm
-WE ./asset/xpm/west.xpm
-EA ./asset/xpm/east.xpm
+NO ./asset/images/NO.xpm
+SO ./asset/images/SO.xpm
+WE ./asset/images/WE.xpm
+EA ./asset/images/EA.xpm
+
 F 127,127,127
 C 255,255,0
 

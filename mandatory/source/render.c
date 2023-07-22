@@ -6,25 +6,24 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 01:35:40 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include "raycasting.h"
 
-static void	render_background(t_cub3d *cub3d, t_img *screen);
-static void	render_screen(t_cub3d *const cub3d, t_img *screen, \
-	double lookat);
+static void	render_background(t_game *game, t_img *screen);
+static void	render_wall(t_game *const game, t_img *screen, double lookat);
 
-void	render(t_cub3d *cub3d)
+void	render(t_game *game)
 {
-	render_background(cub3d, &cub3d->screen);
-	render_screen(cub3d, &cub3d->screen, cub3d->player.lookat);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->screen.pixels, 0, 0);
+	render_background(game, &game->screen);
+	render_wall(game, &game->screen, game->player.lookat);
+	mlx_put_image_to_window(game->mlx, game->win, game->screen.pixels, 0, 0);
 }
 
-static void	render_background(t_cub3d *cub3d, t_img *screen)
+static void	render_background(t_game *game, t_img *screen)
 {
 	int		i;
 	int		j;
@@ -37,20 +36,20 @@ static void	render_background(t_cub3d *cub3d, t_img *screen)
 		while (i < WIN_HEIGHT / 2)
 		{
 			pixel = screen->addr + i * screen->len + j * (screen->bpp / 8);
-			*(t_color *)pixel = cub3d->color[CEILING];
+			*(t_color *)pixel = game->color[CEILING];
 			++i;
 		}
 		while (i < WIN_HEIGHT)
 		{
 			pixel = screen->addr + i * screen->len + j * (screen->bpp / 8);
-			*(t_color *)pixel = cub3d->color[FLOOR];
+			*(t_color *)pixel = game->color[FLOOR];
 			++i;
 		}
 		++j;
 	}
 }
 
-static void	render_screen(t_cub3d *const cub3d, t_img *screen, double lookat)
+static void	render_wall(t_game *const game, t_img *screen, double lookat)
 {
 	int			i;
 	int			j;
@@ -61,7 +60,7 @@ static void	render_screen(t_cub3d *const cub3d, t_img *screen, double lookat)
 	j = 0;
 	while (j < WIN_WIDTH)
 	{
-		raycasting(cub3d, lookat + AOF / 2 - AOF * j / WIN_WIDTH, &tex);
+		raycasting(game, lookat + AOF / 2 - AOF * j / WIN_WIDTH, &tex);
 		i = tex.start;
 		while (i <= tex.end)
 		{

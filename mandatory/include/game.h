@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   game.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 02:28:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 02:54:28 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef game_H
+# define game_H
 
 // C system headers
 # include <math.h>		// To use math related functions
@@ -27,53 +27,20 @@
 # include "mlx.h"		// mlx fuctions
 # include "libft.h"		// libft utile functions
 
-# define PROGRAM			"cub3D"
-# define WIN_HEIGHT			1080
-# define WIN_WIDTH			1920
-# define IMAGE_COUNT		4
-# define COLOR_COUNT		2
+# define PROGRAM		"game"
+# define WIN_HEIGHT		1080
+# define WIN_WIDTH		1920
+# define IMAGE_COUNT	4
+# define COLOR_COUNT	2
 
-# define LR					0.05f
-
-# define TEX_WIDTH			64
-# define TEX_HEIGHT			64
+# define TEX_WIDTH		64
+# define TEX_HEIGHT		64
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846	/* pi */
 # endif // __M_PI__
 
-# define AOF				1.0
-
 typedef unsigned int	t_color;
-
-# ifdef __linux__
-
-enum e_key
-{
-	KEY_W = 119,
-	KEY_A = 97,
-	KEY_S = 115,
-	KEY_D = 100,
-	KEY_ESC = 65307,
-	KEY_LEFT = 65361,
-	KEY_RIGHT = 65363,
-	KEY_RELESED = 255
-};
-
-# else
-
-enum e_key
-{
-	KEY_W = 13,
-	KEY_A = 0,
-	KEY_S = 1,
-	KEY_D = 2,
-	KEY_ESC = 53,
-	KEY_LEFT = 123,
-	KEY_RIGHT = 124,
-	KEY_RELESED = 255
-};
-# endif // __linux__
 
 enum e_mapchar
 {
@@ -142,7 +109,7 @@ typedef struct s_key
 	bool	esc;
 }	t_key;
 
-typedef struct s_cub3d
+typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
@@ -152,6 +119,6 @@ typedef struct s_cub3d
 	t_img			img[IMAGE_COUNT];
 	t_color			color[IMAGE_COUNT + COLOR_COUNT];
 	t_player		player;
-}	t_cub3d;
+}	t_game;
 
-#endif // __CUB3D_H__
+#endif // __game_H__

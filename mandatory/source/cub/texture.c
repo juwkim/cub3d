@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 06:16:22 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 02:09:30 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "utils.h"
 
-static void			set_texture(t_cub3d *const cub3d, const char *line);
+static void			set_texture(t_game *const game, const char *line);
 static enum e_wall	get_texture_identifier(const char *line);
 static void			set_texture_image(void *mlx_ptr, t_img *const img, \
 							const char *image_path);
 static void			set_texture_color(t_color *const color_ptr, char **rgb);
 
-void	parse_texture(t_cub3d *const cub3d, const int fd)
+void	parse_texture(t_game *const game, const int fd)
 {
 	char	*line;
 	int		count;
@@ -34,13 +34,13 @@ void	parse_texture(t_cub3d *const cub3d, const int fd)
 			free(line);
 			continue ;
 		}
-		set_texture(cub3d, line);
+		set_texture(game, line);
 		free(line);
 		++count;
 	}
 }
 
-static void	set_texture(t_cub3d *const cub3d, const char *line)
+static void	set_texture(t_game *const game, const char *line)
 {
 	const enum e_wall	id = get_texture_identifier(line);
 	char				**rgb;
@@ -48,13 +48,13 @@ static void	set_texture(t_cub3d *const cub3d, const char *line)
 
 	_assert(id != NONE, "Texture identifier is NONE\n");
 	if (id == NORTH || id == SOUTH || id == WEST || id == EAST)
-		set_texture_image(cub3d->mlx, &cub3d->img[id], line + 3);
+		set_texture_image(game->mlx, &game->img[id], line + 3);
 	else
 	{
-		_assert(cub3d->color[id] == 0, "Duplicated color\n");
+		_assert(game->color[id] == 0, "Duplicated color\n");
 		rgb = ft_split(line + 2, ',');
 		_assert(rgb != NULL, "set_texture() memory allocation failed\n");
-		set_texture_color(&cub3d->color[id], rgb);
+		set_texture_color(&game->color[id], rgb);
 		index = 0;
 		while (rgb[index])
 			free(rgb[index++]);

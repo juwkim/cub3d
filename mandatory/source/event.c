@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 01:24:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int	key_up(int keycode, t_key *const key)
 	return (0);
 }
 
-int	destroy(t_cub3d *const cub3d)
+int	destroy(t_game *const game)
 {
-	mlx_destroy_image(cub3d->mlx, cub3d->screen.pixels);
-	mlx_destroy_image(cub3d->mlx, cub3d->img[NORTH].pixels);
-	mlx_destroy_image(cub3d->mlx, cub3d->img[SOUTH].pixels);
-	mlx_destroy_image(cub3d->mlx, cub3d->img[WEST].pixels);
-	mlx_destroy_image(cub3d->mlx, cub3d->img[EAST].pixels);
-	mlx_destroy_window(cub3d->mlx, cub3d->win);
-	free(cub3d->map.board);
+	mlx_destroy_image(game->mlx, game->screen.pixels);
+	mlx_destroy_image(game->mlx, game->img[NORTH].pixels);
+	mlx_destroy_image(game->mlx, game->img[SOUTH].pixels);
+	mlx_destroy_image(game->mlx, game->img[WEST].pixels);
+	mlx_destroy_image(game->mlx, game->img[EAST].pixels);
+	mlx_destroy_window(game->mlx, game->win);
+	free(game->map.board);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

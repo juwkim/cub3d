@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/23 00:35:55 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,18 +60,23 @@ BUILD_DIR			:=	$(PROJECT_DIR)/build
 OBJ_DIR				:=	$(BUILD_DIR)/object
 DEP_DIR				:=	$(BUILD_DIR)/dependency
 
+SRC_CUB_DIR			:=	cub
+
 # ---------------------------------------------------------------------------- #
 #    Define the source files                                                   #
 # ---------------------------------------------------------------------------- #
 
-SRCS_FILES			:=	main.c utils.c parse_texture.c parse_map.c event.c update.c render.c raycasting.c print.c
+SRCS_ROOT			:= main.c utils.c event.c update.c render.c raycasting.c
+SRCS_PARSING		:= $(addprefix $(SRC_CUB_DIR)/, texture.c map.c map_utils.c)
+
+SRCS_FILES			:= $(SRCS_ROOT) $(SRCS_PARSING)
 ifdef BONUS
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
 endif
 
 SRCS				:=	$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
-OBJS				:=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-DEPS				:=	$(patsubst $(SRC_DIR)/%.c, $(DEP_DIR)/%.d, $(SRCS))
+OBJS				:=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS_FILES))
+DEPS				:=	$(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS_FILES))
 
 # ---------------------------------------------------------------------------- #
 #    Define the variables for progress bar                                     #
@@ -85,7 +90,7 @@ STEP				:=	100
 #    Define the target                                                         #
 # ---------------------------------------------------------------------------- #
 
-NAME				:=	cub3D
+NAME				:=	game
 
 # ---------------------------------------------------------------------------- #
 #    Define the rules                                                          #
@@ -129,6 +134,8 @@ re: fclean
 
 dir_guard:
 	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
+	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR))
+	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR))
 
 norm:
 	@(norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)")

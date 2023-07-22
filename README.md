@@ -1,1 +1,1 @@
-# cub3D
+# game

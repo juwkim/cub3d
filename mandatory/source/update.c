@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:19:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 02:39:15 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static bool		move(const t_key *const key, const char *const *const board, \
 	t_player *const p);
 static double	get_moving_direction(const t_key *const key, double lookat);
 
-bool	update(t_cub3d *const cub3d, const t_key *const key)
+bool	update(t_game *const game, const t_key *const key)
 {
 	bool	rotated;
 	bool	moved;
 
 	if (key->esc == true)
-		destroy(cub3d);
-	rotated = rotate(key->rotation, &cub3d->player.lookat);
-	moved = move(key, (const char *const *const)cub3d->map.board, \
-		&cub3d->player);
+		destroy(game);
+	rotated = rotate(key->rotation, &game->player.lookat);
+	moved = move(key, (const char *const *const)game->map.board, \
+		&game->player);
 	return (rotated | moved);
 }
 
