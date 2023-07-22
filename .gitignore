@@ -10,4 +10,4 @@ mlx_Linux/obj
 mlx_Linux/test/*o
 mlx_Linux/test/mlx-test
 mlx_Linux/*.a
-game
+cub3D
