@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef game_H
-# define game_H
+#ifndef GAME_H
+# define GAME_H
 
 // C system headers
 # include <math.h>		// To use math related functions
@@ -20,21 +20,20 @@
 # include <string.h>	// To use string utils functions
 # include <unistd.h>	// To use primitive system calls
 # include <stdbool.h>	// To use true and false
-# include <sys/errno.h>	// To use errno
 # include <sys/fcntl.h> // TO use file related system calls
 
 // project headers
 # include "mlx.h"		// mlx fuctions
 # include "libft.h"		// libft utile functions
 
-# define PROGRAM		"game"
-# define WIN_HEIGHT		1080
-# define WIN_WIDTH		1920
-# define IMAGE_COUNT	4
-# define COLOR_COUNT	2
-
-# define TEX_WIDTH		64
-# define TEX_HEIGHT		64
+# define PROGRAM				"game"
+# define WIN_HEIGHT				1080
+# define WIN_WIDTH				1920
+# define IMAGE_COUNT			4
+# define COLOR_COUNT			2
+# define DEFAULT_MAP_CAPACITY	1024
+# define TEX_WIDTH				64
+# define TEX_HEIGHT				64
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846	/* pi */

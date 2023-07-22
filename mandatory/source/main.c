@@ -6,17 +6,17 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:54:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub.h"
 #include "event.h"
 #include "utils.h"
 #include "update.h"
 #include "render.h"
 
-static void	init(t_game *const game, t_img *const	screen);
+static void	init(t_game *const game, t_img *const screen);
 static int	game_loop(t_game *game);
 
 int	main(int argc, char *argv[])
@@ -28,8 +28,7 @@ int	main(int argc, char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	_assert(fd != -1, strerror(errno));
 	init(&game, &game.screen);
-	parse_texture(&game, fd);
-	parse_map(&game, fd);
+	parse_cub(&game, fd);
 	mlx_hook(game.win, ON_KEYDOWN, KEY_PRESS_MASK, key_down, &game.key);
 	mlx_hook(game.win, ON_KEYUP, KEY_RELEASE_MASK, key_up, &game.key);
 	mlx_hook(game.win, ON_DESTORY, BUTTON_PRESS_MASK, destroy, &game);
@@ -53,7 +52,7 @@ static void	init(t_game *const game, t_img *const	screen)
 	game->key.vertical = KEY_RELESED;
 	game->key.horizontal = KEY_RELESED;
 	game->key.rotation = KEY_RELESED;
-	game->map.capacity = 1024;
+	game->map.capacity = DEFAULT_MAP_CAPACITY;
 	game->map.board = (char **)malloc(sizeof(char *) * game->map.capacity);
 	_assert(game->map.board != NULL, "malloc() failed\n");
 }

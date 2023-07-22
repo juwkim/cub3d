@@ -6,11 +6,11 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 06:16:22 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:10:43 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub.h"
 #include "utils.h"
 
 static void			set_texture(t_game *const game, const char *line);

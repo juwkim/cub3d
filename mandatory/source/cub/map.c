@@ -6,11 +6,11 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 05:10:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub.h"
 #include "utils.h"
 
 static void	append(t_map *const map, const char *line);
