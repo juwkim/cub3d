@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:20:39 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 06:06:12 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 09:23:10 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "game_bonus.h"
 
 # define MARGIN		16
-# define MV_SPEED	8.0f
+# define MV_SPEED	4.0f
 # define RT_SPEED	0.05f
 
 bool	update(t_game *const game, const t_key *const key);

@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/23 06:33:03 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/23 09:04:59 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,9 @@ SRC_CUB_DIR			:=	cub
 SRCS_ROOT			:= main.c utils.c event.c update.c render.c raycasting.c
 SRCS_PARSING		:= $(addprefix $(SRC_CUB_DIR)/, parse.c texture.c map.c map_to_int.c trim_map.c)
 
-SRCS_FILES			:= $(SRCS_ROOT) $(SRCS_PARSING)
+SRCS_FILES			= $(SRCS_ROOT) $(SRCS_PARSING)
 ifdef BONUS
+	SRCS_PARSING	+=	$(SRC_CUB_DIR)/door.c
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
 endif
 

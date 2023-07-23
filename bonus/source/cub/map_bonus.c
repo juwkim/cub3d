@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 06:07:16 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 08:36:35 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static void	check_valid_map(t_map *const map)
 		j = 0;
 		while (map->board[i][j] != '\0')
 		{
-			pos = _strfind("SENW01 ", map->board[i][j]);
-			_assert(pos < 7, "Map includes not allowed character\n");
-			_assert(pos >= 5 || is_boundary(i, j, map) == false,
+			pos = _strfind("SENWD01 ", map->board[i][j]);
+			_assert(pos < 8, "Map includes not allowed character\n");
+			_assert(pos >= 6 || is_boundary(i, j, map) == false,
 				"Map boundary includes not wall character\n");
 			player_count += (pos <= 3);
 			_assert(player_count <= 1, "Player's count is not 1\n");

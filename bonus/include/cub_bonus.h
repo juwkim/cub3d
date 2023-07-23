@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:16:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 06:06:26 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 09:02:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ void	map_to_int(t_map *const map);
 
 // trim_map.c
 void	trim_map(char **const board, const int map_size);
+
+// door.c
+void	fill_door(char **const new, const char **board, \
+	const int i, const int j);
 
 #endif // __CUB_BONUS_H__

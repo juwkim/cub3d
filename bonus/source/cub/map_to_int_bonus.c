@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 03:31:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 06:07:20 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 09:31:31 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	map_to_int(t_map *const map)
 		j = 0;
 		while (map->board[i][j] != '\0')
 		{
-			if (map->board[i][j] == C_FILLED)
+			if (map->board[i][j] == C_WALL)
 				fill_wall(new, i, j);
+			else if (map->board[i][j] == C_DOOR)
+				fill_door(new, (const char **)map->board, i, j);
 			++j;
 		}
 		free(map->board[i]);
@@ -67,11 +69,15 @@ static void	fill_wall(char **const new, const int i, const int j)
 	while (k < TEX_HEIGHT * (i + 1) - 1)
 	{
 		new[k][TEX_WIDTH * j] = C_EAST;
-		ft_memset(&new[k][TEX_WIDTH * j + 1], \
-			C_FILLED, TEX_WIDTH - 2);
+		ft_memset(&new[k][TEX_WIDTH * j + 1], C_WALL, TEX_WIDTH - 2);
 		new[k][TEX_WIDTH * (j + 1) - 1] = C_WEST;
 		++k;
 	}
 	ft_memset(&new[TEX_HEIGHT * (i + 1) - 1][TEX_WIDTH * j], \
 		C_NORTH, TEX_WIDTH);
+}
+
+static void	fill_indoor(char **const new, const int i, const int j)
+{
+	
 }

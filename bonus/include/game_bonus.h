@@ -29,7 +29,7 @@
 # define PROGRAM				"game"
 # define WIN_HEIGHT				1080
 # define WIN_WIDTH				1920
-# define IMAGE_COUNT			4
+# define IMAGE_COUNT			5
 # define COLOR_COUNT			2
 # define DEFAULT_MAP_CAPACITY	1024
 # define TEX_WIDTH				64
@@ -47,8 +47,11 @@ enum e_mapchar
 	C_SOUTH = 'S',
 	C_WEST = 'W',
 	C_EAST = 'E',
+	C_DOOR = 'D',
+	C_DOOR_VERTICAL = 'V',
+	C_DOOR_HORIZONTAL = 'H',
 	C_EMPTY = '0',
-	C_FILLED = '1'
+	C_WALL = '1',
 };
 
 enum e_wall
@@ -57,6 +60,7 @@ enum e_wall
 	SOUTH,
 	WEST,
 	EAST,
+	DOOR,
 	FLOOR,
 	CEILING,
 	NONE

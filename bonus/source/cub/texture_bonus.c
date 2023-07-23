@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 06:16:22 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 06:07:23 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 08:34:21 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	set_texture(t_game *const game, const char *line)
 	int					index;
 
 	_assert(id != NONE, "Texture identifier is NONE\n");
-	if (id == NORTH || id == SOUTH || id == WEST || id == EAST)
+	if (id == NORTH || id == SOUTH || id == WEST || id == EAST || id == DOOR)
 		set_texture_image(game->mlx, &game->img[id], line + 3);
 	else
 	{
@@ -72,6 +72,8 @@ static enum e_wall	get_texture_identifier(const char *line)
 		return (WEST);
 	if (ft_strncmp(line, "EA ", ft_strlen("EA ")) == 0)
 		return (EAST);
+	if (ft_strncmp(line, "DO ", ft_strlen("DO ")) == 0)
+		return (DOOR);
 	if (ft_strncmp(line, "F ", ft_strlen("F ")) == 0)
 		return (FLOOR);
 	if (ft_strncmp(line, "C ", ft_strlen("C ")) == 0)

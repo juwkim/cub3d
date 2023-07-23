@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 06:07:05 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/23 08:16:39 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,13 @@ static void	init(t_game *const game, t_img *const	screen)
 static int	game_loop(t_game *game)
 {
 	static bool	updated = true;
+	// static int	frame = 0;
 
 	if (updated)
 		render(game);
 	updated = update(game, &game->key);
+	// ++frame;
+	// if (frame % 10000 == 0)
+	// 	system("leaks cub3D > result; cat result; rm result");
 	return (0);
 }
