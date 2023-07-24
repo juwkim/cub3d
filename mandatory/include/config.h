@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 18:11:36 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 19:08:16 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TITLE					"cub3D"
 # define WIN_HEIGHT				1080
 # define WIN_WIDTH				1920
-# define TEXTURE_COUNT			4
+# define TEXTURE_COUNT			5
 # define COLOR_COUNT			2
 # define TEX_WIDTH				64
 # define TEX_HEIGHT				64
@@ -42,10 +42,11 @@ typedef unsigned int	t_color;
 
 enum e_mapchar
 {
-	C_NORTH = 'N',
 	C_SOUTH = 'S',
-	C_WEST = 'W',
 	C_EAST = 'E',
+	C_NORTH = 'N',
+	C_WEST = 'W',
+	C_DOOR = 'D',
 	C_SPACE = '0',
 	C_WALL = '1',
 	C_EMPTY = ' '
@@ -56,7 +57,9 @@ enum e_texture
 	SOUTH,
 	EAST,
 	NORTH,
-	WEST
+	WEST,
+	DOOR,
+	SPACE
 };
 
 enum e_color

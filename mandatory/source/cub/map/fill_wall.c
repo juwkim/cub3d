@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   fill_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 19:19:21 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/24 18:48:35 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/24 19:16:10 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	parse_map(t_config *const config, const int fd)
+void	fill_wall(t_pixel **const data, int i, int j)
 {
-	int				map_size;
-	char **const	map = read_map(fd, &map_size);
-
-	traverse_map(map, map_size, &config->cam);
-	set_map(map, map_size, &config->map);
-	trim_map(&config->map);
+	fill_south(data, i, j, SOUTH);
+	fill_east(data, i, j, EAST);
+	fill_north(data, i + TEX_HEIGHT - 1, j, NORTH);
+	fill_west(data, i, j + TEX_WIDTH - 1, WEST);
 }
+

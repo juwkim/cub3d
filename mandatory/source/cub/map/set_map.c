@@ -6,73 +6,75 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 03:31:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 18:13:22 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 19:09:14 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "utils.h"
 
-static void	init_board(char **const board, char *line);
-static void	fill_wall(char **const new, const int i, const int j);
+static void	init_rmap(char **const map, const int map_size, t_map *const rmap);
+static int	get_map_width(char **const map, const int map_size);
 
 void	set_map(char **const map, const int map_size, t_map *const rmap)
 {
 	int				i;
 	int				j;
 
-	rmap->height = map_size;
-	rmap->data = malloc(sizeof(t_pixel *) * TEX_HEIGHT * rmap->height);
-	_assert(rmap->data != NULL, "malloc() failed\n");
+	init_rmap(map, map_size, rmap);
 	i = 0;
-	while (i < map->size)
+	while (i < map_size)
 	{
-		init_board(&new[TEX_HEIGHT * i], map->board[i]);
 		j = 0;
-		while (map->board[i][j] != '\0')
+		while (map[i][j] != '\0')
 		{
-			if (map->board[i][j] == C_FILLED)
-				fill_wall(new, i, j);
+			if (map[i][j] == C_WALL)
+				fill_wall(rmap->data, i * TEX_HEIGHT, j * TEX_WIDTH);
+			else if (map[i][j] == C_DOOR)
+				fill_door(rmap->data, i * TEX_HEIGHT, j * TEX_WIDTH);
 			++j;
 		}
-		free(map->board[i]);
+		free(map[i]);
 		++i;
 	}
-	free(map->board);
-	map->board = new;
-	map->size *= TEX_HEIGHT;
+	free(map);
 }
 
-static void	init_board(char **const board, char *line)
+static void	init_rmap(char **const map, const int map_size, t_map *const rmap)
 {
-	const int	len = (int)ft_strlen(line);
-	int			i;
+	int	i;
+	int	j;
+
+	rmap->width = get_map_width(map, map_size) * TEX_WIDTH;
+	rmap->height = map_size * TEX_HEIGHT;
+	rmap->data = malloc(sizeof(t_pixel *) * rmap->height);
+	_assert(rmap->data != NULL, "malloc() failed\n");
+	i = 0;
+	while (i < rmap->height)
+	{
+		rmap->data[i] = malloc(sizeof(t_pixel) * rmap->width);
+		_assert(rmap->data[i] != NULL, "malloc() failed\n");
+		j = 0;
+		while (j < rmap->width)
+		{
+			rmap->data[i][j].tex_id = SPACE;
+			++j;
+		}
+		++i;
+	}
+}
+
+static int	get_map_width(char **const map, const int map_size)
+{
+	int	i;
+	int	width;
 
 	i = 0;
-	while (i < TEX_HEIGHT)
+	width = 0;
+	while (i < map_size)
 	{
-		board[i] = malloc(sizeof(char) * len * TEX_WIDTH + 1);
-		_assert(board[i] != NULL, "malloc() failed\n");
-		ft_memset(board[i], C_EMPTY, len * TEX_WIDTH);
-		board[i][len * TEX_WIDTH] = '\0';
+		width = ft_max(width, (int)ft_strlen(map[i]));
 		++i;
 	}
-}
-
-static void	fill_wall(char **const new, const int i, const int j)
-{
-	int	k;
-
-	ft_memset(&new[TEX_HEIGHT * i][TEX_WIDTH * j], C_SOUTH, TEX_WIDTH);
-	k = TEX_HEIGHT * i + 1;
-	while (k < TEX_HEIGHT * (i + 1) - 1)
-	{
-		new[k][TEX_WIDTH * j] = C_EAST;
-		ft_memset(&new[k][TEX_WIDTH * j + 1], \
-			C_FILLED, TEX_WIDTH - 2);
-		new[k][TEX_WIDTH * (j + 1) - 1] = C_WEST;
-		++k;
-	}
-	ft_memset(&new[TEX_HEIGHT * (i + 1) - 1][TEX_WIDTH * j], \
-		C_NORTH, TEX_WIDTH);
+	return (width);
 }

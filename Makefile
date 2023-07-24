@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/24 17:37:37 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/24 19:18:38 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,8 @@ SRC_WINDOW_DIR		:=	window
 
 SRCS_ROOT			:= main.c
 SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse_cub.c)
-SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, parse_map.c read_map.c check_valid_map.c)
+SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, parse_map.c read_map.c traverse_map.c \
+							set_camera.c set_map.c fill.c fill_door.c fill_wall.c trim_map.c)
 SRCS_TEX_COLOR		:= $(addprefix $(SRC_TEX_COLOR_DIR)/, parse_texture_color.c texture.c color.c)
 SRCS_KEY			:= $(addprefix $(SRC_KEY_DIR)/, init_key.c)
 SRCS_RAYCASTING		:= $(addprefix $(SRC_RAYCASTING_DIR)/, raycasting.c)

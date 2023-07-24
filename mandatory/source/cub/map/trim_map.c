@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 05:48:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:53:38 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 19:20:10 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	trim_upper(char **const board, const int i, const int j);
 static void	trim_lower(char **const board, const int i, const int j);
 
-void	trim_map(char **const board, const int map_size)
+void	trim_map(t_map **const rmap)
 {
 	int	i;
 	int	j;
