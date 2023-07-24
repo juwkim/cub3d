@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:19:25 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static void	append(t_map *const map, const char *line)
 
 static void	check_valid_map(t_map *const map)
 {
-	int	i;
-	int	j;
-	int	pos;
-	int	player_count;
+	int					i;
+	int					j;
+	char				*pos;
+	int					player_count;
 
 	player_count = 0;
 	i = 0;
@@ -72,11 +72,13 @@ static void	check_valid_map(t_map *const map)
 		j = 0;
 		while (map->board[i][j] != '\0')
 		{
-			pos = _strfind("SENW01 ", map->board[i][j]);
-			_assert(pos < 7, "Map includes not allowed character\n");
-			_assert(pos >= 5 || is_boundary(i, j, map) == false,
+			pos = ft_strchr("SENW01 ", map->board[i][j]);
+			_assert(pos != NULL, "Map includes not allowed character\n");
+			_assert(*pos == C_EMPTY || *pos == C_FILLED || *pos == ' ' || \
+				is_boundary(i, j, map) == false,
 				"Map boundary includes not wall character\n");
-			player_count += (pos <= 3);
+			player_count += !(*pos == C_EMPTY || *pos == C_FILLED || \
+				*pos == ' ');
 			_assert(player_count <= 1, "Player's count is not 1\n");
 			++j;
 		}
@@ -100,7 +102,8 @@ void	set_player(t_map *const map, t_player *const p)
 {
 	int			i;
 	int			j;
-	int			off;
+	char		*pos;
+	static char	*allowed = "SENW";
 
 	i = 0;
 	while (i < map->size)
@@ -108,8 +111,8 @@ void	set_player(t_map *const map, t_player *const p)
 		j = 0;
 		while (map->board[i][j] != '\0')
 		{
-			off = _strfind("SENW", map->board[i][j]);
-			if (off == 4)
+			pos = ft_strchr(allowed, map->board[i][j]);
+			if (pos == NULL)
 			{
 				++j;
 				continue ;
@@ -117,7 +120,7 @@ void	set_player(t_map *const map, t_player *const p)
 			map->board[i][j] = C_EMPTY;
 			p->pos.i = TEX_HEIGHT * i + TEX_HEIGHT / 2;
 			p->pos.j = TEX_WIDTH * j + TEX_WIDTH / 2;
-			p->lookat = off * M_PI_2;
+			p->lookat = (pos - allowed) * M_PI_2;
 			return ;
 		}
 		++i;
