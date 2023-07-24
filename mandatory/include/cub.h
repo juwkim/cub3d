@@ -6,23 +6,23 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:16:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:49:38 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:08:55 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "game.h"
+# include "config.h"
 
 // parse.c
-void	parse_cub(t_game *const game, const int fd);
+void	parse_cub(t_config *const config, const char *cub_file);
 
 // texture.c
-void	parse_texture(t_game *const game, const int fd);
+void	parse_texture(t_config *const config, const int fd);
 
 // map.c
-void	parse_map(t_game *const game, const int fd);
+void	parse_map(t_config *const config, const int fd);
 
 // map_to_int.c
 void	map_to_int(t_map *const map);

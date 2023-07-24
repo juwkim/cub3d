@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:10:40 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_valid_map(t_map *const map);
 static bool	is_boundary(const int i, const int j, t_map *const map);
 static void	set_player(t_map *const map, t_player *const p);
 
-void	parse_map(t_game *const game, const int fd)
+void	parse_map(t_config *const config, const int fd)
 {
 	char	*line;
 
@@ -30,16 +30,16 @@ void	parse_map(t_game *const game, const int fd)
 	}
 	while (line)
 	{
-		append(&game->map, line);
+		append(&config->map, line);
 		line = ft_get_next_line(fd);
 		if (line == NULL)
 			break ;
 		_assert(ft_strcmp(line, "") != 0, "Empty line in map\n");
 	}
-	check_valid_map(&game->map);
-	set_player(&game->map, &game->player);
-	map_to_int(&game->map);
-	trim_map(game->map.board, game->map.size);
+	check_valid_map(&config->map);
+	set_player(&config->map, &config->player);
+	map_to_int(&config->map);
+	trim_map(config->map.board, config->map.size);
 }
 
 static void	append(t_map *const map, const char *line)

@@ -6,17 +6,17 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 23:44:57 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCASTING_H
 # define RAYCASTING_H
 
-# include "game.h"
+# include "config.h"
 
-# define LR	0.05f
+# define LR	0.5f
 
-void	raycasting(t_game *const game, double lookat, t_texture *tex);
+void	raycasting(t_config *const config, double lookat, t_texture *tex);
 
 #endif // __RAYCASTING_H__

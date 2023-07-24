@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/23 09:04:59 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/24 12:41:30 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ else
 endif
 
 ifdef	DEBUG
-	CFLAGS			+=	-g -fsanitize=address
+	CFLAGS			+=	-g -DDEBUG
 else
 	CFLAGS			+=	-O2 -pipe
 endif
@@ -61,17 +61,19 @@ OBJ_DIR				:=	$(BUILD_DIR)/object
 DEP_DIR				:=	$(BUILD_DIR)/dependency
 
 SRC_CUB_DIR			:=	cub
+SRC_WINDOW_DIR		:=	window
 
 # ---------------------------------------------------------------------------- #
 #    Define the source files                                                   #
 # ---------------------------------------------------------------------------- #
 
 SRCS_ROOT			:= main.c utils.c event.c update.c render.c raycasting.c
-SRCS_PARSING		:= $(addprefix $(SRC_CUB_DIR)/, parse.c texture.c map.c map_to_int.c trim_map.c)
+SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse.c texture.c map.c map_to_int.c trim_map.c)
+SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, window.c)
 
-SRCS_FILES			= $(SRCS_ROOT) $(SRCS_PARSING)
+SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_WINDOW)
 ifdef BONUS
-	SRCS_PARSING	+=	$(SRC_CUB_DIR)/door.c
+	SRCS_CUB		+=	$(SRC_CUB_DIR)/door.c
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
 endif
 
@@ -135,8 +137,8 @@ re: fclean
 
 dir_guard:
 	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
-	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR))
-	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR))
+	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_WINDOW_DIR))
+	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_WINDOW_DIR))
 
 norm:
 	@(norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)")

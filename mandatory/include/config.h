@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                            :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 02:54:28 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:52:49 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#ifndef CONFIG_H
+# define CONFIG_H
 
 // C system headers
 # include <math.h>		// To use math related functions
@@ -26,7 +26,7 @@
 # include "mlx.h"		// mlx fuctions
 # include "libft.h"		// libft utile functions
 
-# define PROGRAM				"game"
+# define PROGRAM				"config"
 # define WIN_HEIGHT				1080
 # define WIN_WIDTH				1920
 # define IMAGE_COUNT			4
@@ -79,6 +79,18 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_window
+{
+	void	*ptr;
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		len;
+	int		endian;
+}	t_window;
+
 typedef struct s_map
 {
 	char	**board;
@@ -108,16 +120,15 @@ typedef struct s_key
 	bool	esc;
 }	t_key;
 
-typedef struct s_game
+typedef struct s_config
 {
-	void			*mlx;
-	void			*win;
+	void			*mlx_ptr;
 	t_key			key;
-	t_img			screen;
+	t_window		win;
 	t_map			map;
 	t_img			img[IMAGE_COUNT];
 	t_color			color[IMAGE_COUNT + COLOR_COUNT];
 	t_player		player;
-}	t_game;
+}	t_config;
 
-#endif // __game_H__
+#endif // __CONFIG_H__

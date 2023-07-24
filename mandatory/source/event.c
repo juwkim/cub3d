@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:53:09 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int	key_up(int keycode, t_key *const key)
 	return (0);
 }
 
-int	destroy(t_game *const game)
+int	destroy(t_config *const config)
 {
-	mlx_destroy_image(game->mlx, game->screen.pixels);
-	mlx_destroy_image(game->mlx, game->img[NORTH].pixels);
-	mlx_destroy_image(game->mlx, game->img[SOUTH].pixels);
-	mlx_destroy_image(game->mlx, game->img[WEST].pixels);
-	mlx_destroy_image(game->mlx, game->img[EAST].pixels);
-	mlx_destroy_window(game->mlx, game->win);
-	free(game->map.board);
+	mlx_destroy_image(config->mlx_ptr, config->win.img);
+	mlx_destroy_image(config->mlx_ptr, config->img[NORTH].pixels);
+	mlx_destroy_image(config->mlx_ptr, config->img[SOUTH].pixels);
+	mlx_destroy_image(config->mlx_ptr, config->img[WEST].pixels);
+	mlx_destroy_image(config->mlx_ptr, config->img[EAST].pixels);
+	mlx_destroy_window(config->mlx_ptr, config->win.ptr);
+	free(config->map.board);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -6,14 +6,14 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:25 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:40 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EVENT_H
 # define EVENT_H
 
-# include "game.h"
+# include "config.h"
 
 enum e_event
 {
@@ -65,6 +65,6 @@ enum e_key
 
 int	key_down(int keycode, t_key *const key);
 int	key_up(int keycode, t_key *const key);
-int	destroy(t_game *const game);
+int	destroy(t_config *const config);
 
 #endif // __EVENT_H__

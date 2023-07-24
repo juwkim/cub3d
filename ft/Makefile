@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 05:18:16 by juwkim            #+#    #+#              #
-#    Updated: 2023/07/23 00:45:18 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/24 11:52:49 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ifeq ($(shell uname -s), Linux)
 endif
 
 ifdef	DEBUG
-	CFLAGS			+=	-g -fsanitize=address
+	CFLAGS			+=	-g -DDEBUG
 else
 	CFLAGS			+=	-O2 -pipe
 endif

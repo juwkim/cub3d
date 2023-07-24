@@ -6,24 +6,24 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:02:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:57:09 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include "raycasting.h"
 
-static void	render_background(t_game *game, t_img *screen);
-static void	render_wall(t_game *const game, t_img *screen, double lookat);
+static void	render_background(t_config *config, t_window *win);
+static void	render_wall(t_config *const config, t_window *win, double lookat);
 
-void	render(t_game *game)
+void	render(t_config *config)
 {
-	render_background(game, &game->screen);
-	render_wall(game, &game->screen, game->player.lookat);
-	mlx_put_image_to_window(game->mlx, game->win, game->screen.pixels, 0, 0);
+	render_background(config, &config->win);
+	render_wall(config, &config->win, config->player.lookat);
+	mlx_put_image_to_window(config->mlx_ptr, config->win.ptr, config->win.img, 0, 0);
 }
 
-static void	render_background(t_game *game, t_img *screen)
+static void	render_background(t_config *config, t_window *win)
 {
 	int		i;
 	int		j;
@@ -35,21 +35,21 @@ static void	render_background(t_game *game, t_img *screen)
 		i = 0;
 		while (i < WIN_HEIGHT / 2)
 		{
-			pixel = screen->addr + i * screen->len + j * (screen->bpp / 8);
-			*(t_color *)pixel = game->color[CEILING];
+			pixel = win->addr + i * win->len + j * (win->bpp / 8);
+			*(t_color *)pixel = config->color[CEILING];
 			++i;
 		}
 		while (i < WIN_HEIGHT)
 		{
-			pixel = screen->addr + i * screen->len + j * (screen->bpp / 8);
-			*(t_color *)pixel = game->color[FLOOR];
+			pixel = win->addr + i * win->len + j * (win->bpp / 8);
+			*(t_color *)pixel = config->color[FLOOR];
 			++i;
 		}
 		++j;
 	}
 }
 
-static void	render_wall(t_game *const game, t_img *screen, double lookat)
+static void	render_wall(t_config *const config, t_window *win, double lookat)
 {
 	int			i;
 	int			j;
@@ -60,13 +60,13 @@ static void	render_wall(t_game *const game, t_img *screen, double lookat)
 	j = 0;
 	while (j < WIN_WIDTH)
 	{
-		raycasting(game, lookat + AOF / 2 - AOF * j / WIN_WIDTH, &tex);
+		raycasting(config, lookat + AOF / 2 - AOF * j / WIN_WIDTH, &tex);
 		i = tex.start;
 		while (i <= tex.end)
 		{
 			if (0 <= i && i < WIN_HEIGHT)
 			{
-				pixel = screen->addr + i * screen->len + j * (screen->bpp / 8);
+				pixel = win->addr + i * win->len + j * (win->bpp / 8);
 				color = *(t_color *)(tex.img->addr + (TEX_HEIGHT - 1) * \
 					(i - tex.start) / (tex.end - tex.start) * tex.img->len + \
 					tex.off * tex.img->bpp / 8);

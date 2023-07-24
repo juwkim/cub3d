@@ -6,63 +6,55 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:54:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:57:25 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "window.h"
 #include "event.h"
 #include "utils.h"
 #include "update.h"
 #include "render.h"
 
-static void	init(t_game *const game, t_img *const screen);
-static int	game_loop(t_game *game);
+static void	init_config(t_config *const cfg);
+static int	cub3d(t_config *cfg);
 
 int	main(int argc, char *argv[])
 {
-	t_game	game;
-	int		fd;
+	t_config	cfg;
 
-	_assert(argc == 2 && is_extension(argv[1], ".cub"), "Usage: .game *.cub\n");
-	fd = open(argv[1], O_RDONLY);
-	_assert(fd != -1, strerror(errno));
-	init(&game, &game.screen);
-	parse_cub(&game, fd);
-	mlx_hook(game.win, ON_KEYDOWN, KEY_PRESS_MASK, key_down, &game.key);
-	mlx_hook(game.win, ON_KEYUP, KEY_RELEASE_MASK, key_up, &game.key);
-	mlx_hook(game.win, ON_DESTORY, BUTTON_PRESS_MASK, destroy, &game);
-	mlx_loop_hook(game.mlx, game_loop, &game);
-	mlx_loop(game.mlx);
+	_assert(argc == 2, "argc must be 2\n");
+	init_config(&cfg);
+	parse_cub(&cfg, argv[1]);
+	mlx_hook(cfg.win.ptr, ON_KEYDOWN, KEY_PRESS_MASK, key_down, &cfg.key);
+	mlx_hook(cfg.win.ptr, ON_KEYUP, KEY_RELEASE_MASK, key_up, &cfg.key);
+	mlx_hook(cfg.win.ptr, ON_DESTORY, BUTTON_PRESS_MASK, destroy, &cfg);
+	mlx_loop_hook(cfg.mlx_ptr, cub3d, &cfg);
+	mlx_loop(cfg.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
 
-static void	init(t_game *const game, t_img *const	screen)
+static void	init_config(t_config *const config)
 {
-	ft_bzero(game, sizeof(t_game));
-	game->mlx = mlx_init();
-	_assert(game->mlx != NULL, "mlx_init() failed\n");
-	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, PROGRAM);
-	_assert(game->win != NULL, "mlx_new_window() failed\n");
-	screen->pixels = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	_assert(screen->pixels != NULL, "mlx_new_image() failed\n");
-	screen->addr = mlx_get_data_addr(screen->pixels, &screen->bpp, \
-		&screen->len, &screen->endian);
-	_assert(screen->addr != NULL, "mlx_get_data_addr() failed\n");
-	game->key.vertical = KEY_RELESED;
-	game->key.horizontal = KEY_RELESED;
-	game->key.rotation = KEY_RELESED;
-	game->map.capacity = DEFAULT_MAP_CAPACITY;
-	game->map.board = (char **)malloc(sizeof(char *) * game->map.capacity);
-	_assert(game->map.board != NULL, "malloc() failed\n");
+	ft_bzero(config, sizeof(t_config));
+	config->mlx_ptr = mlx_init();
+	_assert(config->mlx_ptr != NULL, "mlx_init() failed\n");
+	init_window(config, &config->win);
+	config->key.vertical = KEY_RELESED;
+	config->key.horizontal = KEY_RELESED;
+	config->key.rotation = KEY_RELESED;
+	config->map.capacity = DEFAULT_MAP_CAPACITY;
+	config->map.board = (char **)malloc(sizeof(char *) * config->map.capacity);
+	_assert(config->map.board != NULL, "malloc() failed\n");
 }
 
-static int	game_loop(t_game *game)
+static int	cub3d(t_config *config)
 {
 	static bool	updated = true;
 
 	if (updated)
-		render(game);
-	updated = update(game, &game->key);
+		render(config);
+	updated = update(config, &config->key);
 	return (0);
 }

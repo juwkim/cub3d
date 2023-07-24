@@ -6,14 +6,14 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 07:08:17 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:06:15 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "game.h"
+# include "config.h"
 
 # include <sys/errno.h>	// To use errno
 
