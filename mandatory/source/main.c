@@ -6,17 +6,18 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 13:34:42 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:29:58 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "config.h"
 #include "cub.h"
-#include "event.h"
+#include "key.h"
 #include "map.h"
-#include "window.h"
-#include "update.h"
 #include "render.h"
+#include "update.h"
 #include "utils.h"
+#include "window.h"
 
 static void	init_config(t_config *const cfg);
 static int	cub3d(t_config *const cfg);

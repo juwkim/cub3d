@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.h                                            :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:25 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 13:22:03 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:29:01 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENT_H
-# define EVENT_H
+#ifndef KEY_H
+# define KEY_H
 
 # include "config.h"
 
@@ -68,4 +68,4 @@ int		key_down(int keycode, t_key *const key);
 int		key_up(int keycode, t_key *const key);
 int		destroy(t_config *const config);
 
-#endif // __EVENT_H__
+#endif // __KEY_H__

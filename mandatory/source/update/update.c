@@ -6,12 +6,12 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:19:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:30:07 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "update.h"
-#include "event.h"
+#include "key.h"
 
 static bool		rotate(const int rotation, double *const lookat);
 static bool		move(const t_key *const key, const char *const *const board, \
