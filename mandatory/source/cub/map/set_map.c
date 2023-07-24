@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 03:31:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 18:08:04 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:13:22 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	set_map(char **const map, const int map_size, t_map *const rmap)
 {
 	int				i;
 	int				j;
-	char **const	new = malloc(sizeof(char *) * map->size * TEX_HEIGHT);
 
-	_assert(new != NULL, "malloc() failed\n");
+	rmap->height = map_size;
+	rmap->data = malloc(sizeof(t_pixel *) * TEX_HEIGHT * rmap->height);
+	_assert(rmap->data != NULL, "malloc() failed\n");
 	i = 0;
 	while (i < map->size)
 	{

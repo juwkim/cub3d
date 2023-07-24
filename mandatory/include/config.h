@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 17:43:52 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:11:36 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef struct s_window
 
 typedef struct s_pixel
 {
-	enum e_texture	tex_id;
-	int				off;
+	uint8_t	tex_id;
+	uint8_t	off;
 }	t_pixel;
 
 typedef struct s_map
