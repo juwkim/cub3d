@@ -645,7 +645,7 @@ int get_mouse_button(NSEventType eventtype)
 // mlx API
  
 
-void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
+void *mlx_new_window(mlx_t *mlx, int size_x, int size_y, char *title)
 {
   mlx_win_list_t	*newwin;
   NSString		*str;
@@ -653,10 +653,10 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
   if ((newwin = malloc(sizeof(*newwin))) == NULL)
     return ((void *)0);
   newwin->img_list = NULL;
-  newwin->next = mlx_ptr->win_list;
+  newwin->next = mlx->win_list;
   newwin->nb_flush = 0;
   newwin->pixmgt = 1;
-  mlx_ptr->win_list = newwin;
+  mlx->win_list = newwin;
 
   NSRect windowRect = NSMakeRect(100, 100, size_x, size_y);
   str = [NSString stringWithCString:title encoding:NSASCIIStringEncoding];
@@ -671,7 +671,7 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
 }
 
 
-void mlx_clear_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr)
+void mlx_clear_window(mlx_t *mlx, mlx_win_list_t *win_ptr)
 {
   [(id)(win_ptr->winid) selectGLContext];
   [(id)(win_ptr->winid) clearWin];
@@ -699,11 +699,11 @@ void mlx_hook(mlx_win_list_t *win_ptr, int x_event, int x_mask, int (*funct_ptr)
   [(id)(win_ptr->winid) setEvent:x_event andFunc:funct_ptr andParam:param];
 }
 
-int     mlx_do_key_autorepeatoff(mlx_ptr_t *mlx_ptr)
+int     mlx_do_key_autorepeatoff(mlx_t *mlx)
 {
   mlx_win_list_t *win;
 
-  win = mlx_ptr->win_list;
+  win = mlx->win_list;
   while (win)
     {
       [(id)(win->winid) setKeyRepeat:0];
@@ -712,11 +712,11 @@ int     mlx_do_key_autorepeatoff(mlx_ptr_t *mlx_ptr)
   return (0);
 }
 
-int     mlx_do_key_autorepeaton(mlx_ptr_t *mlx_ptr)
+int     mlx_do_key_autorepeaton(mlx_t *mlx)
 {
   mlx_win_list_t *win;
 
-  win = mlx_ptr->win_list;
+  win = mlx->win_list;
   while (win)
     {
       [(id)(win->winid) setKeyRepeat:1];
@@ -726,14 +726,14 @@ int     mlx_do_key_autorepeaton(mlx_ptr_t *mlx_ptr)
 }
 
 
-int     mlx_destroy_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_to_del)
+int     mlx_destroy_window(mlx_t *mlx, mlx_win_list_t *win_to_del)
 {
   mlx_win_list_t    first;
   mlx_win_list_t    *win;
   mlx_img_ctx_t	    *ctx;
   mlx_img_ctx_t	    *ctx2;
 
-  first.next = mlx_ptr->win_list;
+  first.next = mlx->win_list;
   win = &first;
   while (win && win->next)
     {
@@ -741,7 +741,7 @@ int     mlx_destroy_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_to_del)
 	win->next = win->next->next;
       win = win->next;
     }
-  mlx_ptr->win_list = first.next;
+  mlx->win_list = first.next;
 
   if (win_to_del->pixmgt)
     {
@@ -761,6 +761,6 @@ int     mlx_destroy_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_to_del)
   free(win_to_del);
 
   //  printf("destroy window done.\n");
-  mlx_do_sync(mlx_ptr);
+  mlx_do_sync(mlx);
   return (0);
 }

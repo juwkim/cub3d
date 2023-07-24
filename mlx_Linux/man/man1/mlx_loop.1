@@ -8,7 +8,7 @@ MiniLibX - Handle events
 .fi
 .B mlx_loop
 (
-.I void *mlx_ptr
+.I void *mlx
 );
 
 .nf
@@ -40,7 +40,7 @@ MiniLibX - Handle events
 .fi
 .B mlx_loop_hook
 (
-.I void *mlx_ptr, int (*funct_ptr)(), void *param
+.I void *mlx, int (*funct_ptr)(), void *param
 );
 
 .SH X-WINDOW EVENTS
@@ -58,7 +58,7 @@ To receive events, you must use
 (). This function never returns. It is an infinite loop that waits for
 an event, and then calls a user-defined function associated with this event.
 A single parameter is needed, the connection identifier
-.I mlx_ptr
+.I mlx
 (see the
 .B mlx manual).
 

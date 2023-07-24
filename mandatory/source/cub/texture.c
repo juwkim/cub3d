@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 06:16:22 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:53:25 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:12:18 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void			set_texture(t_config *const config, const char *line);
 static enum e_wall	get_texture_identifier(const char *line);
-static void			set_texture_image(void *mlx_ptr, t_img *const img, \
+static void			set_texture_image(void *mlx, t_img *const img, \
 							const char *image_path);
 static void			set_texture_color(t_color *const color_ptr, char **rgb);
 
@@ -48,7 +48,7 @@ static void	set_texture(t_config *const config, const char *line)
 
 	_assert(id != NONE, "Texture identifier is NONE\n");
 	if (id == NORTH || id == SOUTH || id == WEST || id == EAST)
-		set_texture_image(config->mlx_ptr, &config->img[id], line + 3);
+		set_texture_image(config->mlx, &config->img[id], line + 3);
 	else
 	{
 		_assert(config->color[id] == 0, "Duplicated color\n");
@@ -79,12 +79,12 @@ static enum e_wall	get_texture_identifier(const char *line)
 	return (NONE);
 }
 
-static void	set_texture_image(void *mlx_ptr, t_img *const img, \
+static void	set_texture_image(void *mlx, t_img *const img, \
 								const char *image_path)
 {
 	_assert(is_extension(image_path, ".xpm"), "image is not xpm file\n");
 	_assert(img->pixels == NULL, "Duplicated image\n");
-	img->pixels = mlx_xpm_file_to_image(mlx_ptr, (char *)image_path, \
+	img->pixels = mlx_xpm_file_to_image(mlx, (char *)image_path, \
 		&img->width, &img->height);
 	_assert(img->pixels != NULL, "mlx_xpm_file_to_image() failed\n");
 	img->addr = mlx_get_data_addr(img->pixels, &img->bpp, &img->len,

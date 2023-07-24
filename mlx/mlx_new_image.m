@@ -12,16 +12,16 @@
 
 
 
-void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
+void    *mlx_new_image(mlx_t *mlx, int width, int height)
 {
   mlx_img_list_t        *newimg;
 
-  //  if (mlx_ptr->win_list == NULL)
+  //  if (mlx->win_list == NULL)
   //    return (NULL);  // need at leat one window created to have openGL context and create texture
   if ((newimg = malloc(sizeof(*newimg))) == NULL)
     return ((void *)0);
-  newimg->next = mlx_ptr->img_list;
-  mlx_ptr->img_list = newimg;
+  newimg->next = mlx->img_list;
+  mlx->img_list = newimg;
   newimg->width = width;
   newimg->height = height;
   newimg->vertexes[0] = 0.0;  newimg->vertexes[1] = 0.0;
@@ -73,7 +73,7 @@ mlx_img_ctx_t	*add_img_to_ctx(mlx_img_list_t *img, mlx_win_list_t *win)
 }
 
 
-void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, mlx_img_list_t *img_ptr, int x, int y)
+void    mlx_put_image_to_window(mlx_t *mlx, mlx_win_list_t *win_ptr, mlx_img_list_t *img_ptr, int x, int y)
 {
   mlx_img_ctx_t	*imgctx;
 
@@ -103,12 +103,12 @@ char    *mlx_get_data_addr(mlx_img_list_t *img_ptr, int *bits_per_pixel, int *si
   return (img_ptr->buffer);
 }
 
-unsigned int    mlx_get_color_value(mlx_ptr_t *mlx_ptr, int color)
+unsigned int    mlx_get_color_value(mlx_t *mlx, int color)
 {
   return (color);
 }
 
-int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, int color, unsigned char *string)
+int mlx_string_put(mlx_t *mlx, mlx_win_list_t *win_ptr, int x, int y, int color, unsigned char *string)
 {
   mlx_img_ctx_t	*imgctx;
   int		gX;
@@ -123,7 +123,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
 
   [(id)(win_ptr->winid) selectGLContext];
 
-  imgctx = add_img_to_ctx(mlx_ptr->font, win_ptr);
+  imgctx = add_img_to_ctx(mlx->font, win_ptr);
 
   while (*string)
     {
@@ -132,7 +132,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
 	  gX = (FONT_WIDTH+2)*(*string-32);
 	  gY = 0;
 	  //      printf("put char %c pos %d %d\n", *string, gX, gY);
-	  [(id)(win_ptr->winid) mlx_gl_draw_font:mlx_ptr->font andCtx:imgctx andX:x andY:y andColor:color glyphX:gX glyphY:gY];
+	  [(id)(win_ptr->winid) mlx_gl_draw_font:mlx->font andCtx:imgctx andX:x andY:y andColor:color glyphX:gX glyphY:gY];
 #ifdef STRINGPUTX11
 	  x += FONT_WIDTH/1.4;
 #else
@@ -147,7 +147,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
   return (0);
 }
 
-int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
+int     mlx_destroy_image(mlx_t *mlx, mlx_img_list_t *img_todel)
 {
   mlx_img_ctx_t	ctx_first;
   mlx_img_ctx_t	*ctx;
@@ -156,7 +156,7 @@ int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
   mlx_img_list_t *img;
   mlx_win_list_t *win;
 
-  img_first.next = mlx_ptr->img_list;
+  img_first.next = mlx->img_list;
   img = &img_first;
   while (img && img->next)
     {
@@ -164,10 +164,10 @@ int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
 	img->next = img->next->next;
       img = img->next;
     }
-  mlx_ptr->img_list = img_first.next;
+  mlx->img_list = img_first.next;
 
 
-  win = mlx_ptr->win_list;
+  win = mlx->win_list;
   while (win)
     {
       ctx_first.next = win->img_list;

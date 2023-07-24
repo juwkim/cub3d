@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:25 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:22:03 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ enum e_key
 };
 # endif // __linux__
 
-int	key_down(int keycode, t_key *const key);
-int	key_up(int keycode, t_key *const key);
-int	destroy(t_config *const config);
+void	init_key(t_key *const key);
+int		key_down(int keycode, t_key *const key);
+int		key_up(int keycode, t_key *const key);
+int		destroy(t_config *const config);
 
 #endif // __EVENT_H__

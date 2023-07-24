@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:52:49 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:24:37 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "mlx.h"		// mlx fuctions
 # include "libft.h"		// libft utile functions
 
-# define PROGRAM				"config"
+# define TITLE					"cub3D"
 # define WIN_HEIGHT				1080
 # define WIN_WIDTH				1920
 # define IMAGE_COUNT			4
@@ -122,9 +122,9 @@ typedef struct s_key
 
 typedef struct s_config
 {
-	void			*mlx_ptr;
-	t_key			key;
+	void			*mlx;
 	t_window		win;
+	t_key			key;
 	t_map			map;
 	t_img			img[IMAGE_COUNT];
 	t_color			color[IMAGE_COUNT + COLOR_COUNT];

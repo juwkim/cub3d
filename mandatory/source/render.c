@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:57:09 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:12:18 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	render(t_config *config)
 {
 	render_background(config, &config->win);
 	render_wall(config, &config->win, config->player.lookat);
-	mlx_put_image_to_window(config->mlx_ptr, config->win.ptr, config->win.img, 0, 0);
+	mlx_put_image_to_window(config->mlx, config->win.ptr, config->win.img, 0, 0);
 }
 
 static void	render_background(t_config *config, t_window *win)
