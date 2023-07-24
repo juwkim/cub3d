@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_to_int.c                                       :+:      :+:    :+:   */
+/*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 03:31:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/23 05:48:29 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:08:04 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	init_board(char **const board, char *line);
 static void	fill_wall(char **const new, const int i, const int j);
 
-void	map_to_int(t_map *const map)
+void	set_map(char **const map, const int map_size, t_map *const rmap)
 {
 	int				i;
 	int				j;

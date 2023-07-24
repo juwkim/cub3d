@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cub.c                                        :+:      :+:    :+:   */
+/*   set_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 05:14:08 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 15:16:06 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/24 17:45:26 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/24 17:59:28 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "utils.h"
 
-void	parse_cub(t_config *const config, const char *filename)
+void	set_camera(t_camera *const cam, char **const map, \
+	const int i, const int j)
 {
-	int	fd;
-
-	_assert(is_extension(filename, ".cub") == true, "Usage: .cub3D *.cub\n");
-	fd = open(filename, O_RDONLY);
-	_assert(fd != -1, strerror(errno));
-	parse_texture_and_color(config, fd);
-	parse_map(config, fd);
+	map[i][j] = C_SPACE;
+	cam->pos.i = TEX_HEIGHT * i + TEX_HEIGHT / 2;
+	cam->pos.j = TEX_WIDTH * j + TEX_WIDTH / 2;
+	if (map[i][j] == C_SOUTH)
+		cam->lookat = 0.0f;
+	else if (map[i][j] == C_EAST)
+		cam->lookat = M_PI_2;
+	else if (map[i][j] == C_NORTH)
+		cam->lookat = M_PI;
+	else if (map[i][j] == C_WEST)
+		cam->lookat = M_PI + M_PI_2;
 }

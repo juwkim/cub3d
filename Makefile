@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/24 14:34:05 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/24 17:37:37 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,8 +61,9 @@ OBJ_DIR				:=	$(BUILD_DIR)/object
 DEP_DIR				:=	$(BUILD_DIR)/dependency
 
 SRC_CUB_DIR			:=	cub
+SRC_MAP_DIR			:=	$(SRC_CUB_DIR)/map
+SRC_TEX_COLOR_DIR	:=	$(SRC_CUB_DIR)/texture_color
 SRC_KEY_DIR			:=	key
-SRC_MAP_DIR			:=	map
 SRC_RAYCASTING_DIR	:=	raycasting
 SRC_RENDER_DIR		:=	render
 SRC_UPDATE_DIR		:=	update
@@ -74,20 +75,20 @@ SRC_WINDOW_DIR		:=	window
 # ---------------------------------------------------------------------------- #
 
 SRCS_ROOT			:= main.c
-SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse_cub.c parse_texture.c parse_map.c)
+SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse_cub.c)
+SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, parse_map.c read_map.c check_valid_map.c)
+SRCS_TEX_COLOR		:= $(addprefix $(SRC_TEX_COLOR_DIR)/, parse_texture_color.c texture.c color.c)
 SRCS_KEY			:= $(addprefix $(SRC_KEY_DIR)/, init_key.c)
-SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, init_map.c map_to_int.c trim_map.c)
 SRCS_RAYCASTING		:= $(addprefix $(SRC_RAYCASTING_DIR)/, raycasting.c)
 SRCS_RENDER			:= $(addprefix $(SRC_RENDER_DIR)/, render.c)
 SRCS_UPDATE			:= $(addprefix $(SRC_UPDATE_DIR)/, update.c)
 SRCS_UTILS			:= $(addprefix $(SRC_UTILS_DIR)/, _assert.c _atoi.c is_extension.c)
 SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, init_window.c)
 
-SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_KEY) $(SRCS_MAP) \
-						$(SRCS_RAYCASTING) $(SRCS_RENDER) $(SRCS_UPDATE) \
-						$(SRCS_UTILS) $(SRCS_WINDOW)
+SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_MAP) $(SRCS_TEX_COLOR) \
+						$(SRCS_KEY) $(SRCS_RAYCASTING) $(SRCS_RENDER) \
+						$(SRCS_UPDATE) $(SRCS_UTILS) $(SRCS_WINDOW)
 ifdef BONUS
-	SRCS_CUB		+=	$(SRC_CUB_DIR)/door.c
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
 endif
 
@@ -151,12 +152,14 @@ re: fclean
 
 dir_guard:
 	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
-	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_KEY_DIR) \
-				$(SRC_MAP_DIR) $(SRC_RAYCASTING_DIR) $(SRC_RENDER_DIR) \
-				$(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) $(SRC_WINDOW_DIR))
-	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_KEY_DIR) \
-				$(SRC_MAP_DIR) $(SRC_RAYCASTING_DIR) $(SRC_RENDER_DIR) \
-				$(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) $(SRC_WINDOW_DIR))
+	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
+				$(SRC_TEX_COLOR_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
+				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
+				$(SRC_WINDOW_DIR))
+	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
+				$(SRC_TEX_COLOR_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
+				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
+				$(SRC_WINDOW_DIR))
 
 norm:
 	@(norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)")

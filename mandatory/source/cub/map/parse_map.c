@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 13:26:33 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 13:31:04 by juwkim           ###   ########.fr       */
+/*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/24 18:04:49 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "cub.h"
 
-# include "config.h"
+void	parse_map(t_config *const config, const int fd)
+{
+	int				map_size;
+	char **const	map = read_map(fd, &map_size);
 
-void	init_map(t_map *const map);
-
-#endif // __MAP_H__
+	traverse_map(map, map_size, &config->cam);
+	set_map(map, map_size, &config->map);
+}

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 14:05:48 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 17:43:52 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@
 # define TITLE					"cub3D"
 # define WIN_HEIGHT				1080
 # define WIN_WIDTH				1920
-# define IMAGE_COUNT			4
+# define TEXTURE_COUNT			4
 # define COLOR_COUNT			2
-# define DEFAULT_MAP_CAPACITY	1024
 # define TEX_WIDTH				64
 # define TEX_HEIGHT				64
 
@@ -47,19 +46,23 @@ enum e_mapchar
 	C_SOUTH = 'S',
 	C_WEST = 'W',
 	C_EAST = 'E',
-	C_EMPTY = '0',
-	C_FILLED = '1'
+	C_SPACE = '0',
+	C_WALL = '1',
+	C_EMPTY = ' '
 };
 
-enum e_wall
+enum e_texture
 {
-	NORTH,
 	SOUTH,
-	WEST,
 	EAST,
+	NORTH,
+	WEST
+};
+
+enum e_color
+{
 	FLOOR,
-	CEILING,
-	NONE
+	CEILING
 };
 
 typedef struct s_pos
@@ -70,7 +73,7 @@ typedef struct s_pos
 
 typedef struct s_img
 {
-	void	*pixels;
+	void	*img;
 	char	*addr;
 	int		width;
 	int		height;
@@ -91,18 +94,24 @@ typedef struct s_window
 	int		endian;
 }	t_window;
 
+typedef struct s_pixel
+{
+	enum e_texture	tex_id;
+	int				off;
+}	t_pixel;
+
 typedef struct s_map
 {
-	char	**board;
-	int		size;
-	int		capacity;
+	t_pixel	**data;
+	int		width;
+	int		height;
 }	t_map;
 
-typedef struct s_player
+typedef struct s_camera
 {
 	t_pos	pos;
 	double	lookat;
-}	t_player;
+}	t_camera;
 
 typedef struct s_texture
 {
@@ -126,9 +135,9 @@ typedef struct s_config
 	t_window	win;
 	t_key		key;
 	t_map		map;
-	t_img		img[IMAGE_COUNT];
-	t_color		color[IMAGE_COUNT + COLOR_COUNT];
-	t_player	player;
+	t_img		tex[TEXTURE_COUNT];
+	t_color		color[COLOR_COUNT];
+	t_camera	cam;
 }	t_config;
 
 #endif // __CONFIG_H__

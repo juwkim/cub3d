@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 23:44:35 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:39:48 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,22 @@ static void	set_image_and_off(t_config *const config, t_texture *tex, \
 {
 	if (config->map.board[i][j] == C_NORTH)
 	{
-		tex->img = &config->img[NORTH];
+		tex->img = &config->tex[NORTH];
 		tex->off = j % TEX_WIDTH;
 	}
 	else if (config->map.board[i][j] == C_WEST)
 	{
-		tex->img = &config->img[WEST];
+		tex->img = &config->tex[WEST];
 		tex->off = (TEX_HEIGHT - 1) - i % TEX_HEIGHT;
 	}
 	else if (config->map.board[i][j] == C_SOUTH)
 	{
-		tex->img = &config->img[SOUTH];
+		tex->img = &config->tex[SOUTH];
 		tex->off = (TEX_WIDTH - 1) - j % TEX_WIDTH;
 	}
 	else if (config->map.board[i][j] == C_EAST)
 	{
-		tex->img = &config->img[EAST];
+		tex->img = &config->tex[EAST];
 		tex->off = i % TEX_HEIGHT;
 	}
 }
