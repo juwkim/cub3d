@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:16:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 19:20:07 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 19:21:07 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	fill_wall(t_pixel **const data, int i, int j);
 void	fill_door(t_pixel **const data, int i, int j);
 
 // trim_map.c
-void	trim_map(t_map **const rmap);
+void	trim_map(t_map *const rmap);
 
 #endif // __CUB_H__
