@@ -6,16 +6,17 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 13:29:10 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:34:42 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include "window.h"
 #include "event.h"
-#include "utils.h"
+#include "map.h"
+#include "window.h"
 #include "update.h"
 #include "render.h"
+#include "utils.h"
 
 static void	init_config(t_config *const cfg);
 static int	cub3d(t_config *const cfg);
@@ -42,9 +43,7 @@ static void	init_config(t_config *const config)
 	_assert(config->mlx != NULL, "mlx_init() failed\n");
 	init_window(&config->win, config->mlx);
 	init_key(&config->key);
-	config->map.capacity = DEFAULT_MAP_CAPACITY;
-	config->map.board = (char **)malloc(sizeof(char *) * config->map.capacity);
-	_assert(config->map.board != NULL, "malloc() failed\n");
+	init_map(&config->map);
 }
 
 static int	cub3d(t_config *const config)

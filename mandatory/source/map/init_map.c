@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 13:26:33 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 13:31:04 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/24 13:30:05 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/24 13:34:03 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "map.h"
+#include "utils.h"
 
-# include "config.h"
-
-void	init_map(t_map *const map);
-
-#endif // __MAP_H__
+void	init_map(t_map *const map)
+{
+	map->capacity = DEFAULT_MAP_CAPACITY;
+	map->board = (char **)malloc(sizeof(char *) * map->capacity);
+	_assert(map->board != NULL, "malloc() failed\n");
+}

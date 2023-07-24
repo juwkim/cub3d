@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/24 13:19:14 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/24 13:54:20 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,18 +62,30 @@ DEP_DIR				:=	$(BUILD_DIR)/dependency
 
 SRC_CUB_DIR			:=	cub
 SRC_EVENT_DIR		:=	event
+SRC_MAP_DIR			:=	map
+SRC_RAYCASTING_DIR	:=	raycasting
+SRC_RENDER_DIR		:=	render
+SRC_UPDATE_DIR		:=	update
+SRC_UTIL_DIR		:=	util
 SRC_WINDOW_DIR		:=	window
 
 # ---------------------------------------------------------------------------- #
 #    Define the source files                                                   #
 # ---------------------------------------------------------------------------- #
 
-SRCS_ROOT			:= main.c utils.c update.c render.c raycasting.c
+SRCS_ROOT			:= main.c
 SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse.c texture.c map.c map_to_int.c trim_map.c)
-SRCS_EVENT			:= $(addprefix $(SRC_EVENT_DIR)/, key.c)
-SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, window.c)
+SRCS_EVENT			:= $(addprefix $(SRC_EVENT_DIR)/, init_key.c)
+SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, init_map.c)
+SRCS_RAYCASTING		:= $(addprefix $(SRC_RAYCASTING_DIR)/, raycasting.c)
+SRCS_RENDER			:= $(addprefix $(SRC_RENDER_DIR)/, render.c)
+SRCS_UPDATE			:= $(addprefix $(SRC_UPDATE_DIR)/, update.c)
+SRCS_UTIL			:= $(addprefix $(SRC_UTIL_DIR)/, utils.c)
+SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, init_window.c)
 
-SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_EVENT) $(SRCS_WINDOW)
+SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_EVENT) $(SRCS_MAP) \
+						$(SRCS_RAYCASTING) $(SRCS_RENDER) $(SRCS_UPDATE) \
+						$(SRCS_UTIL) $(SRCS_WINDOW)
 ifdef BONUS
 	SRCS_CUB		+=	$(SRC_CUB_DIR)/door.c
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
@@ -139,8 +151,12 @@ re: fclean
 
 dir_guard:
 	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
-	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_EVENT_DIR) $(SRC_WINDOW_DIR))
-	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_EVENT_DIR) $(SRC_WINDOW_DIR))
+	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_EVENT_DIR) \
+				$(SRC_MAP_DIR) $(SRC_RAYCASTING_DIR) $(SRC_RENDER_DIR) \
+				$(SRC_UPDATE_DIR) $(SRC_UTIL_DIR) $(SRC_WINDOW_DIR))
+	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_EVENT_DIR) \
+				$(SRC_MAP_DIR) $(SRC_RAYCASTING_DIR) $(SRC_RENDER_DIR) \
+				$(SRC_UPDATE_DIR) $(SRC_UTIL_DIR) $(SRC_WINDOW_DIR))
 
 norm:
 	@(norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)")

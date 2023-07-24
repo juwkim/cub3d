@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 13:24:37 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:39:25 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,13 @@ typedef struct s_key
 
 typedef struct s_config
 {
-	void			*mlx;
-	t_window		win;
-	t_key			key;
-	t_map			map;
-	t_img			img[IMAGE_COUNT];
-	t_color			color[IMAGE_COUNT + COLOR_COUNT];
-	t_player		player;
+	void		*mlx;
+	t_window	win;
+	t_key		key;
+	t_map		map;
+	t_img		img[IMAGE_COUNT];
+	t_color		color[IMAGE_COUNT + COLOR_COUNT];
+	t_player	player;
 }	t_config;
 
 #endif // __CONFIG_H__
