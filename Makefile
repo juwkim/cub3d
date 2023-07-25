@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 22:15:39 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 22:23:18 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,14 +89,14 @@ all: $(LIBFT) $(LIBMLX)
 
 $(NAME): $(OBJS)
 	@ $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
-	@ printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(DEF_COLOR)"
+	@ printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(WHITE)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
 	@ $(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 	@ $(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
 	@ $(eval PROGRESS = $(shell expr 100 "*" $(COMPILED_FILES) / $(TOTAL_FILES)))
 	@ printf "                                                                                                         \r"
-	@ printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
+	@ printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(WHITE)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 $(LIBFT):
 	@ $(MAKE) -j -C $(LIBFT)
@@ -108,28 +108,28 @@ clean:
 	@ $(MAKE) -C $(LIBFT) clean
 	@ $(MAKE) -C $(LIBMLX) clean
 	@ $(RM) -r mandatory/build bonus/build
-	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(WHITE)$(GREEN)	=> Cleaned!\n$(WHITE)"
 
 fclean:
 	@ $(MAKE) -C $(LIBFT) fclean
 	@ $(MAKE) -C $(LIBMLX) fclean
 	@ $(RM) -r mandatory/build bonus/build $(NAME)
-	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
-	@ printf "$(CYAN)[$(NAME)] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(WHITE)$(GREEN)	=> Cleaned!\n$(WHITE)"
+	@ printf "$(CYAN)[$(NAME)] exec. files$(WHITE)$(GREEN)	=> Cleaned!\n$(WHITE)"
 
 bonus:
 	@ $(MAKE) all BONUS=1
 
 re: fclean
 	@ $(MAKE) all
-	@ printf "$(GREEN)[$(NAME)] Cleaned and rebuilt everything!\n$(DEF_COLOR)"
+	@ printf "$(GREEN)[$(NAME)] Cleaned and rebuilt everything!\n$(WHITE)"
 
 dir_guard:
 	@ mkdir -p $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(shell find $(SRC_DIR) -type d))
 	@ mkdir -p $(patsubst $(SRC_DIR)/%, $(DEP_DIR)/%, $(shell find $(SRC_DIR) -type d))
 
 norm:
-	@ ((norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)"))
+	@ ((norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(WHITE)"))
 
 debug: fclean
 	@ $(MAKE) all DEBUG=1
@@ -140,14 +140,13 @@ debug: fclean
 #    Define the colors                                                         #
 # ---------------------------------------------------------------------------- #
 
-DEF_COLOR	=	\033[1;39m
-GRAY		=	\033[1;90m
-RED			=	\033[1;91m
-GREEN		=	\033[1;92m
-YELLOW		=	\033[1;93m
-BLUE		=	\033[1;94m
-MAGENTA		=	\033[1;95m
-CYAN		=	\033[1;96m
-WHITE		=	\033[1;97m
+GRAY            =	\033[1;90m
+RED             =	\033[1;91m
+GREEN           =	\033[1;92m
+YELLOW          =	\033[1;93m
+BLUE            =	\033[1;94m
+MAGENTA         =	\033[1;95m
+CYAN            =	\033[1;96m
+WHITE           =	\033[1;97m
 
 -include $(DEPS)
