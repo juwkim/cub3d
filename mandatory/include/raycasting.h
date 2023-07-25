@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 23:44:57 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 12:01:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:10:33 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,18 @@
 
 # include "config.h"
 
-# define LR	0.5f
+# define LR		0.5f
+# define BOF	TEX_WIDTH
 
-void	raycasting(t_config *const config, double lookat, t_texture *tex);
+typedef struct s_raycast
+{
+	t_img	*tex;
+	int		off;
+	int		start;
+	int		end;
+}	t_raycast;
+
+void	raycasting(t_config *const config, t_camera *const cam, \
+	const double direction, t_raycast *raycast);
 
 #endif // __RAYCASTING_H__

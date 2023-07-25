@@ -6,13 +6,14 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 16:20:58 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 16:37:49 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 01:42:46 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "utils.h"
 
-static char	**append(const char **map, const char *line, int *map_size, \
+static char	**append(char **map, const char *line, int *map_size, \
 	int *map_capacity);
 
 char	**read_map(const int fd, int *out_map_size)
@@ -44,7 +45,7 @@ char	**read_map(const int fd, int *out_map_size)
 	return (map);
 }
 
-static char	**append(const char **map, const char *line, int *map_size, \
+static char	**append(char **map, const char *line, int *map_size, \
 	int *map_capacity)
 {
 	char	**new;

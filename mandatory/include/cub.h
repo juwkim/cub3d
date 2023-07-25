@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:16:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 19:21:07 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:43:03 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@
 void	parse_cub(t_config *const config, const char *filename);
 
 // parse_texture_and_color.c
-void	parse_texture_and_color(t_config *const config, const int fd);
+void	parse_texture_sprite_color(t_config *const config, const int fd);
 
 // texture.c
 bool	is_texture(const char *line, enum e_texture *out_tex_id);
 void	set_texture(t_img *const tex, void *mlx, const char *filename);
+
+// sprite.c
+bool	is_sprite(const char *line, enum e_texture *out_tex_id);
 
 // color.c
 bool	is_color(const char *line, enum e_color *out_color_id);

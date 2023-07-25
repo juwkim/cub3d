@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 15:18:41 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 00:05:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,18 @@ int	key_up(int keycode, t_key *const key)
 
 int	destroy(t_config *const config)
 {
+	int	i;
+
 	mlx_destroy_image(config->mlx, config->win.img);
 	mlx_destroy_image(config->mlx, config->tex[NORTH].img);
 	mlx_destroy_image(config->mlx, config->tex[SOUTH].img);
 	mlx_destroy_image(config->mlx, config->tex[WEST].img);
 	mlx_destroy_image(config->mlx, config->tex[EAST].img);
 	mlx_destroy_window(config->mlx, config->win.ptr);
-	free(config->map.board);
+	i = 0;
+	while (i < config->map.height)
+		free(config->map.data[i++]);
+	free(config->map.data);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

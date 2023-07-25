@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/24 19:18:38 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 02:45:13 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ DEP_DIR				:=	$(BUILD_DIR)/dependency
 
 SRC_CUB_DIR			:=	cub
 SRC_MAP_DIR			:=	$(SRC_CUB_DIR)/map
-SRC_TEX_COLOR_DIR	:=	$(SRC_CUB_DIR)/texture_color
+SRC_TSC_DIR			:=	$(SRC_CUB_DIR)/texture_sprite_color
 SRC_KEY_DIR			:=	key
 SRC_RAYCASTING_DIR	:=	raycasting
 SRC_RENDER_DIR		:=	render
@@ -78,11 +78,11 @@ SRCS_ROOT			:= main.c
 SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse_cub.c)
 SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, parse_map.c read_map.c traverse_map.c \
 							set_camera.c set_map.c fill.c fill_door.c fill_wall.c trim_map.c)
-SRCS_TEX_COLOR		:= $(addprefix $(SRC_TEX_COLOR_DIR)/, parse_texture_color.c texture.c color.c)
-SRCS_KEY			:= $(addprefix $(SRC_KEY_DIR)/, init_key.c)
+SRCS_TEX_COLOR		:= $(addprefix $(SRC_TSC_DIR)/, parse_texture_sprite_color.c texture.c sprite.c color.c)
+SRCS_KEY			:= $(addprefix $(SRC_KEY_DIR)/, key.c)
 SRCS_RAYCASTING		:= $(addprefix $(SRC_RAYCASTING_DIR)/, raycasting.c)
 SRCS_RENDER			:= $(addprefix $(SRC_RENDER_DIR)/, render.c)
-SRCS_UPDATE			:= $(addprefix $(SRC_UPDATE_DIR)/, update.c)
+SRCS_UPDATE			:= $(addprefix $(SRC_UPDATE_DIR)/, update.c move.c rotate.c)
 SRCS_UTILS			:= $(addprefix $(SRC_UTILS_DIR)/, _assert.c _atoi.c is_extension.c)
 SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, init_window.c)
 
@@ -128,7 +128,7 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
 	@$(eval PROGRESS = $(shell expr $(COMPILED_FILES) "*" $(STEP) / $(TOTAL_FILES)))
-	@printf "                                                                                                   \r"
+	@printf "                                                                                                         \r"
 	@printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 clean:
@@ -154,11 +154,11 @@ re: fclean
 dir_guard:
 	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
 	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
-				$(SRC_TEX_COLOR_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
+				$(SRC_TSC_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
 				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
 				$(SRC_WINDOW_DIR))
 	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
-				$(SRC_TEX_COLOR_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
+				$(SRC_TSC_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
 				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
 				$(SRC_WINDOW_DIR))
 

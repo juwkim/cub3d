@@ -6,11 +6,12 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:17:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 18:06:10 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:36:37 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "utils.h"
 
 static void	check_boundary(const char **map, const int map_size, \
 	const int i, const int j);
@@ -28,15 +29,15 @@ void	traverse_map(char **const map, const int map_size, t_camera *const cam)
 		j = 0;
 		while (map[i][j] != '\0')
 		{
+			if (ft_strchr("SENWDI", map[i][j]) != NULL)
+				check_boundary((const char **)map, map_size, i, j);
+			else if (ft_strchr("01 ", map[i][j]) == NULL)
+				_assert(false, "Map includes not allowed character\n");
 			if (ft_strchr("SENW", map[i][j]) != NULL)
 			{
 				_assert(cam_count++ == 0, "Cam count > 1\n");
-				check_boundary(map, map_size, i, j);
 				set_camera(cam, map, i, j);
-				map[i][j] = C_SPACE;
 			}
-			else if (ft_strchr("01 ", map[i][j]) == NULL)
-				_assert(false, "Map includes not allowed character\n");
 			++j;
 		}
 		++i;
@@ -55,4 +56,3 @@ static void	check_boundary(const char **map, const int map_size, \
 
 	_assert(is_boundary == false, "Map boundary includes not wall character\n");
 }
-

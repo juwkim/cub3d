@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_wall.c                                        :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 18:48:35 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 03:00:55 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/25 02:41:29 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/25 03:37:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	fill_wall(t_pixel **const data, int i, int j)
+bool	is_sprite(const char *line, enum e_texture *out_tex_id)
 {
-	fill_south(data, i, j, SOUTH);
-	fill_east(data, i, j, EAST);
-	fill_north(data, i + TEX_HEIGHT - 1, j, NORTH);
-	fill_west(data, i, j + TEX_WIDTH - 1, WEST);
+	if (ft_strncmp(line, "DO ", ft_strlen("DO ")) == 0)
+	{
+		*out_tex_id = DOOR;
+		return (true);
+	}
+	if (ft_strncmp(line, "IT ", ft_strlen("IT ")) == 0)
+	{
+		*out_tex_id = ITEM;
+		return (true);
+	}
+	return (false);
 }

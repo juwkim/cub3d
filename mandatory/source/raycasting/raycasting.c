@@ -6,62 +6,42 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 23:44:35 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 14:39:48 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:48:10 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
+#include "utils.h"
 
-static void	set_image_and_off(t_config *const config, t_texture *tex, \
-	const int i, const int j);
+static double	norm(const double di, const double dj);
 
-void	raycasting(t_config *const config, double lookat, t_texture *tex)
+void	raycasting(t_config *const config, t_camera *const cam, \
+	const double direction, t_raycast *raycast)
 {
-	double			move_i;
-	double			move_j;
+	const double	c = LR * cos(direction);
+	const double	s = LR * sin(direction);
+	double			i;
+	double			j;
 	double			dist;
-	const double	c = LR * cos(lookat);
-	const double	s = LR * sin(lookat);
 
-	move_i = 0.0f;
-	move_j = 0.0f;
+	i = cam->pos.i + 0.5f;
+	j = cam->pos.j + 0.5f;
 	while (true)
 	{
-		move_i += c;
-		move_j += s;
-		if (config->map.board[(int)(config->player.pos.i + move_i)] \
-			[(int)(config->player.pos.j + move_j)] != C_EMPTY)
+		i += c;
+		j += s;
+		if (config->map.data[(int)i][(int)j].tex_id != SPACE)
 			break ;
 	}
-	dist = sqrt(move_i * move_i + move_j * move_j) * \
-		cos(lookat - config->player.lookat) / TEX_WIDTH;
-	tex->start = (int)(0.5 * WIN_HEIGHT - 0.5 * WIN_HEIGHT / dist);
-	tex->end = (int)(0.5 * WIN_HEIGHT + 0.5 * WIN_HEIGHT / dist);
-	set_image_and_off(config, tex, \
-	(int)(config->player.pos.i + move_i), (int)(config->player.pos.j + move_j));
+	dist = norm(i - cam->pos.i, j - cam->pos.j) * cos(direction - cam->lookat);
+	raycast->tex = &config->tex[config->map.data[(int)i][(int)j].tex_id];
+	_assert(raycast->tex->img != NULL, "No image to render\n");
+	raycast->off = config->map.data[(int)i][(int)j].off;
+	raycast->start = WIN_HEIGHT * 0.5f * (1 - BOF / dist);
+	raycast->end = WIN_HEIGHT * 0.5f * (1 + BOF / dist);
 }
 
-static void	set_image_and_off(t_config *const config, t_texture *tex, \
-	const int i, const int j)
+static double	norm(const double di, const double dj)
 {
-	if (config->map.board[i][j] == C_NORTH)
-	{
-		tex->img = &config->tex[NORTH];
-		tex->off = j % TEX_WIDTH;
-	}
-	else if (config->map.board[i][j] == C_WEST)
-	{
-		tex->img = &config->tex[WEST];
-		tex->off = (TEX_HEIGHT - 1) - i % TEX_HEIGHT;
-	}
-	else if (config->map.board[i][j] == C_SOUTH)
-	{
-		tex->img = &config->tex[SOUTH];
-		tex->off = (TEX_WIDTH - 1) - j % TEX_WIDTH;
-	}
-	else if (config->map.board[i][j] == C_EAST)
-	{
-		tex->img = &config->tex[EAST];
-		tex->off = i % TEX_HEIGHT;
-	}
+	return (sqrt(di * di + dj * dj));
 }
