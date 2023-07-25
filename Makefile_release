@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 21:59:36 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 21:02:13 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,46 @@ BUILD_DIR			:=	$(PROJECT_DIR)/build
 OBJ_DIR				:=	$(BUILD_DIR)/object
 DEP_DIR				:=	$(BUILD_DIR)/dependency
 
+SRC_CUB_DIR			:=	cub
+SRC_MAP_DIR			:=	map
+SRC_TSC_DIR			:=	texture_sprite_color
+SRC_DOOR_DIR		:=	door
+SRC_KEY_DIR			:=	key
+SRC_RAYCASTING_DIR	:=	raycasting
+SRC_RENDER_DIR		:=	render
+SRC_UPDATE_DIR		:=	update
+SRC_UTILS_DIR		:=	utils
+SRC_WINDOW_DIR		:=	window
+SRC_WALL_DIR		:=	wall
+
 # ---------------------------------------------------------------------------- #
 #    Define the source files                                                   #
 # ---------------------------------------------------------------------------- #
 
-SRCS				:=	$(shell find $(SRC_DIR) -name *.c)
-OBJS				:=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-DEPS				:=	$(patsubst $(SRC_DIR)/%.c, $(DEP_DIR)/%.d, $(SRCS))
+SRCS_ROOT			:= main.c
+SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse_cub.c)
+SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, parse_map.c read_map.c traverse_map.c \
+							set_camera.c set_map.c fill.c trim_map.c)
+SRCS_TEX_COLOR		:= $(addprefix $(SRC_TSC_DIR)/, parse_texture_sprite_color.c texture.c sprite.c color.c)
+SRCS_DOOR			:= $(addprefix $(SRC_DOOR_DIR)/, fill_door.c)
+SRCS_KEY			:= $(addprefix $(SRC_KEY_DIR)/, key.c)
+SRCS_RAYCASTING		:= $(addprefix $(SRC_RAYCASTING_DIR)/, raycasting.c)
+SRCS_RENDER			:= $(addprefix $(SRC_RENDER_DIR)/, render.c)
+SRCS_UPDATE			:= $(addprefix $(SRC_UPDATE_DIR)/, update.c move.c rotate.c)
+SRCS_UTILS			:= $(addprefix $(SRC_UTILS_DIR)/, _assert.c _atoi.c is_extension.c)
+SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, init_window.c)
+SRCS_WALL			:= $(addprefix $(SRC_WALL_DIR)/, fill_wall.c)
+
+SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_MAP) $(SRCS_TEX_COLOR) \
+						$(SRCS_KEY) $(SRCS_RAYCASTING) $(SRCS_RENDER) \
+						$(SRCS_UPDATE) $(SRCS_UTILS) $(SRCS_WINDOW) $(SRCS_DOOR) $(SRCS_WALL)
+ifdef BONUS
+	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
+endif
+
+SRCS				:=	$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
+OBJS				:=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS_FILES))
+DEPS				:=	$(patsubst %.c, $(DEP_DIR)/%.d, $(SRCS_FILES))
 
 # ---------------------------------------------------------------------------- #
 #    Define the variables for progress bar                                     #
@@ -85,7 +118,9 @@ NAME				:=	cub3D
 #    Define the rules                                                          #
 # ---------------------------------------------------------------------------- #
 
-all: $(LIBFT) $(LIBMLX)
+all:
+	@$(MAKE) -C $(LIBMLX)
+	@$(MAKE) -C $(LIBFT)
 	@$(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
@@ -98,12 +133,6 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
 	@$(eval PROGRESS = $(shell expr $(COMPILED_FILES) "*" $(STEP) / $(TOTAL_FILES)))
 	@printf "                                                                                                         \r"
 	@printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
-
-$(LIBFT):
-	@$(MAKE) -j -C $(LIBFT)
-
-$(LIBMLX):
-	@$(MAKE) -j -C $(LIBMLX)
 
 clean:
 	@$(MAKE) -C $(LIBFT) clean
@@ -119,23 +148,31 @@ fclean:
 	@printf "$(CYAN)[$(NAME)] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 
 bonus:
-	@$(MAKE) all BONUS=1
+	@$(MAKE) BONUS=1 all
 
 re: fclean
 	@$(MAKE) all
 	@printf "$(GREEN)[$(NAME)] Cleaned and rebuilt everything!\n$(DEF_COLOR)"
 
 dir_guard:
-	@mkdir -p $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(shell find $(SRC_DIR) -type d))
-	@mkdir -p $(patsubst $(SRC_DIR)/%, $(DEP_DIR)/%, $(shell find $(SRC_DIR) -type d))
+	@mkdir -p $(OBJ_DIR) $(DEP_DIR)
+	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
+				$(SRC_TSC_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
+				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
+				$(SRC_WINDOW_DIR) $(SRC_DOOR_DIR) $(SRC_WALL_DIR))
+	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
+				$(SRC_TSC_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
+				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
+				$(SRC_WINDOW_DIR) $(SRC_DOOR_DIR) $(SRC_WALL_DIR))
 
 norm:
 	@(norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)")
 
-debug: fclean
+debug:
+	@$(MAKE) fclean
 	@$(MAKE) all DEBUG=1
 
-.PHONY: all clean fclean bonus re dir_guard norm debug $(LIBFT) $(LIBMLX)
+.PHONY: all clean fclean bonus re dir_guard norm debug
 
 # ---------------------------------------------------------------------------- #
 #    Define the colors                                                         #
