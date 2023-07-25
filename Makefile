@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 22:04:16 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 22:09:37 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,34 +14,34 @@
 #    Define the compiler and flags                                             #
 # ---------------------------------------------------------------------------- #
 
-CC				:=	cc
-CFLAGS			:=	-Wall -Wextra -Werror -pipe
-CPPFLAGS		=	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBMLX)
-DEPFLAGS		=	-MMD -MP -MF $(DEP_DIR)/$*.d
-LDFLAGS			=	-L$(LIBFT) -L$(LIBMLX)
-LDLIBS			=	-l$(LIBFT) -l$(LIBMLX)
+CC              :=	cc
+CFLAGS          =	-Wall -Wextra -Werror -pipe
+CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBMLX)
+DEPFLAGS        =	-MMD -MP -MF $(DEP_DIR)/$*.d
+LDFLAGS         =	-L$(LIBFT) -L$(LIBMLX)
+LDLIBS          =	-l$(LIBFT) -l$(LIBMLX)
 
 ifeq ($(shell uname), Linux)
-	LDLIBS		+= -lXext -lX11 -lm -lz
+	LDLIBS      +=	-lXext -lX11 -lm -lz
 else
-	LDLIBS		+= -framework OpenGL -framework Appkit
+	LDLIBS      +=	-framework OpenGL -framework Appkit
 endif
 
-ifdef	DEBUG
-	CFLAGS		+=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
+ifdef DEBUG
+	CFLAGS      +=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
 else
-	CFLAGS		+=	-O2 -DNDEBUG
+	CFLAGS      +=	-O2 -DNDEBUG
 endif
 
 # ---------------------------------------------------------------------------- #
 #    Define the libraries                                                      #
 # ---------------------------------------------------------------------------- #
 
-LIBFT			:=	ft
+LIBFT           :=	ft
 ifeq ($(shell uname -s), Linux)
-	LIBMLX		:=	mlx_Linux
+	LIBMLX      :=	mlx_Linux
 else
-	LIBMLX		:=	mlx
+	LIBMLX      :=	mlx
 endif
 
 # ---------------------------------------------------------------------------- #
@@ -49,37 +49,36 @@ endif
 # ---------------------------------------------------------------------------- #
 
 ifdef BONUS
-	PROJECT_DIR	:=	bonus
+	PROJECT_DIR :=	bonus
 else
-	PROJECT_DIR	:=	mandatory
+	PROJECT_DIR :=	mandatory
 endif
 
-SRC_DIR			:=	$(PROJECT_DIR)/source
-BUILD_DIR		:=	$(PROJECT_DIR)/build
-OBJ_DIR			:=	$(BUILD_DIR)/object
-DEP_DIR			:=	$(BUILD_DIR)/dependency
+SRC_DIR         :=	$(PROJECT_DIR)/source
+BUILD_DIR       :=	$(PROJECT_DIR)/build
+OBJ_DIR         :=	$(BUILD_DIR)/object
+DEP_DIR         :=	$(BUILD_DIR)/dependency
 
 # ---------------------------------------------------------------------------- #
 #    Define the source files                                                   #
 # ---------------------------------------------------------------------------- #
 
-SRCS			:=	$(shell find $(SRC_DIR) -name *.c)
-OBJS			:=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-DEPS			:=	$(patsubst $(SRC_DIR)/%.c, $(DEP_DIR)/%.d, $(SRCS))
+SRCS            :=	$(shell find $(SRC_DIR) -name *.c)
+OBJS            :=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+DEPS            :=	$(patsubst $(SRC_DIR)/%.c, $(DEP_DIR)/%.d, $(SRCS))
 
 # ---------------------------------------------------------------------------- #
 #    Define the variables for progress bar                                     #
 # ---------------------------------------------------------------------------- #
 
-TOTAL_FILES		:=	$(shell echo $(SRCS) | wc -w)
-COMPILED_FILES	:=	0
-STEP			:=	100
+TOTAL_FILES     :=	$(shell echo $(SRCS) | wc -w)
+COMPILED_FILES  :=	0
 
 # ---------------------------------------------------------------------------- #
 #    Define the target                                                         #
 # ---------------------------------------------------------------------------- #
 
-NAME			:=	cub3D
+NAME            :=	cub3D
 
 # ---------------------------------------------------------------------------- #
 #    Define the rules                                                          #
@@ -95,7 +94,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
-	@$(eval PROGRESS = $(shell expr $(COMPILED_FILES) "*" $(STEP) / $(TOTAL_FILES)))
+	@$(eval PROGRESS = $(shell expr 100 "*" $(COMPILED_FILES) / $(TOTAL_FILES)))
 	@printf "                                                                                                         \r"
 	@printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
