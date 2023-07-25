@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 22:14:43 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 22:15:39 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,54 +85,54 @@ NAME            :=	cub3D
 # ---------------------------------------------------------------------------- #
 
 all: $(LIBFT) $(LIBMLX)
-	@$(MAKE) -j $(NAME)
+	@ $(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
-	@printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(DEF_COLOR)"
+	@ $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+	@ printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(DEF_COLOR)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
-	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
-	@$(eval PROGRESS = $(shell expr 100 "*" $(COMPILED_FILES) / $(TOTAL_FILES)))
-	@printf "                                                                                                         \r"
-	@printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
+	@ $(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
+	@ $(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
+	@ $(eval PROGRESS = $(shell expr 100 "*" $(COMPILED_FILES) / $(TOTAL_FILES)))
+	@ printf "                                                                                                         \r"
+	@ printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 $(LIBFT):
-	@$(MAKE) -j -C $(LIBFT)
+	@ $(MAKE) -j -C $(LIBFT)
 
 $(LIBMLX):
-	@$(MAKE) -j -C $(LIBMLX)
+	@ $(MAKE) -j -C $(LIBMLX)
 
 clean:
-	@$(MAKE) -C $(LIBFT) clean
-	@$(MAKE) -C $(LIBMLX) clean
-	@$(RM) -r mandatory/build bonus/build
-	@printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@ $(MAKE) -C $(LIBFT) clean
+	@ $(MAKE) -C $(LIBMLX) clean
+	@ $(RM) -r mandatory/build bonus/build
+	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 
 fclean:
-	@$(MAKE) -C $(LIBFT) fclean
-	@$(MAKE) -C $(LIBMLX) fclean
-	@$(RM) -r mandatory/build bonus/build $(NAME)
-	@printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
-	@printf "$(CYAN)[$(NAME)] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@ $(MAKE) -C $(LIBFT) fclean
+	@ $(MAKE) -C $(LIBMLX) fclean
+	@ $(RM) -r mandatory/build bonus/build $(NAME)
+	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
+	@ printf "$(CYAN)[$(NAME)] exec. files$(DEF_COLOR)$(GREEN)	=> Cleaned!\n$(DEF_COLOR)"
 
 bonus:
-	@$(MAKE) all BONUS=1
+	@ $(MAKE) all BONUS=1
 
 re: fclean
-	@$(MAKE) all
-	@printf "$(GREEN)[$(NAME)] Cleaned and rebuilt everything!\n$(DEF_COLOR)"
+	@ $(MAKE) all
+	@ printf "$(GREEN)[$(NAME)] Cleaned and rebuilt everything!\n$(DEF_COLOR)"
 
 dir_guard:
-	@mkdir -p $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(shell find $(SRC_DIR) -type d))
-	@mkdir -p $(patsubst $(SRC_DIR)/%, $(DEP_DIR)/%, $(shell find $(SRC_DIR) -type d))
+	@ mkdir -p $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(shell find $(SRC_DIR) -type d))
+	@ mkdir -p $(patsubst $(SRC_DIR)/%, $(DEP_DIR)/%, $(shell find $(SRC_DIR) -type d))
 
 norm:
 	@ ((norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)"))
 
 debug: fclean
-	@$(MAKE) all DEBUG=1
+	@ $(MAKE) all DEBUG=1
 
 .PHONY: all clean fclean bonus re dir_guard norm debug $(LIBFT) $(LIBMLX)
 
