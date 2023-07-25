@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 22:23:18 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 23:29:13 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ NAME            :=	cub3D
 
 all: $(LIBFT) $(LIBMLX)
 	@ $(MAKE) -j $(NAME)
+	@ $(MAKE) test
 
 $(NAME): $(OBJS)
 	@ $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
@@ -133,6 +134,9 @@ norm:
 
 debug: fclean
 	@ $(MAKE) all DEBUG=1
+
+test:
+	./cub3D asset/correct.cub
 
 .PHONY: all clean fclean bonus re dir_guard norm debug $(LIBFT) $(LIBMLX)
 
