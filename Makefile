@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 22:09:37 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 22:11:00 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,15 +22,15 @@ LDFLAGS         =	-L$(LIBFT) -L$(LIBMLX)
 LDLIBS          =	-l$(LIBFT) -l$(LIBMLX)
 
 ifeq ($(shell uname), Linux)
-	LDLIBS      +=	-lXext -lX11 -lm -lz
+    LDLIBS      +=	-lXext -lX11 -lm -lz
 else
-	LDLIBS      +=	-framework OpenGL -framework Appkit
+    LDLIBS      +=	-framework OpenGL -framework Appkit
 endif
 
 ifdef DEBUG
-	CFLAGS      +=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
+    CFLAGS      +=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
 else
-	CFLAGS      +=	-O2 -DNDEBUG
+    CFLAGS      +=	-O2 -DNDEBUG
 endif
 
 # ---------------------------------------------------------------------------- #
@@ -39,9 +39,9 @@ endif
 
 LIBFT           :=	ft
 ifeq ($(shell uname -s), Linux)
-	LIBMLX      :=	mlx_Linux
+    LIBMLX      :=	mlx_Linux
 else
-	LIBMLX      :=	mlx
+    LIBMLX      :=	mlx
 endif
 
 # ---------------------------------------------------------------------------- #
@@ -49,9 +49,9 @@ endif
 # ---------------------------------------------------------------------------- #
 
 ifdef BONUS
-	PROJECT_DIR :=	bonus
+    PROJECT_DIR :=	bonus
 else
-	PROJECT_DIR :=	mandatory
+    PROJECT_DIR :=	mandatory
 endif
 
 SRC_DIR         :=	$(PROJECT_DIR)/source
