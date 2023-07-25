@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 05:18:16 by juwkim            #+#    #+#              #
-#    Updated: 2023/07/24 11:52:49 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 20:03:45 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 CC                  :=	cc
 CFLAGS              :=	-Wall -Wextra -Werror
-CPPFLAGS            :=	-I include
+CPPFLAGS            :=	-Iinclude
 ARFLAGS             := 	-rcs
 
 ifeq ($(shell uname -s), Linux)
@@ -66,7 +66,7 @@ all:
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $^
-	@printf "\n$(MAGENTA)[LIBFT] Make Success\n$(DEF_COLOR)"
+	@printf "\n$(MAGENTA)[LIBFT] Linking Success\n$(DEF_COLOR)"
 
 $(OBJ_DIR)/%.o: %.c | dir_guard
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@

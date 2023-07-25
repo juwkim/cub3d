@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 18:48:35 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 03:00:55 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:03:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	fill_wall(t_pixel **const data, int i, int j)
+void	fill_wall(t_pixel *const *const data, const int i, const int j)
 {
 	fill_south(data, i, j, SOUTH);
 	fill_east(data, i, j, EAST);

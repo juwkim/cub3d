@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 02:45:13 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 19:32:47 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ else
 endif
 
 ifdef	DEBUG
-	CFLAGS			+=	-g -DDEBUG
+	CFLAGS			+=	-g -DDEBUG -fsanitize=leak
 else
 	CFLAGS			+=	-O2 -pipe
 endif
@@ -61,14 +61,16 @@ OBJ_DIR				:=	$(BUILD_DIR)/object
 DEP_DIR				:=	$(BUILD_DIR)/dependency
 
 SRC_CUB_DIR			:=	cub
-SRC_MAP_DIR			:=	$(SRC_CUB_DIR)/map
-SRC_TSC_DIR			:=	$(SRC_CUB_DIR)/texture_sprite_color
+SRC_MAP_DIR			:=	map
+SRC_TSC_DIR			:=	texture_sprite_color
+SRC_DOOR_DIR		:=	door
 SRC_KEY_DIR			:=	key
 SRC_RAYCASTING_DIR	:=	raycasting
 SRC_RENDER_DIR		:=	render
 SRC_UPDATE_DIR		:=	update
 SRC_UTILS_DIR		:=	utils
 SRC_WINDOW_DIR		:=	window
+SRC_WALL_DIR		:=	wall
 
 # ---------------------------------------------------------------------------- #
 #    Define the source files                                                   #
@@ -77,18 +79,20 @@ SRC_WINDOW_DIR		:=	window
 SRCS_ROOT			:= main.c
 SRCS_CUB			:= $(addprefix $(SRC_CUB_DIR)/, parse_cub.c)
 SRCS_MAP			:= $(addprefix $(SRC_MAP_DIR)/, parse_map.c read_map.c traverse_map.c \
-							set_camera.c set_map.c fill.c fill_door.c fill_wall.c trim_map.c)
+							set_camera.c set_map.c fill.c trim_map.c)
 SRCS_TEX_COLOR		:= $(addprefix $(SRC_TSC_DIR)/, parse_texture_sprite_color.c texture.c sprite.c color.c)
+SRCS_DOOR			:= $(addprefix $(SRC_DOOR_DIR)/, fill_door.c)
 SRCS_KEY			:= $(addprefix $(SRC_KEY_DIR)/, key.c)
 SRCS_RAYCASTING		:= $(addprefix $(SRC_RAYCASTING_DIR)/, raycasting.c)
 SRCS_RENDER			:= $(addprefix $(SRC_RENDER_DIR)/, render.c)
 SRCS_UPDATE			:= $(addprefix $(SRC_UPDATE_DIR)/, update.c move.c rotate.c)
 SRCS_UTILS			:= $(addprefix $(SRC_UTILS_DIR)/, _assert.c _atoi.c is_extension.c)
 SRCS_WINDOW			:= $(addprefix $(SRC_WINDOW_DIR)/, init_window.c)
+SRCS_WALL			:= $(addprefix $(SRC_WALL_DIR)/, fill_wall.c)
 
 SRCS_FILES			= $(SRCS_ROOT) $(SRCS_CUB) $(SRCS_MAP) $(SRCS_TEX_COLOR) \
 						$(SRCS_KEY) $(SRCS_RAYCASTING) $(SRCS_RENDER) \
-						$(SRCS_UPDATE) $(SRCS_UTILS) $(SRCS_WINDOW)
+						$(SRCS_UPDATE) $(SRCS_UTILS) $(SRCS_WINDOW) $(SRCS_DOOR) $(SRCS_WALL)
 ifdef BONUS
 	SRCS_FILES		:=	$(patsubst %.c, %_bonus.c, $(SRCS_FILES))
 endif
@@ -156,16 +160,17 @@ dir_guard:
 	@mkdir -p $(addprefix $(OBJ_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
 				$(SRC_TSC_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
 				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
-				$(SRC_WINDOW_DIR))
+				$(SRC_WINDOW_DIR) $(SRC_DOOR_DIR) $(SRC_WALL_DIR))
 	@mkdir -p $(addprefix $(DEP_DIR)/, $(SRC_CUB_DIR) $(SRC_MAP_DIR) \
 				$(SRC_TSC_DIR) $(SRC_KEY_DIR) $(SRC_RAYCASTING_DIR) \
 				$(SRC_RENDER_DIR) $(SRC_UPDATE_DIR) $(SRC_UTILS_DIR) \
-				$(SRC_WINDOW_DIR))
+				$(SRC_WINDOW_DIR) $(SRC_DOOR_DIR) $(SRC_WALL_DIR))
 
 norm:
 	@(norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(DEF_COLOR)")
 
 debug:
+	@$(MAKE) fclean
 	@$(MAKE) DEBUG=1 all
 
 .PHONY: all clean fclean bonus re dir_guard norm debug

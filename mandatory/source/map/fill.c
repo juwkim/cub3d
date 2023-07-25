@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:12:15 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 19:15:44 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:01:35 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	fill_south(t_pixel **const data, int i, int j, enum e_texture tex)
+void	fill_south(t_pixel *const *const data, int i, int j, enum e_texture tex)
 {
 	int	off;
 
@@ -26,7 +26,7 @@ void	fill_south(t_pixel **const data, int i, int j, enum e_texture tex)
 	}
 }
 
-void	fill_east(t_pixel **const data, int i, int j, enum e_texture tex)
+void	fill_east(t_pixel *const *const data, int i, int j, enum e_texture tex)
 {
 	int	off;
 
@@ -40,7 +40,7 @@ void	fill_east(t_pixel **const data, int i, int j, enum e_texture tex)
 	}
 }
 
-void	fill_north(t_pixel **const data, int i, int j, enum e_texture tex)
+void	fill_north(t_pixel *const *const data, int i, int j, enum e_texture tex)
 {
 	int	off;
 
@@ -54,7 +54,7 @@ void	fill_north(t_pixel **const data, int i, int j, enum e_texture tex)
 	}
 }
 
-void	fill_west(t_pixel **const data, int i, int j, enum e_texture tex)
+void	fill_west(t_pixel *const *const data, int i, int j, enum e_texture tex)
 {
 	int	off;
 

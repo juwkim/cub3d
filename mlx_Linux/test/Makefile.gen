@@ -28,7 +28,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LFLAGS)
+	@$(CC) -o $(NAME) $(OBJ) $(LFLAGS)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 show:
 	@printf "UNAME		: $(UNAME)\n"
@@ -40,6 +43,6 @@ show:
 	@printf "OBJ		:\n	$(OBJ)\n"
 
 clean:
-	rm -f $(NAME) $(OBJ) *~ core *.core
+	@rm -f $(NAME) $(OBJ) *~ core *.core
 
 re: clean all

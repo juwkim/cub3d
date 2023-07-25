@@ -36,18 +36,26 @@ SRC	= mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
 
 OBJ_DIR = obj
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
-CFLAGS	= -O3 -I$(INC)
+CFLAGS	= -O3 -I$(INC) -Wno-unused-result
+ARFLAGS             := 	-rcs
+TOTAL_FILES			:=	$(shell echo $(SRC) | wc -w)
+COMPILED_FILES		:=	0
+STEP				:=	100
 
-all	: $(NAME)
+all:$(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
+	@$(eval PROGRESS = $(shell expr $(COMPILED_FILES) "*" $(STEP) / $(TOTAL_FILES)))
+	@printf "                                                                                                   \r"
+	@printf "$(YELLOW)[MLX] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 $(NAME): $(OBJ)
-	@ar -r $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	@$(AR) $(ARFLAGS) $@ $^
 	@cp $(NAME) $(NAME_UNAME)
+	@printf "\n$(MAGENTA)[MLX] Linking Success\n$(DEF_COLOR)"
 
 check: all
 	@test/run_tests.sh
@@ -64,3 +72,17 @@ clean	:
 	@rm -rf $(OBJ_DIR)/ $(NAME) $(NAME_UNAME) *~ core *.core
 
 .PHONY: all check show clean
+
+# ---------------------------------------------------------------------------- #
+#    Define the colors                                                         #
+# ---------------------------------------------------------------------------- #
+
+DEF_COLOR	=	\033[1;39m
+GRAY		=	\033[1;90m
+RED			=	\033[1;91m
+GREEN		=	\033[1;92m
+YELLOW		=	\033[1;93m
+BLUE		=	\033[1;94m
+MAGENTA		=	\033[1;95m
+CYAN		=	\033[1;96m
+WHITE		=	\033[1;97m

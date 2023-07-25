@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:16:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 02:43:03 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:02:50 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,20 @@ void	set_camera(t_camera *const cam, char **const map, \
 void	set_map(char **const map, const int map_size, t_map *const rmap);
 
 // fill.c
-void	fill_south(t_pixel **const data, int i, int j, enum e_texture tex);
-void	fill_east(t_pixel **const data, int i, int j, enum e_texture tex);
-void	fill_north(t_pixel **const data, int i, int j, enum e_texture tex);
-void	fill_west(t_pixel **const data, int i, int j, enum e_texture tex);
+void	fill_south(t_pixel *const *const data, const int i, const int j, \
+	const enum e_texture tex);
+void	fill_east(t_pixel *const *const data, const int i, const int j, \
+	const enum e_texture tex);
+void	fill_north(t_pixel *const *const data, const int i, const int j, \
+	const enum e_texture tex);
+void	fill_west(t_pixel *const *const data, const int i, const int j, \
+	const enum e_texture tex);
 
 // fill_wall.c
-void	fill_wall(t_pixel **const data, int i, int j);
+void	fill_wall(t_pixel *const *const data, const int i, const int j);
 
 // fill_door.c
-void	fill_door(t_pixel **const data, int i, int j);
+void	fill_door(t_pixel *const *const data, const int i, const int j);
 
 // trim_map.c
 void	trim_map(t_map *const rmap);

@@ -11,10 +11,11 @@
 ## Please use configure script
 
 
-all	: do_configure
+all	:
+	@$(MAKE) -j do_configure
 
 do_configure	:
-	./configure
+	@./configure
 
 clean	:
 	@./configure clean
