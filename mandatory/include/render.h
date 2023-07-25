@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:43:07 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 01:33:58 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 23:10:53 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "config.h"
 
-# define AOF	1.0f
+# define AOF	M_PI_3
 
 void	render(t_config *config);
 

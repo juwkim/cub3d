@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:49:14 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 03:35:56 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 23:13:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,7 @@
 # define COLOR_COUNT			2
 # define TEX_WIDTH				64
 # define TEX_HEIGHT				64
-
-# ifndef M_PI
-#  define M_PI 					3.14159265358979323846	/* pi */
-#  define M_PI_2				1.57079632679489661923	/* pi/2 */
-#  define M_PI_4				0.78539816339744830962	/* pi/4 */
-# endif // __M_PI__
+# define M_PI_3					1.0471975512 /* pi/3 */
 
 typedef unsigned int	t_color;
 

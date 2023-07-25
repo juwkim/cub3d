@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:20:39 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 02:56:26 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/25 23:06:41 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "config.h"
 
-# define MARGIN		16
+# define MARGIN		32
 # define MV_SPEED	5.0f
 # define RT_SPEED	0.05f
 
