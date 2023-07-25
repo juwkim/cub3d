@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 19:32:47 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 21:00:20 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,23 +15,22 @@
 # ---------------------------------------------------------------------------- #
 
 CC					:=	cc
-CFLAGS				:=	-Wall -Wextra -Werror
+CFLAGS				:=	-Wall -Wextra -Werror -pipe
 CPPFLAGS			=	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBMLX)
 DEPFLAGS			=	-MMD -MP -MF $(DEP_DIR)/$*.d
 LDFLAGS				=	-L$(LIBFT) -L$(LIBMLX)
 LDLIBS				=	-l$(LIBFT) -l$(LIBMLX)
 
-ifeq ($(shell uname -s), Linux)
-	CFLAGS			+=	-Wno-unused-result
+ifeq ($(shell uname), Linux)
 	LDLIBS			+= -lXext -lX11 -lm -lz
 else
 	LDLIBS			+= -framework OpenGL -framework Appkit
 endif
 
 ifdef	DEBUG
-	CFLAGS			+=	-g -DDEBUG -fsanitize=leak
+	CFLAGS		+=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
 else
-	CFLAGS			+=	-O2 -pipe
+	CFLAGS		+=	-O2 -DNDEBUG
 endif
 
 # ---------------------------------------------------------------------------- #
@@ -40,9 +39,9 @@ endif
 
 LIBFT				:=	ft
 ifeq ($(shell uname -s), Linux)
-	LIBMLX				:=	mlx_Linux
+	LIBMLX			:=	mlx_Linux
 else
-	LIBMLX				:=	mlx
+	LIBMLX			:=	mlx
 endif
 
 # ---------------------------------------------------------------------------- #
@@ -125,7 +124,7 @@ all:
 	@$(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 	@printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(DEF_COLOR)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
@@ -171,7 +170,7 @@ norm:
 
 debug:
 	@$(MAKE) fclean
-	@$(MAKE) DEBUG=1 all
+	@$(MAKE) all DEBUG=1
 
 .PHONY: all clean fclean bonus re dir_guard norm debug
 

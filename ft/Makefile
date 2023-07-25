@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 05:18:16 by juwkim            #+#    #+#              #
-#    Updated: 2023/07/25 20:03:45 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 20:57:40 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,18 +15,14 @@
 # ---------------------------------------------------------------------------- #
 
 CC                  :=	cc
-CFLAGS              :=	-Wall -Wextra -Werror
+CFLAGS              :=	-Wall -Wextra -Werror -pipe
 CPPFLAGS            :=	-Iinclude
-ARFLAGS             := 	-rcs
-
-ifeq ($(shell uname -s), Linux)
-	CFLAGS			+=	-Wno-unused-result
-endif
+ARFLAGS             :=	-rcs
 
 ifdef	DEBUG
-	CFLAGS			+=	-g -DDEBUG
+    CFLAGS          +=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
 else
-	CFLAGS			+=	-O2 -pipe
+    CFLAGS          +=	-O2 -DNDEBUG
 endif
 
 # ---------------------------------------------------------------------------- #
