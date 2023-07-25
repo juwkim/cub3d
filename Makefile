@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 22:12:50 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/25 22:13:19 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,18 +85,18 @@ NAME            :=	cub3D
 # ---------------------------------------------------------------------------- #
 
 all: $(LIBFT) $(LIBMLX)
-    @$(MAKE) -j $(NAME)
+	@$(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
-    @$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
-    @printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+	@printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(DEF_COLOR)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
-    @$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
-    @$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
-    @$(eval PROGRESS = $(shell expr 100 "*" $(COMPILED_FILES) / $(TOTAL_FILES)))
-    @printf "                                                                                                         \r"
-    @printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
+	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
+	@$(eval PROGRESS = $(shell expr 100 "*" $(COMPILED_FILES) / $(TOTAL_FILES)))
+	@printf "                                                                                                         \r"
+	@printf "$(YELLOW)[$(NAME)] [%02d/%02d] ( %3d %%) Compiling $<\r$(DEF_COLOR)" $(COMPILED_FILES) $(TOTAL_FILES) $(PROGRESS)
 
 $(LIBFT):
 	@$(MAKE) -j -C $(LIBFT)
