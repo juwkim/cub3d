@@ -6,17 +6,17 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:43:07 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 23:10:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 03:08:05 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-# include "config.h"
+# include "main.h"
 
 # define AOF	M_PI_3
 
-void	render(t_config *config);
+void	render(t_cub3d *cub3d);
 
 #endif // __RENDER_H__

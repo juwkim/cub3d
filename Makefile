@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/07/25 23:29:13 by juwkim           ###   ########.fr        #
+#    Updated: 2023/07/26 11:20:15 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@
 
 CC              :=	cc
 CFLAGS          =	-Wall -Wextra -Werror -pipe
-CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBMLX)
+CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBDS)/include -I$(LIBMLX)
 DEPFLAGS        =	-MMD -MP -MF $(DEP_DIR)/$*.d
-LDFLAGS         =	-L$(LIBFT) -L$(LIBMLX)
-LDLIBS          =	-l$(LIBFT) -l$(LIBMLX)
+LDFLAGS         =	-L$(LIBFT) -L$(LIBDS) -L$(LIBMLX)
+LDLIBS          =	-l$(LIBFT) -L$(LIBDS) -l$(LIBMLX)
 
 ifeq ($(shell uname), Linux)
     LDLIBS      +=	-lXext -lX11 -lm -lz
@@ -38,6 +38,7 @@ endif
 # ---------------------------------------------------------------------------- #
 
 LIBFT           :=	ft
+LIBDS           :=	ds
 ifeq ($(shell uname -s), Linux)
     LIBMLX      :=	mlx_Linux
 else
@@ -84,7 +85,7 @@ NAME            :=	cub3D
 #    Define the rules                                                          #
 # ---------------------------------------------------------------------------- #
 
-all: $(LIBFT) $(LIBMLX)
+all: $(LIBFT) $(LIBDS) $(LIBMLX)
 	@ $(MAKE) -j $(NAME)
 	@ $(MAKE) test
 
@@ -102,17 +103,22 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
 $(LIBFT):
 	@ $(MAKE) -j -C $(LIBFT)
 
+$(LIBDS):
+	@ $(MAKE) -j -C $(LIBDS)
+
 $(LIBMLX):
 	@ $(MAKE) -j -C $(LIBMLX)
 
 clean:
 	@ $(MAKE) -C $(LIBFT) clean
+	@ $(MAKE) -C $(LIBDS) clean
 	@ $(MAKE) -C $(LIBMLX) clean
 	@ $(RM) -r mandatory/build bonus/build
 	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(WHITE)$(GREEN)	=> Cleaned!\n$(WHITE)"
 
 fclean:
 	@ $(MAKE) -C $(LIBFT) fclean
+	@ $(MAKE) -C $(LIBDS) fclean
 	@ $(MAKE) -C $(LIBMLX) fclean
 	@ $(RM) -r mandatory/build bonus/build $(NAME)
 	@ printf "$(BLUE)[$(NAME)] obj. dep. files$(WHITE)$(GREEN)	=> Cleaned!\n$(WHITE)"
@@ -130,7 +136,7 @@ dir_guard:
 	@ mkdir -p $(patsubst $(SRC_DIR)/%, $(DEP_DIR)/%, $(shell find $(SRC_DIR) -type d))
 
 norm:
-	@ ((norminette $(LIBFT) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(WHITE)"))
+	@ ((norminette $(LIBFT) $(LIBDS) mandatory bonus | grep Error) || (printf "$(GREEN)[$(NAME)] Norminette Success\n$(WHITE)"))
 
 debug: fclean
 	@ $(MAKE) all DEBUG=1
@@ -138,7 +144,7 @@ debug: fclean
 test:
 	./cub3D asset/correct.cub
 
-.PHONY: all clean fclean bonus re dir_guard norm debug $(LIBFT) $(LIBMLX)
+.PHONY: all clean fclean bonus re dir_guard norm debug $(LIBFT) $(LIBDS) $(LIBMLX)
 
 # ---------------------------------------------------------------------------- #
 #    Define the colors                                                         #

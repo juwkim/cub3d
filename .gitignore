@@ -1,9 +1,11 @@
 .DS_Store
 .vscode
-ft/object
-ft/libft.a
 mandatory/build
 bonus/build
+ft/object
+ft/libft.a
+ds/object
+ds/libds.a
 mlx/*.o
 mlx/*.a
 mlx_Linux/obj

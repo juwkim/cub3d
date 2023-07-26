@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   cub3d_update.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:19:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 02:56:10 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 04:19:18 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "update.h"
 #include "key.h"
 
-bool	update(t_config *const config, const t_key *const key)
+bool	cub3d_update(t_cub3d *const cub3d)
 {
 	bool	rotated;
 	bool	moved;
+	t_key	*key;
 
+	key = &cub3d->key;
 	if (key->esc == true)
-		destroy(config);
-	rotated = rotate(config, key->rotation, &config->cam.lookat);
-	moved = move(key, &config->cam, config->map.data);
+		cub3d_destroy(cub3d);
+	rotated = rotate(cub3d, key->rotation, &cub3d->cam.lookat);
+	moved = move(key, &cub3d->cam, cub3d->map.data);
 	return (rotated | moved);
 }

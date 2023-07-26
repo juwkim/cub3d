@@ -1,1 +1,1 @@
-# config
+# cub3d

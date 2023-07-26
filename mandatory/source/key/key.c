@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_key.c                                         :+:      :+:    :+:   */
+/*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 00:05:57 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 11:32:29 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 
-void	init_key(t_key *const key)
+void	key_init(const t_cub3d *cub3d, t_key *const key)
 {
-	key->vertical = KEY_RELESED;
-	key->horizontal = KEY_RELESED;
-	key->rotation = KEY_RELESED;
+	key->vertical = KEY_RELESE;
+	key->horizontal = KEY_RELESE;
+	key->rotation = KEY_RELESE;
+	mlx_hook(cub3d->win.ptr, KeyPress, KeyPressMask, key_press, key);
+	mlx_hook(cub3d->win.ptr, KeyRelease, KeyReleaseMask, key_release, key);
 }
 
-int	key_down(int keycode, t_key *const key)
+int	key_press(int keycode, t_key *const key)
 {
 	if (keycode == KEY_W || keycode == KEY_S)
 		key->vertical = keycode;
@@ -32,31 +34,31 @@ int	key_down(int keycode, t_key *const key)
 	return (0);
 }
 
-int	key_up(int keycode, t_key *const key)
+int	key_release(int keycode, t_key *const key)
 {
 	if (key->vertical == keycode)
-		key->vertical = KEY_RELESED;
+		key->vertical = KEY_RELESE;
 	else if (key->horizontal == keycode)
-		key->horizontal = KEY_RELESED;
+		key->horizontal = KEY_RELESE;
 	else if (key->rotation == keycode)
-		key->rotation = KEY_RELESED;
+		key->rotation = KEY_RELESE;
 	return (0);
 }
 
-int	destroy(t_config *const config)
+int	destroy(t_cub3d *const cub3d)
 {
 	int	i;
 
-	mlx_destroy_image(config->mlx, config->win.img);
-	mlx_destroy_image(config->mlx, config->tex[NORTH].img);
-	mlx_destroy_image(config->mlx, config->tex[SOUTH].img);
-	mlx_destroy_image(config->mlx, config->tex[WEST].img);
-	mlx_destroy_image(config->mlx, config->tex[EAST].img);
-	mlx_destroy_window(config->mlx, config->win.ptr);
+	mlx_destroy_image(cub3d->mlx, cub3d->win.screen.img);
+	mlx_destroy_image(cub3d->mlx, cub3d->tex[NORTH].img);
+	mlx_destroy_image(cub3d->mlx, cub3d->tex[SOUTH].img);
+	mlx_destroy_image(cub3d->mlx, cub3d->tex[WEST].img);
+	mlx_destroy_image(cub3d->mlx, cub3d->tex[EAST].img);
+	mlx_destroy_window(cub3d->mlx, cub3d->win.ptr);
 	i = 0;
-	while (i < config->map.height)
-		free(config->map.data[i++]);
-	free(config->map.data);
+	while (i < cub3d->map.height)
+		free(cub3d->map.data[i++]);
+	free(cub3d->map.data);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

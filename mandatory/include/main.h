@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#ifndef MAIN_H
+# define MAIN_H
 
 // C system headers
 # include <math.h>		// To use math related functions
@@ -22,11 +22,15 @@
 # include <stdbool.h>	// To use true and false
 # include <sys/fcntl.h> // TO use file related system calls
 
+# ifdef __linux__
+#  include "X11/X.h"
+# endif
+
 // project headers
 # include "mlx.h"		// mlx fuctions
 # include "libft.h"		// libft utile functions
 
-# define TITLE					"cub3D"
+# define WIN_TITLE				"cub3D"
 # define WIN_HEIGHT				1080
 # define WIN_WIDTH				1920
 # define TEXTURE_COUNT			4
@@ -83,18 +87,12 @@ typedef struct s_img
 	int		bpp;
 	int		len;
 	int		endian;
-}	t_img;
+}	t_image;
 
 typedef struct s_window
 {
 	void	*ptr;
-	void	*img;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bpp;
-	int		len;
-	int		endian;
+	t_image	screen;
 }	t_window;
 
 typedef struct s_pixel
@@ -124,15 +122,15 @@ typedef struct s_key
 	bool	esc;
 }	t_key;
 
-typedef struct s_config
+typedef struct s_cub3d
 {
 	void		*mlx;
 	t_window	win;
 	t_key		key;
 	t_map		map;
-	t_img		tex[TEXTURE_COUNT + SPRITE_COUNT];
+	t_image		tex[TEXTURE_COUNT + SPRITE_COUNT];
 	t_color		color[COLOR_COUNT];
 	t_camera	cam;
-}	t_config;
+}	t_cub3d;
 
-#endif // __CONFIG_H__
+#endif // __MAIN_H__

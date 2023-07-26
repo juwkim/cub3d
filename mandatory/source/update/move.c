@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 00:10:31 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 00:38:13 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 03:46:41 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	move(const t_key *const key, t_camera *const cam, t_pixel **const data)
 	int		di;
 	int		dj;
 
-	if (key->vertical == KEY_RELESED && key->horizontal == KEY_RELESED)
+	if (key->vertical == KEY_RELESE && key->horizontal == KEY_RELESE)
 		return (false);
 	moved = false;
 	direction = get_moving_direction(key, cam->lookat);

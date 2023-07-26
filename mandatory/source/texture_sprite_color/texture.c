@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 14:46:58 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 15:51:13 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 13:42:36 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	is_texture(const char *line, enum e_texture *out_tex_id)
 	return (false);
 }
 
-void	set_texture(t_img *const tex, void *mlx, const char *filename)
+void	set_texture(t_image *const tex, void *mlx, const char *filename)
 {
 	_assert(is_extension(filename, ".xpm") == true, "image is not xpm file\n");
 	_assert(tex->img == NULL, "Duplicated image\n");

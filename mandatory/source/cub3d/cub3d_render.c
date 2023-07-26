@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   cub3d_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 01:39:22 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 04:19:14 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "render.h"
 #include "raycasting.h"
 
-static void	render_background(t_config *config, t_window *win);
-static void	render_wall(t_config *const config, t_window *win, double lookat);
+static void	render_background(t_cub3d *cub3d, t_window *win);
+static void	render_wall(t_cub3d *const cub3d, t_window *win, double lookat);
 
-void	render(t_config *config)
+void	cub3d_render(t_cub3d *const cub3d)
 {
-	t_window *const	win = &config->win;
+	t_window *const	win = &cub3d->win;
 
-	render_background(config, win);
-	render_wall(config, win, config->cam.lookat);
-	mlx_put_image_to_window(config->mlx, win->ptr, win->img, 0, 0);
+	render_background(cub3d, win);
+	render_wall(cub3d, win, cub3d->cam.lookat);
+	mlx_put_image_to_window(cub3d->mlx, win->ptr, win->screen.img, 0, 0);
 }
 
-static void	render_background(t_config *config, t_window *win)
+static void	render_background(t_cub3d *cub3d, t_window *win)
 {
 	int		i;
 	int		j;
@@ -37,21 +38,21 @@ static void	render_background(t_config *config, t_window *win)
 		i = 0;
 		while (i < WIN_HEIGHT / 2)
 		{
-			pixel = win->addr + i * win->len + j * (win->bpp / 8);
-			*(t_color *)pixel = config->color[CEILING];
+			pixel = win->screen.addr + i * win->screen.len + j * (win->screen.bpp / 8);
+			*(t_color *)pixel = cub3d->color[CEILING];
 			++i;
 		}
 		while (i < WIN_HEIGHT)
 		{
-			pixel = win->addr + i * win->len + j * (win->bpp / 8);
-			*(t_color *)pixel = config->color[FLOOR];
+			pixel = win->screen.addr + i * win->screen.len + j * (win->screen.bpp / 8);
+			*(t_color *)pixel = cub3d->color[FLOOR];
 			++i;
 		}
 		++j;
 	}
 }
 
-static void	render_wall(t_config *const config, t_window *win, double lookat)
+static void	render_wall(t_cub3d *const cub3d, t_window *win, double lookat)
 {
 	int			i;
 	int			j;
@@ -62,12 +63,12 @@ static void	render_wall(t_config *const config, t_window *win, double lookat)
 	j = 0;
 	while (j < WIN_WIDTH)
 	{
-		raycasting(config, &config->cam, \
+		raycasting(cub3d, &cub3d->cam, \
 			lookat + AOF / 2 - AOF * j / WIN_WIDTH, &raycast);
 		i = ft_max(0, raycast.start);
 		while (i <= ft_min(WIN_HEIGHT, raycast.end))
 		{
-			pixel = win->addr + i * win->len + j * (win->bpp / 8);
+			pixel = win->screen.addr + i * win->screen.len + j * (win->screen.bpp / 8);
 			color = *(t_color *)(raycast.tex->addr + (TEX_HEIGHT - 1) * \
 				(i - raycast.start) / (raycast.end - raycast.start) * \
 				raycast.tex->len + raycast.off * raycast.tex->bpp / 8);

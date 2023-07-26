@@ -6,33 +6,14 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:25 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/24 14:29:01 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 11:32:42 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_H
 # define KEY_H
 
-# include "config.h"
-
-enum e_event
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTORY = 17
-};
-
-enum e_mask
-{
-	KEY_PRESS_MASK = (1L << 0),
-	KEY_RELEASE_MASK = (1L << 1),
-	BUTTON_PRESS_MASK = (1L << 2),
-	BUTTON_RELEASE_MASK = (1L << 3),
-};
+# include "main.h"
 
 # ifdef __linux__
 
@@ -45,7 +26,7 @@ enum e_key
 	KEY_ESC = 65307,
 	KEY_LEFT = 65361,
 	KEY_RIGHT = 65363,
-	KEY_RELESED = 255
+	KEY_RELESE = 255
 };
 
 # else
@@ -63,9 +44,8 @@ enum e_key
 };
 # endif // __linux__
 
-void	init_key(t_key *const key);
-int		key_down(int keycode, t_key *const key);
-int		key_up(int keycode, t_key *const key);
-int		destroy(t_config *const config);
+void	key_init(const t_cub3d *cub3d, t_key *const key);
+int		key_press(int keycode, t_key *const key);
+int		key_release(int keycode, t_key *const key);
 
 #endif // __KEY_H__

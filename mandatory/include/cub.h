@@ -6,26 +6,26 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:16:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/25 16:02:50 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/26 13:42:36 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "config.h"
+# include "main.h"
 
 # define DEFAULT_MAP_CAPACITY	1024
 
 // parse.c
-void	parse_cub(t_config *const config, const char *filename);
+void	parse_cub(t_cub3d *const cub3d, const char *filename);
 
 // parse_texture_and_color.c
-void	parse_texture_sprite_color(t_config *const config, const int fd);
+void	parse_texture_sprite_color(t_cub3d *const cub3d, const int fd);
 
 // texture.c
 bool	is_texture(const char *line, enum e_texture *out_tex_id);
-void	set_texture(t_img *const tex, void *mlx, const char *filename);
+void	set_texture(t_image *const tex, void *mlx, const char *filename);
 
 // sprite.c
 bool	is_sprite(const char *line, enum e_texture *out_tex_id);
@@ -35,7 +35,7 @@ bool	is_color(const char *line, enum e_color *out_color_id);
 void	set_color(t_color *const color, const char *line);
 
 // parse_map.c
-void	parse_map(t_config *const config, const int fd);
+void	parse_map(t_cub3d *const cub3d, const int fd);
 
 // read_map.c
 char	**read_map(const int fd, int *out_map_size);
