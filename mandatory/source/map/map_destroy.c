@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_init.c                                       :+:      :+:    :+:   */
+/*   map_destroy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 13:40:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 02:48:46 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/27 00:00:47 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/27 04:15:05 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "image.h"
+#include "map.h"
 
-bool	image_init(t_image *const img, void *mlx, int width, int height)
+void	map_destroy(const t_map *const map)
 {
-	img->ptr = mlx_new_image(mlx, width, height);
-	if (img->ptr == NULL)
-		return (false);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->len, &img->endian);
-	if (img->addr == NULL)
+	int	i;
+
+	i = 0;
+	while (i < map->height)
 	{
-		mlx_destroy_image(mlx, img->ptr);
-		return (false);
+		free(map->tex_id[i]);
+		free(map->off[i]);
+		++i;
 	}
-	return (img);
+	free(map->tex_id);
+	free(map->off);
 }

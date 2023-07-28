@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.h                                            :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 13:40:57 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 03:34:03 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/26 14:00:21 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/28 01:04:18 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IMAGE_H
-# define IMAGE_H
+#ifndef MAP_H
+# define MAP_H
 
 # include "cub3d.h"
 
-typedef struct s_img
+enum e_mapchar
 {
-	void	*ptr;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bpp;
-	int		len;
-	int		endian;
-}	t_image;
+	C_SOUTH = 'S',
+	C_EAST = 'E',
+	C_NORTH = 'N',
+	C_WEST = 'W',
+	C_DOOR = 'D',
+	C_ITEM = 'I',
+	C_SPACE = '0',
+	C_WALL = '1',
+	C_EMPTY = ' '
+};
 
-bool	image_init(t_image *const img, void *mlx, int width, int height);
-bool	image_init_by_xpm_file(t_image *const img, void *mlx, char *xpm_file);
-void	image_destroy(const t_image *const img, void *mlx);
+typedef struct s_map
+{
+	enum e_texture	**tex_id;
+	uint8_t			**off;
+	int				width;
+	int				height;
+}	t_map;
 
-#endif // __IMAGE_H__
+bool	map_init(t_map *const map);
+void	map_destroy(const t_map *const map);
+
+#endif // __MAP_H__

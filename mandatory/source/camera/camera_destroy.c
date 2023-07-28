@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_init.c                                       :+:      :+:    :+:   */
+/*   camera_destroy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 13:40:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 02:48:46 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/26 20:04:19 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/27 03:33:49 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "image.h"
+#include "camera.h"
 
-bool	image_init(t_image *const img, void *mlx, int width, int height)
+void	camera_destroy(const t_camera *const cam)
 {
-	img->ptr = mlx_new_image(mlx, width, height);
-	if (img->ptr == NULL)
-		return (false);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->len, &img->endian);
-	if (img->addr == NULL)
-	{
-		mlx_destroy_image(mlx, img->ptr);
-		return (false);
-	}
-	return (img);
+	(void)cam;
 }

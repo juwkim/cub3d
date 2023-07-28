@@ -6,29 +6,27 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:54:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/26 13:27:05 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/28 08:12:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "cub.h"
-#include "window.h"
-#include "key.h"
-#include "utils.h"
 
-bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
+bool	cub3d_init(t_cub3d *const cub3d)
 {
 	ft_bzero(cub3d, sizeof(t_cub3d));
 	cub3d->mlx = mlx_init();
 	if (cub3d->mlx == NULL)
+		return (false);
+	if (window_init(cub3d->win, cub3d->mlx) == false || \
+		key_init(cub3d->key) == false || \
+		mouse_init(cub3d->mouse, 0.00005f) == false || \
+		camera_init(cub3d->cam, M_PI / 3.0f, M_PI / 1024.0f, 4.0f) == false || \
+		texture_init(cub3d->tex, 15) == false || \
+		map_init(cub3d->tex) == false)
 	{
-		perror("mlx_init()");
+		cub3d_destroy(cub3d);
 		return (false);
 	}
-	window_init(cub3d, &cub3d->win);
-	key_init(cub3d, &cub3d->key);
-	parse_cub(cub3d, filename);
-	mlx_hook(cub3d->win.ptr, DestroyNotify, ButtonPressMask, cub3d_destroy, cub3d);
-	mlx_loop_hook(cub3d->mlx, cub3d_play, cub3d);
 	return (true);
 }

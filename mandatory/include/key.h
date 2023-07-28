@@ -6,14 +6,14 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:25 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/26 11:32:42 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/27 03:34:22 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_H
 # define KEY_H
 
-# include "main.h"
+# include "cub3d.h"
 
 # ifdef __linux__
 
@@ -44,8 +44,17 @@ enum e_key
 };
 # endif // __linux__
 
-void	key_init(const t_cub3d *cub3d, t_key *const key);
-int		key_press(int keycode, t_key *const key);
-int		key_release(int keycode, t_key *const key);
+typedef struct s_key
+{
+	enum e_key	vertical;
+	enum e_key	horizontal;
+	enum e_key	rotation;
+	bool		esc;
+}	t_key;
+
+bool	key_init(t_key *const key);
+void	key_destroy(const t_key *const key);
+int		key_press(const int keycode, t_key *const key);
+int		key_release(const int keycode, t_key *const key);
 
 #endif // __KEY_H__

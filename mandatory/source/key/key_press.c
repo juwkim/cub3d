@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_init.c                                       :+:      :+:    :+:   */
+/*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 13:40:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 02:48:46 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/26 18:58:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "image.h"
+#include "key.h"
 
-bool	image_init(t_image *const img, void *mlx, int width, int height)
+int	key_press(const int keycode, t_key *const key)
 {
-	img->ptr = mlx_new_image(mlx, width, height);
-	if (img->ptr == NULL)
-		return (false);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->len, &img->endian);
-	if (img->addr == NULL)
-	{
-		mlx_destroy_image(mlx, img->ptr);
-		return (false);
-	}
-	return (img);
+	if (keycode == KEY_W || keycode == KEY_S)
+		key->vertical = keycode;
+	else if (keycode == KEY_A || keycode == KEY_D)
+		key->horizontal = keycode;
+	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+		key->rotation = keycode;
+	else if (keycode == KEY_ESC)
+		key->esc = true;
+	return (0);
 }

@@ -6,22 +6,21 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:17:43 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/26 13:44:17 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/27 02:52:08 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
-#include "utils.h"
 
-void	window_init(const t_cub3d *const cub3d, t_window *const win)
+bool	window_init(t_window *const win, void *mlx)
 {
-	t_image *const	screen = &win->screen;
-
-	win->ptr = mlx_new_window(cub3d->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
-	_assert(win->ptr != NULL, "mlx_new_window() failed\n");
-	screen->img = mlx_new_image(cub3d->mlx, WIN_WIDTH, WIN_HEIGHT);
-	_assert(win->screen.img != NULL, "mlx_new_image() failed\n");
-	screen->addr = mlx_get_data_addr(screen->img, &screen->bpp, &screen->len, \
-		&screen->endian);
-	_assert(screen->addr != NULL, "mlx_get_data_addr() failed\n");
+	win->ptr = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, TITLE);
+	if (win->ptr == NULL)
+		return (false);
+	if (image_init(win->img, mlx, WIN_WIDTH, WIN_HEIGHT) == false)
+	{
+		mlx_destroy_window(mlx, win->ptr);
+		return (false);
+	}
+	return (win);
 }

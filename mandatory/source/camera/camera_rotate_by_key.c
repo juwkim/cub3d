@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image_init.c                                       :+:      :+:    :+:   */
+/*   camera_rotate_by_key.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 13:40:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 02:48:46 by juwkim           ###   ########.fr       */
+/*   Created: 2023/07/27 04:33:04 by juwkim            #+#    #+#             */
+/*   Updated: 2023/07/28 00:56:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "image.h"
+#include "camera.h"
 
-bool	image_init(t_image *const img, void *mlx, int width, int height)
+bool	camera_rotate_by_key(t_camera *const cam, const t_key *const key)
 {
-	img->ptr = mlx_new_image(mlx, width, height);
-	if (img->ptr == NULL)
+	if (key->rotation == KEY_RELESE)
 		return (false);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->len, &img->endian);
-	if (img->addr == NULL)
-	{
-		mlx_destroy_image(mlx, img->ptr);
-		return (false);
-	}
-	return (img);
+	if (key->rotation == KEY_LEFT)
+		cam->angle += cam->rotation_speed;
+	else if (key->rotation == KEY_RIGHT)
+		cam->angle -= cam->rotation_speed;
+	return (true);
 }
