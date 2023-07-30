@@ -6,11 +6,12 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 08:12:12 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:39:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "texture.h"
 
 static void	texture_render_background(const t_texture *const tex, \
 	t_window *const win);
