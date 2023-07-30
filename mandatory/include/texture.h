@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:07:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/31 07:32:57 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:37:56 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define TEXTURE_H
 
 # include "cub3d.h"
-# include "image.h"
 
 enum e_texture
 {
