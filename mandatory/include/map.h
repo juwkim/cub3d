@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:00:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 01:04:18 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:30:56 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ enum e_mapchar
 	C_WALL = '1',
 	C_EMPTY = ' '
 };
-
-typedef struct s_map
-{
-	enum e_texture	**tex_id;
-	uint8_t			**off;
-	int				width;
-	int				height;
-}	t_map;
 
 bool	map_init(t_map *const map);
 void	map_destroy(const t_map *const map);

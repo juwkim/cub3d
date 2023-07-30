@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:03:16 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 00:54:22 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:29:44 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define CAMERA_H
 
 # include "cub3d.h"
-
-typedef struct s_camera
-{
-	double	i;
-	double	j;
-	double	angle;
-	double	aof;
-	double	rotation_speed;
-	double	moving_speed;
-}	t_camera;
 
 bool	camera_init(t_camera *const cam, const double aof, \
 	const double rotation_speed, const double moving_speed);

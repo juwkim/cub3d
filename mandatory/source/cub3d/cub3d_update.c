@@ -6,11 +6,12 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 00:19:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 00:55:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:36:12 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "camera.h"
 
 bool	cub3d_update(t_cub3d *const cub3d)
 {

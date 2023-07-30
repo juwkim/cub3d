@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:07:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 01:18:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:32:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 # define TEXTURE_H
 
 # include "cub3d.h"
-
-# define TEX_WIDTH	64
-# define TEX_HEIGHT	64
-# define N_WALL		4
-# define N_DOOR		1
-# define N_SPRITE	1
-# define N_BGCOLOR	2
-
-typedef uint32_t	t_color;
+# include "image.h"
 
 enum e_texture
 {
@@ -37,13 +29,6 @@ enum e_texture
 	T_SPACE,
 	T_NONE
 };
-
-typedef struct s_texture
-{
-	t_image	img[N_WALL + N_DOOR + N_SPRITE];
-	t_color	bgcolor[N_BGCOLOR];
-	int		barrior_dist;
-}	t_texture;
 
 bool			texture_init(t_texture *const tex, const int barrior_dist);
 void			texture_destroy(const t_texture *const tex, void *mlx);

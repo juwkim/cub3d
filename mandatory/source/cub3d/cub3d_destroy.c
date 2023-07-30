@@ -6,11 +6,17 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:27:03 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 04:25:06 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:35:52 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "window.h"
+#include "key.h"
+#include "mouse.h"
+#include "camera.h"
+#include "texture.h"
+#include "map.h"
 
 void	cub3d_destroy(const t_cub3d *const cub3d)
 {

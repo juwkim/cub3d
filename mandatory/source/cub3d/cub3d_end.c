@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:36:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 04:25:30 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/07/31 07:27:25 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	cub3d_end(const t_cub3d *const cub3d)
 {
-	mlx_loop_end(cub3d->mlx);
 	cub3d_destroy(cub3d);
 	return (0);
 }
