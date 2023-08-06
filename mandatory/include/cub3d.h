@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:24:41 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 02:49:07 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 
-bool	cub3d_init(t_cub3d *const cub3d);
+bool	cub3d_init(t_cub3d *const cub3d, const char *filename);
 void	cub3d_destroy(const t_cub3d *const cub3d);
 int		cub3d_play(t_cub3d *const cub3d);
 int		cub3d_end(const t_cub3d *const cub3d);

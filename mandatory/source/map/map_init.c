@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:54:53 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 04:14:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 02:48:29 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-bool	map_init(t_map *const map)
+bool	map_init(t_map *const map, const int fd)
 {
 	map->width = 0;
 	map->height = 0;

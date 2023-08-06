@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:00:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:03:07 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 02:48:25 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "cub3d.h"
 
-bool	map_init(t_map *const map);
+bool	map_init(t_map *const map, const int fd);
 void	map_destroy(const t_map *const map);
 
 #endif // __MAP_H__

@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/08/07 02:14:47 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/07 02:53:43 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ $(LIBDS):
 	@ $(MAKE) -j -C $(LIBDS)
 
 $(LIBMLX):
-	@ $(MAKE) -j -C $(LIBMLX)
+	@ $(MAKE) -j -C $(LIBMLX) 2> /dev/null
 
 clean:
 	@ $(MAKE) -C $(LIBFT) clean

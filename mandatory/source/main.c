@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 02:19:15 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 02:49:19 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char *argv[])
 		printf("Error\n[%s] is not .cub file\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
-	if (cub3d_init(&cub3d) == false)
+	if (cub3d_init(&cub3d, argv[1]) == false)
 		return (EXIT_FAILURE);
 	mlx_hook(cub3d.win->ptr, KeyPress, KeyPressMask, key_press, cub3d.key);
 	mlx_hook(cub3d.win->ptr, KeyRelease, KeyReleaseMask, key_release, \
