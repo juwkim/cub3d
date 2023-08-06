@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/31 07:34:54 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/05 19:24:41 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@
 # include <unistd.h>	// To use primitive system calls
 # include <stdbool.h>	// To use true and false
 # include <sys/fcntl.h> // TO use file related system calls
-
-# ifdef __linux__
-#  include "X11/X.h"
-# endif
+# include <X11/X.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -71,9 +68,36 @@ enum e_key
 	KEY_ESC = 53,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
-	KEY_RELESED = 255
+	KEY_RELESE = 255
 };
 # endif // __linux__
+
+enum e_texture
+{
+	T_SOUTH,
+	T_EAST,
+	T_NORTH,
+	T_WEST,
+	T_DOOR,
+	T_SPRITE,
+	T_FLOOR,
+	T_CEILING,
+	T_SPACE,
+	T_NONE
+};
+
+enum e_mapchar
+{
+	C_SOUTH = 'S',
+	C_EAST = 'E',
+	C_NORTH = 'N',
+	C_WEST = 'W',
+	C_DOOR = 'D',
+	C_ITEM = 'I',
+	C_SPACE = '0',
+	C_WALL = '1',
+	C_EMPTY = ' '
+};
 
 typedef uint32_t	t_color;
 typedef struct s_img
@@ -87,6 +111,28 @@ typedef struct s_img
 	int		endian;
 }	t_image;
 
+typedef struct s_window
+{
+	void	*ptr;
+	char	*title;
+	int		width;
+	int		height;
+	t_image	*img;
+}	t_window;
+
+typedef struct s_key
+{
+	enum e_key	vertical;
+	enum e_key	horizontal;
+	enum e_key	rotation;
+	bool		esc;
+}	t_key;
+
+typedef struct s_mouse
+{
+	double	rotation_speed;
+}	t_mouse;
+
 typedef struct s_camera
 {
 	double	i;
@@ -97,13 +143,12 @@ typedef struct s_camera
 	double	moving_speed;
 }	t_camera;
 
-typedef struct s_key
+typedef struct s_texture
 {
-	enum e_key	vertical;
-	enum e_key	horizontal;
-	enum e_key	rotation;
-	bool		esc;
-}	t_key;
+	t_image	*img[N_WALL + N_DOOR + N_SPRITE];
+	t_color	bgcolor[N_BGCOLOR];
+	int		barrior_dist;
+}	t_texture;
 
 typedef struct s_map
 {
@@ -112,27 +157,6 @@ typedef struct s_map
 	int				width;
 	int				height;
 }	t_map;
-
-typedef struct s_mouse
-{
-	double	rotation_speed;
-}	t_mouse;
-
-typedef struct s_texture
-{
-	t_image	img[N_WALL + N_DOOR + N_SPRITE];
-	t_color	bgcolor[N_BGCOLOR];
-	int		barrior_dist;
-}	t_texture;
-
-typedef struct s_window
-{
-	void	*ptr;
-	char	*title;
-	int		width;
-	int		height;
-	t_image	*img;
-}	t_window;
 
 typedef struct s_cub3d
 {
@@ -148,7 +172,7 @@ typedef struct s_cub3d
 
 bool	cub3d_init(t_cub3d *const cub3d);
 void	cub3d_destroy(const t_cub3d *const cub3d);
-int		cub3d_start(t_cub3d *const cub3d);
+int		cub3d_play(t_cub3d *const cub3d);
 int		cub3d_end(const t_cub3d *const cub3d);
 void	cub3d_render(t_cub3d *const cub3d);
 bool	cub3d_update(t_cub3d *const cub3d);

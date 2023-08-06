@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 02:25:35 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 02:19:15 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "key.h"
+#include "utils.h"
 
 int	main(int argc, char *argv[])
 {
@@ -32,6 +34,6 @@ int	main(int argc, char *argv[])
 	mlx_hook(cub3d.win->ptr, KeyRelease, KeyReleaseMask, key_release, \
 		cub3d.key);
 	mlx_hook(cub3d.win->ptr, DestroyNotify, ButtonPressMask, cub3d_end, &cub3d);
-	mlx_loop_hook(cub3d.mlx, cub3d_start, &cub3d);
+	mlx_loop_hook(cub3d.mlx, cub3d_play, &cub3d);
 	return (mlx_loop(cub3d.mlx));
 }

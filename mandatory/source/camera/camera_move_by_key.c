@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_move_by_key.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 00:10:31 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 00:53:39 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 02:27:42 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ static bool		camera_move_to_j(t_camera *const cam, const t_map *const map, \
 bool	camera_move_by_key(t_camera *const cam, const t_key *const key, \
 	const t_map *const map, const t_texture *const tex)
 {
-	double	direction;
 	double	di;
 	double	dj;
+	bool	i_moved;
+	bool	j_moved;
 
 	if (key->vertical == KEY_RELESE && key->horizontal == KEY_RELESE)
 		return (false);
 	camera_get_moving_distance(cam, key, &di, &dj);
-	return (camera_move_to_i(cam, map, tex, di) | \
-		camera_move_to_j(cam, map, tex, di));
+	i_moved = camera_move_to_i(cam, map, tex, di);
+	j_moved = camera_move_to_j(cam, map, tex, di);
+	return (i_moved | j_moved);
 }
 
 static void	camera_get_moving_distance(t_camera *const cam, \

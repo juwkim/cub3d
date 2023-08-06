@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:27:03 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/31 07:35:52 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/05 19:14:08 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,4 @@ void	cub3d_destroy(const t_cub3d *const cub3d)
 		texture_destroy(cub3d->tex, cub3d->mlx);
 	if (cub3d->map)
 		map_destroy(cub3d->map);
-	mlx_destroy_display(cub3d->mlx);
 }
