@@ -3,7 +3,7 @@ SO ./asset/images/SO.xpm
 WE ./asset/images/WE.xpm
 EA ./asset/images/EA.xpm
 DO ./asset/images/DOOR.xpm
-IT ./asset/images/ITEM.xpm
+SP ./asset/images/ITEM.xpm
 
 F 127,127,127
 C 255,255,0

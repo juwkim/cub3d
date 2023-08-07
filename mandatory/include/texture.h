@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:07:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 23:58:21 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:32:05 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "cub3d.h"
 # include "image.h"
 
-bool			texture_init(t_texture **tex, const int barrior_dist);
-void			texture_destroy(t_texture *tex, void *mlx);
+bool			texture_init(t_texture *const tex, const int barrior_dist);
+void			texture_destroy(t_texture *const tex, void *mlx);
 
 enum e_texture	texture_get_id(const char *str);
 

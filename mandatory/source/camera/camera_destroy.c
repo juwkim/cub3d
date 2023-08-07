@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:04:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 22:35:30 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:12:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-void	camera_destroy(t_camera *cam)
+void	camera_destroy(const t_camera *const cam)
 {
-	free(cam);
+	(void)cam;
 }

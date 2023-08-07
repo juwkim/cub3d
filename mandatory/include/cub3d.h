@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 23:50:57 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:45:00 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_window
 	char	*title;
 	int		width;
 	int		height;
-	t_image	*img;
+	t_image	img;
 }	t_window;
 
 typedef struct s_key
@@ -147,7 +147,7 @@ typedef struct s_camera
 
 typedef struct s_texture
 {
-	t_image	*img[N_WALL + N_DOOR + N_SPRITE];
+	t_image	img[N_WALL + N_DOOR + N_SPRITE];
 	t_color	bgcolor[N_BGCOLOR];
 	int		barrior_dist;
 }	t_texture;
@@ -158,25 +158,24 @@ typedef struct s_map
 	uint8_t			**off;
 	int				width;
 	int				height;
-	t_list			*list;
+	t_list			list;
 }	t_map;
 
 typedef struct s_cub3d
 {
 	void		*mlx;
-	t_window	*win;
-	t_key		*key;
-	t_mouse		*mouse;
-	t_camera	*cam;
-	t_texture	*tex;
-	t_map		*map;
+	t_window	win;
+	t_key		key;
+	t_mouse		mouse;
+	t_camera	cam;
+	t_texture	tex;
+	t_map		map;
 }	t_cub3d;
 
 
 bool	cub3d_init(t_cub3d *const cub3d, const char *filename);
-void	cub3d_destroy(const t_cub3d *const cub3d);
+int		cub3d_destroy(t_cub3d *const cub3d);
 int		cub3d_play(t_cub3d *const cub3d);
-int		cub3d_end(const t_cub3d *const cub3d);
 void	cub3d_render(t_cub3d *const cub3d);
 bool	cub3d_update(t_cub3d *const cub3d);
 

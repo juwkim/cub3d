@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:00:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 22:32:20 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:41:55 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-void	map_destroy(t_map *map)
+void	map_destroy(t_map *const map)
 {
 	int	i;
 
@@ -25,5 +25,5 @@ void	map_destroy(t_map *map)
 	}
 	free(map->tex_id);
 	free(map->off);
-	free(map);
+	list_destroy(&map->list, free);
 }

@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 22:39:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:10:46 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 
-void	key_destroy(t_key *key)
+void	key_destroy(const t_key *const key)
 {
-	free(key);
+	(void)key;
 }

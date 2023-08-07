@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:03:16 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 23:57:45 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:12:45 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "cub3d.h"
 
-bool	camera_init(t_camera **cam, const double aof, \
+bool	camera_init(t_camera *const cam, const double aof, \
 	const double rotation_speed, const double moving_speed);
-void	camera_destroy(t_camera *cam);
+void	camera_destroy(const t_camera *const cam);
 bool	camera_rotate_by_mouse(t_camera *const cam, const t_window *const win, \
 	const t_mouse *const mouse);
 bool	camera_rotate_by_key(t_camera *const cam, const t_key *const key);

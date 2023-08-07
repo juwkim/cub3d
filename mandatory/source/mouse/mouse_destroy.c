@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 11:33:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 22:38:42 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:12:10 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mouse.h"
 
-void	mouse_destroy(t_mouse *mouse)
+void	mouse_destroy(const t_mouse *const mouse)
 {
-	free(mouse);
+	(void)mouse;
 }

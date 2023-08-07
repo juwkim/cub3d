@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:40:57 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 00:01:59 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 03:06:28 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "cub3d.h"
 
-bool	image_init(t_image **img, void *mlx, int width, int height);
-bool	image_init_by_xpm_file(t_image **img, void *mlx, char *xpm_file);
-void	image_destroy(t_image *img, void *mlx);
+bool	image_init(t_image *const img, void *mlx, int width, int height);
+bool	image_init_by_xpm_file(t_image *const img, void *mlx, char *xpm_file);
+void	image_destroy(const t_image *const img, void *mlx);
 
 #endif // __IMAGE_H__
