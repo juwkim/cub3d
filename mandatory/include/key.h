@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:25 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:00:51 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 23:56:58 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "cub3d.h"
 
-bool	key_init(t_key *const key);
-void	key_destroy(const t_key *const key);
+bool	key_init(t_key **key);
+void	key_destroy(t_key *key);
 int		key_press(const int keycode, t_key *const key);
 int		key_release(const int keycode, t_key *const key);
 

@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_destroy.c                                      :+:      :+:    :+:   */
+/*   texture_set_door.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 00:00:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 22:32:20 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/07 21:36:11 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/08 00:05:44 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "texture.h"
 
-void	map_destroy(t_map *map)
+bool	texture_set_door(t_texture *const tex, void *mlx, char *filename, \
+	const enum e_texture id)
 {
-	int	i;
-
-	i = 0;
-	while (i < map->height)
-	{
-		free(map->tex_id[i]);
-		free(map->off[i]);
-		++i;
-	}
-	free(map->tex_id);
-	free(map->off);
-	free(map);
+	if (image_init_by_xpm_file(&tex->img[id], mlx, filename) == false)
+		return (false);
+	return (true);
 }

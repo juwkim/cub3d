@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   key_destroy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 03:34:31 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 22:39:32 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 
-void	key_destroy(const t_key *const key)
+void	key_destroy(t_key *key)
 {
-	(void)key;
+	free(key);
 }

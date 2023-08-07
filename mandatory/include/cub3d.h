@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 02:49:07 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 23:50:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "list.h"
 
 # define TITLE		"cub3D"
 # define WIN_WIDTH	1920
@@ -36,6 +37,7 @@
 # define N_DOOR		1
 # define N_SPRITE	1
 # define N_BGCOLOR	2
+# define N_BGPAD    6
 
 # ifndef M_PI
 #  define M_PI		3.14159265358979323846	/* pi */
@@ -156,6 +158,7 @@ typedef struct s_map
 	uint8_t			**off;
 	int				width;
 	int				height;
+	t_list			*list;
 }	t_map;
 
 typedef struct s_cub3d

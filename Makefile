@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/08/07 02:53:43 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/07 23:35:18 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS          =	-Wall -Wextra -Werror -pipe
 CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBDS)/include -I$(LIBMLX) -I/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers
 DEPFLAGS        =	-MMD -MP -MF $(DEP_DIR)/$*.d
 LDFLAGS         =	-L$(LIBFT) -L$(LIBDS) -L$(LIBMLX)
-LDLIBS          =	-l$(LIBFT) -L$(LIBDS) -l$(LIBMLX)
+LDLIBS          =	-l$(LIBFT) -l$(LIBDS) -l$(LIBMLX)
 
 ifeq ($(shell uname), Linux)
     LDLIBS      +=	-lXext -lX11 -lm -lz
@@ -28,7 +28,7 @@ else
 endif
 
 ifdef DEBUG
-    CFLAGS      +=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
+    CFLAGS      +=	-g -O0 -DDEBUG -march=native -fsanitize=address,undefined
 else
     CFLAGS      +=	-O2 -DNDEBUG
 endif
@@ -86,7 +86,7 @@ NAME            :=	cub3D
 # ---------------------------------------------------------------------------- #
 
 all: $(LIBFT) $(LIBDS) $(LIBMLX)
-	@ $(MAKE) -j $(NAME)
+	@ $(MAKE) $(NAME)
 	@ $(MAKE) test
 
 $(NAME): $(OBJS)

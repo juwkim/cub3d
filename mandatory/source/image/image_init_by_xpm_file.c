@@ -3,25 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   image_init_by_xpm_file.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 13:40:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 02:49:19 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/07 21:43:58 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/08 00:14:46 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "image.h"
+#include "utils.h"
 
-bool	image_init_by_xpm_file(t_image *const img, void *mlx, char *xpm_file)
+bool	image_init_by_xpm_file(t_image **img, void *mlx, char *filename)
 {
-	img->ptr = mlx_xpm_file_to_image(mlx, xpm_file, &img->width, &img->height);
-	if (img->ptr == NULL)
-		return (false);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->len, &img->endian);
-	if (img->addr == NULL)
+	if (is_extension(filename, ".xpm") == false)
 	{
-		mlx_destroy_image(mlx, img->ptr);
+		printf("Error\nimage is not xpm file\n");
 		return (false);
 	}
-	return (img);
+	if (*img != NULL)
+	{
+		printf("Error\nDuplicated image\n");
+		return (false);
+	}
+	*img = malloc(sizeof(t_image));
+	if (*img == NULL)
+		return (false);
+	(*img)->ptr = mlx_xpm_file_to_image(mlx, filename, &(*img)->width, \
+		&(*img)->height);
+	if ((*img)->ptr == NULL)
+		return (false);
+	(*img)->addr = mlx_get_data_addr((*img)->ptr, &(*img)->bpp, &(*img)->len, \
+		&(*img)->endian);
+	if ((*img)->addr == NULL)
+	{
+		mlx_destroy_image(mlx, (*img)->ptr);
+		return (false);
+	}
+	return (true);
 }

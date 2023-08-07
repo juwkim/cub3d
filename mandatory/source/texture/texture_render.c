@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:08:22 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 02:24:35 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/07 20:50:14 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ static void	texture_render_background(const t_texture *const tex, \
 		while (i < WIN_HEIGHT / 2)
 		{
 			p = win->img->addr + i * win->img->len + j * (win->img->bpp / 8);
-			*(t_color *)p = tex->bgcolor[T_CEILING - \
-				(N_WALL + N_DOOR + N_SPRITE)];
+			*(t_color *)p = tex->bgcolor[T_CEILING - N_BGPAD];
 			++i;
 		}
 		while (i < WIN_HEIGHT)
 		{
 			p = win->img->addr + i * win->img->len + j * (win->img->bpp / 8);
-			*(t_color *)p = tex->bgcolor[T_FLOOR - \
-				(N_WALL + N_DOOR + N_SPRITE)];
+			*(t_color *)p = tex->bgcolor[T_FLOOR - N_BGPAD];
 			++i;
 		}
 		++j;
