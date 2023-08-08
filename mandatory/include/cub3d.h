@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:45:00 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 13:51:11 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # include "mlx.h"
 # include "libft.h"
-# include "list.h"
+# include "dlist.h"
 
 # define TITLE		"cub3D"
 # define WIN_WIDTH	1920
@@ -158,7 +158,7 @@ typedef struct s_map
 	uint8_t			**off;
 	int				width;
 	int				height;
-	t_list			list;
+	t_dlist			list;
 }	t_map;
 
 typedef struct s_cub3d

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:50:31 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:54:22 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:36:29 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ bool	texture_parse(t_texture *const tex, t_map *const map, void *mlx, \
 		if (ft_strcmp(line, "") != 0)
 		{
 			if (texture_get_id(line) == T_NONE)
-			{
-				list_push_back(&map->list, line);
-				return (true);
-			}
+				break ;
 			res = texture_set(tex, mlx, line);
 		}
 		free(line);
 		if (res == false)
 			return (false);
 	}
+	dlist_push_back(&map->list, line);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:00:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:42:03 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 13:17:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 
 bool	map_init(t_map *const map);
 void	map_destroy(t_map *const map);
+bool	map_parse(t_map *const map, t_camera *const cam, const int fd);
+bool	map_is_valid(const t_map *const map);
 
 #endif // __MAP_H__

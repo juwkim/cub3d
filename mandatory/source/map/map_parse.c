@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 23:54:53 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 14:11:59 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/08 04:05:19 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/08 14:59:10 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-bool	map_init(t_map *const map)
+static void	map_read(t_map *const map, const int fd);
+
+bool	map_parse(t_map *const map, t_camera *const cam, const int fd)
 {
-	map->tex_id = NULL;
-	map->off = NULL;
-	map->width = 0;
-	map->height = 0;
-	dlist_init(&map->list);
+	map_read(map, fd);
+	dlist_print(&map->list);
+	if (map_is_valid(map) == false)
+		return (false);
+	(void)cam;
 	return (true);
+}
+
+static void	map_read(t_map *const map, const int fd)
+{
+	char	*line;
+
+	while (true)
+	{
+		line = ft_get_next_line(fd);
+		if (line == NULL)
+			break ;
+		dlist_push_back(&map->list, line);
+	}
 }

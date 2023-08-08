@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_get_id.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 03:52:03 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 04:05:08 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 13:23:14 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum e_texture	texture_get_id(const char *str)
 		return (T_WEST);
 	if (ft_strncmp(str, "DO ", ft_strlen("DO ")) == 0)
 		return (T_DOOR);
-	if (ft_strncmp(str, "SP ", ft_strlen("SP ")) == 0)
+	if (ft_strncmp(str, "IT ", ft_strlen("IT ")) == 0)
 		return (T_SPRITE);
 	if (ft_strncmp(str, "F ", ft_strlen("F ")) == 0)
 		return (T_FLOOR);

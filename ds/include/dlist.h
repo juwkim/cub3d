@@ -14,15 +14,17 @@
 # define DLIST_H
 
 # include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <assert.h>
 
-typedef void *	t_dlist_data;
+typedef char *	t_dlist_data;
 
 typedef struct s_dlist_node
 {
 	t_dlist_data		item;
+	int					size;
 	struct s_dlist_node	*prev;
 	struct s_dlist_node	*next;
 }	t_dlist_node;

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:00:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:41:55 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 13:51:14 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	map_destroy(t_map *const map)
 	}
 	free(map->tex_id);
 	free(map->off);
-	list_destroy(&map->list, free);
+	dlist_destroy(&map->list);
 }

@@ -17,9 +17,9 @@ void	dlist_print(t_dlist *list)
 	t_dlist_node	*cur;
 
 	cur = list->head->next;
-	while (cur != NULL)
+	while (cur != list->tail)
 	{
-		printf("%06d", *(int *) cur->item);
+		printf("%s\n", cur->item);
 		cur = cur->next;
 	}
 }

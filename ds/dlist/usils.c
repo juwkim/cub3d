@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   usils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 08:55:42 by juwkim            #+#    #+#             */
-/*   Updated: 2023/03/01 06:26:00 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:35:33 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	dlist_init(t_dlist *list)
 	t_dlist_node *const	tail = (t_dlist_node*) malloc(sizeof(t_dlist_node));
 
 	assert(head != NULL && tail != NULL);
-	head->prev = NULL;
+	head->prev = tail;
 	head->next = tail;
 	tail->prev = head;
-	tail->next = NULL;
+	tail->next = head;
 	list->head = head;
 	list->tail = tail;
 	list->size = 0;
@@ -44,7 +44,7 @@ size_t	dlist_size(t_dlist *list)
 	return (list->size);
 }
 
-t_dlist_node	*get_iterator(t_dlist *list, int pos)
+t_dlist_node	*dlist_get_iterator(t_dlist *list, int pos)
 {
 	t_dlist_node	*cur;
 
@@ -56,7 +56,7 @@ t_dlist_node	*get_iterator(t_dlist *list, int pos)
 	}
 	else
 	{
-		cur = list->tail->prev;
+		cur = list->tail;
 		while (pos++)
 			cur = cur->prev;
 	}

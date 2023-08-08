@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 00:16:46 by juwkim            #+#    #+#             */
-/*   Updated: 2023/03/01 06:47:32 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 04:47:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	list_print(t_list *list)
 	t_list_node	*cur;
 
 	cur = list->head->next;
-	printf(YELLOW"%s "DEF_COLOR, (char *) cur->item);
+	printf(YELLOW"%s\n"DEF_COLOR, (char *) cur->item);
 	while (cur->next != NULL)
 	{
 		cur = cur->next;
-		printf(GREEN"%s "DEF_COLOR, (char *) cur->item);
+		printf(GREEN"%s\n"DEF_COLOR, (char *) cur->item);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:24:11 by juwkim            #+#    #+#             */
-/*   Updated: 2023/03/01 06:24:41 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:22:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_dlist_node	*__dlist_create_node(t_dlist_data item)
 
 	assert(new_node != NULL);
 	new_node->item = item;
+	new_node->size = (int)strlen(item);
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);
