@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   map_block_fill_east.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 08:11:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/28 01:20:52 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/08 20:36:28 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/08 20:46:19 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	parse_map(t_cub3d *const cub3d, const int fd)
-{
-	int				map_size;
-	char **const	map = read_map(fd, &map_size);
+#include "map.h"
 
-	traverse_map(map, map_size, &cub3d->cam);
-	set_map(map, map_size, &cub3d->map);
-	trim_map(&cub3d->map);
+void	map_block_fill_east(t_map *const map, const enum e_texture tex, \
+	int i, const int j)
+{
+	int	off;
+
+	off = 0;
+	while (off < TEX_HEIGHT)
+	{
+		map->tex_id[i][j] = tex;
+		map->off[i][j] = off;
+		++i;
+		++off;
+	}
 }

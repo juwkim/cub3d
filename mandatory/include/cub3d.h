@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 13:51:11 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 20:54:54 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ enum e_texture
 	T_NORTH,
 	T_WEST,
 	T_DOOR,
-	T_SPRITE,
+	T_ITEM,
 	T_FLOOR,
 	T_CEILING,
 	T_SPACE,

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/08/08 14:37:12 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/08 19:40:16 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@
 
 CC              :=	cc
 CFLAGS          =	-Wall -Wextra -Werror -pipe
-CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBDS)/include -I$(LIBMLX) -I/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers
+CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBDS)/include -I$(LIBMLX)
+CPPFLAGS		+=	-I/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers
 DEPFLAGS        =	-MMD -MP -MF $(DEP_DIR)/$*.d
 LDFLAGS         =	-L$(LIBFT) -L$(LIBDS) -L$(LIBMLX)
 LDLIBS          =	-l$(LIBFT) -l$(LIBDS) -l$(LIBMLX)

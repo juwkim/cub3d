@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   usils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 08:55:42 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 14:35:33 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 21:10:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,18 @@ void	dlist_init(t_dlist *list)
 	list->size = 0;
 }
 
-void	dlist_destroy(t_dlist *list)
+void	dlist_destroy(t_dlist *list, void (*del)(void *))
 {
-	while (list->head->next)
-		dlist_pop_front(list);
+	const t_dlist_node	*cur = list->head->next;
+
+	while (cur != list->tail)
+	{
+		cur = cur->next;
+		del(cur->prev->item);
+		free(cur->prev);
+	}
 	free(list->head);
+	free(list->tail);
 }
 
 bool	dlist_is_empty(t_dlist *list)

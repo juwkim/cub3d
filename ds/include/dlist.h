@@ -31,14 +31,14 @@ typedef struct s_dlist_node
 
 typedef struct s_dlist
 {
-	size_t			size;
+	int				size;
 	t_dlist_node	*head;
 	t_dlist_node	*tail;
 }	t_dlist;
 
 // utils.c
 void			dlist_init(t_dlist *list);
-void			dlist_destroy(t_dlist *list);
+void			dlist_destroy(t_dlist *list, void (*del)(void *));
 bool			dlist_is_empty(t_dlist *list);
 size_t			dlist_size(t_dlist *list);
 t_dlist_node	*dlist_get_iterator(t_dlist *list, int pos);

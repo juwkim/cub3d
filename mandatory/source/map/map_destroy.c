@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_destroy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:00:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 13:51:14 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 21:10:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	map_destroy(t_map *const map)
 	}
 	free(map->tex_id);
 	free(map->off);
-	dlist_destroy(&map->list);
+	dlist_destroy(&map->list, free);
 }

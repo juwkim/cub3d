@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 04:05:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 15:27:16 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/08 21:11:11 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ bool	map_parse(t_map *const map, t_camera *const cam, const int fd)
 		return (false);
 	camera_set(cam, map);
 	dlist_print(&map->list);
+	if (map_list_to_array(map) == false)
+		return (false);
 	return (true);
 }
 

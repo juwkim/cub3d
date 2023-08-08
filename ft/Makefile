@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 05:18:16 by juwkim            #+#    #+#              #
-#    Updated: 2023/07/25 21:59:20 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/08 19:47:17 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CPPFLAGS            :=	-Iinclude
 ARFLAGS             :=	-rcs
 
 ifdef	DEBUG
-    CFLAGS          +=	-g -O0 -DDEBUG -march=native -fsanitize=address,leak,undefined
+    CFLAGS          +=	-g -O0 -DDEBUG -march=native -fsanitize=address,undefined
 else
     CFLAGS          +=	-O2 -DNDEBUG
 endif
