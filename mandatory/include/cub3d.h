@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 01:56:51 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 02:22:28 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_key
 
 typedef struct s_mouse
 {
+	int		x;
+	int		y;
 	double	rotation_speed;
 }	t_mouse;
 
