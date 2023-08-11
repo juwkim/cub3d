@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door.h                                             :+:      :+:    :+:   */
+/*   door_is_valid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:36 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 04:10:10 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/12 04:02:13 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/12 04:10:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOOR_H
-# define DOOR_H
+#include "door.h"
 
-# include "cub3d.h"
-
-bool	door_update(t_cub3d *const cub3d);
-bool	door_is_valid(const t_dlist_node *const cur, const int i);
-
-#endif // __DOOR_H__
+bool	door_is_valid(const t_dlist_node *const cur, const int i)
+{
+	if (cur->prev->item[i] == C_SPACE && cur->next->item[i] == C_SPACE && \
+		cur->item[i - 1] == C_WALL && cur->item[i + 1] == C_WALL)
+		return (true);
+	if (cur->prev->item[i] == C_WALL && cur->next->item[i] == C_WALL && \
+		cur->item[i - 1] == C_SPACE && cur->item[i + 1] == C_SPACE)
+		return (true);
+	return (false);
+}

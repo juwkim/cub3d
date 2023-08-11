@@ -6,17 +6,18 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:09:50 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 03:13:57 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 04:12:28 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
+#include "door.h"
 
 static bool	map_is_valid_element(const t_map *const map, \
 	const t_texture *const tex);
 static bool	map_is_valid_camera(const t_map *const map);
 static bool	map_is_valid_boundary(const t_map *const map);
-static bool	map_has_texture(const t_texture *const tex, const char c);
+static bool	map_is_valid_door(const t_map *const map);
 
 bool	map_is_valid(const t_map *const map, const t_texture *const tex)
 {
@@ -25,6 +26,8 @@ bool	map_is_valid(const t_map *const map, const t_texture *const tex)
 	if (map_is_valid_camera(map) == false)
 		return (false);
 	if (map_is_valid_boundary(map) == false)
+		return (false);
+	if (map_is_valid_door(map) == false)
 		return (false);
 	return (true);
 }
@@ -111,17 +114,27 @@ static bool	map_is_valid_boundary(const t_map *const map)
 	return (true);
 }
 
-static bool	map_has_texture(const t_texture *const tex, const char c)
+static bool	map_is_valid_door(const t_map *const map)
 {
-	if (c == 'D' && tex->img[T_DOOR].ptr == NULL)
+	t_dlist_node	*cur;
+	char			*line;
+	int				i;
+
+	cur = map->list.head->next;
+	while (cur != map->list.tail)
 	{
-		printf("Error\nDoor texture are omitted\n");
-		return (false);
-	}
-	if (c == 'I' && tex->img[T_ITEM].ptr == NULL)
-	{
-		printf("Error\nItem texture are omitted\n");
-		return (false);
+		line = cur->item;
+		i = 0;
+		while (i < cur->size)
+		{
+			if (line[i] == 'D' && door_is_valid(cur, i) == false)
+			{
+				printf("Error\ninvalid door\n");
+				return (false);
+			}
+			++i;
+		}
+		cur = cur->next;
 	}
 	return (true);
 }
