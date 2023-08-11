@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   usils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 08:55:42 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 21:10:13 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 04:36:02 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_dlist_node	*dlist_get_iterator(t_dlist *list, int pos)
 
 	if (pos >= 0)
 	{
-		cur = list->head;
+		cur = list->head->next;
 		while (pos--)
 			cur = cur->next;
 	}
