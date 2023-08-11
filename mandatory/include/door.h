@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_update.c                                     :+:      :+:    :+:   */
+/*   door.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/16 00:19:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 00:05:34 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/12 00:03:36 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/12 00:04:47 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "camera.h"
-#include "door.h"
+#ifndef DOOR_H
+# define DOOR_H
 
-bool	cub3d_update(t_cub3d *const cub3d)
-{
-	const bool	cam_updated = camera_update(cub3d);
-	const bool	door_updated = door_update(cub3d);
+# include "cub3d.h"
 
-	return (cam_updated | door_updated);
-}
+bool	door_update(t_cub3d *const cub3d);
+
+#endif // __DOOR_H__
