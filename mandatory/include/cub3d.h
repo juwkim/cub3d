@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 01:48:47 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 01:56:51 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct s_window
 	int		width;
 	int		height;
 	t_image	img;
+	t_image	bg;
 }	t_window;
 
 typedef struct s_key

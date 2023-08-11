@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:32:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:09:50 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 01:58:30 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ void	window_destroy(const t_window *const win, void *mlx)
 {
 	mlx_destroy_window(mlx, win->ptr);
 	image_destroy(&win->img, mlx);
+	image_destroy(&win->bg, mlx);
 }
