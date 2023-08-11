@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:11:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 19:44:26 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 02:36:52 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 int	main(int argc, char *argv[])
 {
-	t_cub3d	cub3d;
+	t_cub3d			cub3d;
+	t_window *const	win = &cub3d.win;
 
 	if (argc != 2)
 	{
@@ -30,11 +31,9 @@ int	main(int argc, char *argv[])
 	}
 	if (cub3d_init(&cub3d, argv[1]) == false)
 		return (EXIT_FAILURE);
-	mlx_hook(cub3d.win.ptr, KeyPress, KeyPressMask, key_press, &cub3d.key);
-	mlx_hook(cub3d.win.ptr, KeyRelease, KeyReleaseMask, key_release, \
-		&cub3d.key);
-	mlx_hook(cub3d.win.ptr, DestroyNotify, ButtonPressMask, \
-		cub3d_destroy, &cub3d);
+	mlx_hook(win->ptr, KeyPress, KeyPressMask, key_press, &cub3d.key);
+	mlx_hook(win->ptr, KeyRelease, KeyReleaseMask, key_release, &cub3d.key);
+	mlx_hook(win->ptr, DestroyNotify, ButtonPressMask, cub3d_destroy, &cub3d);
 	mlx_loop_hook(cub3d.mlx, cub3d_play, &cub3d);
 	return (mlx_loop(cub3d.mlx));
 }
