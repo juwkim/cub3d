@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_raycast.c                                   :+:      :+:    :+:   */
+/*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 23:44:35 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:06:30 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:23:19 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
-
-# define LR		0.5f
-# define BOF	TEX_WIDTH
-
-typedef struct s_raycast
-{
-	t_image	*tex;
-	int		off;
-	int		start;
-	int		end;
-}	t_raycast;
-
+#include "ray.h"
 
 static double	norm(const double di, const double dj);
 
-angle + AOF / 2 - AOF * j / WIN_WIDTH
-void	camera_raycast(const t_camera *const cam)
+void	ray_cast(t_ray *const ray, const t_camera *const cam, \
+	const t_map *const map, const t_window *const win, \
+	t_texture *const tex)
 {
-	const double	c = LR * cos(direction);
-	const double	s = LR * sin(direction);
+	const double	c = ray->lr * cos(ray->angle);
+	const double	s = ray->lr * sin(ray->angle);
 	double			i;
 	double			j;
 	double			dist;
@@ -41,15 +30,14 @@ void	camera_raycast(const t_camera *const cam)
 	{
 		i += c;
 		j += s;
-		if (cub3d->map.data[(int)round(i)][(int)round(j)].tex_id != T_SPACE)
+		if (map->tex_id[(int)round(i)][(int)round(j)] != T_SPACE)
 			break ;
 	}
-	dist = norm(i - cam->pos.i, j - cam->pos.j) * cos(direction - cam->angle);
-	raycast->tex = &cub3d->tex[cub3d->map.data[(int)i][(int)j].tex_id];
-	_assert(raycast->tex->img != NULL, "No image to render\n");
-	raycast->off = cub3d->map.data[(int)i][(int)j].off;
-	raycast->start = WIN_HEIGHT * 0.5f * (1 - BOF / dist);
-	raycast->end = WIN_HEIGHT * 0.5f * (1 + BOF / dist);
+	dist = norm(i - cam->i, j - cam->j) * cos(ray->angle - cam->angle);
+	ray->start = (int)(win->height * (1 - ray->bof / dist) / 2.0f);
+	ray->end = (int)(win->height * (1 + ray->bof / dist) / 2.0f);
+	ray->img = &tex->img[map->tex_id[(int)round(i)][(int)round(j)]];
+	ray->off = map->off[(int)round(i)][(int)round(j)];
 }
 
 static double	norm(const double di, const double dj)

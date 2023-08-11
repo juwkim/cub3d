@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_init.c                                      :+:      :+:    :+:   */
+/*   ray_destroy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 19:59:40 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/11 23:43:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/10 01:19:34 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/10 01:20:41 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#include "ray.h"
 
-bool	camera_init(t_camera *const cam, const double aof)
+void	ray_destroy(t_ray *const ray)
 {
-	cam->aof = aof;
-	return (true);
+	(void)ray;
 }

@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_init.c                                      :+:      :+:    :+:   */
+/*   ray_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 19:59:40 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/11 23:43:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/10 01:14:58 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/10 01:19:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#include "ray.h"
 
-bool	camera_init(t_camera *const cam, const double aof)
+bool	ray_init(t_ray *const ray, const double lr, const double bof)
 {
-	cam->aof = aof;
+	ray->lr = lr;
+	ray->bof = bof;
 	return (true);
 }

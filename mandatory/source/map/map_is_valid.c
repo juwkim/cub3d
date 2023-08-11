@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:09:50 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 14:58:24 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 22:36:25 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static bool	map_is_valid_element(const t_map *const map)
 	}
 	return (true);
 }
-
 
 static bool	map_is_valid_camera(const t_map *const map)
 {

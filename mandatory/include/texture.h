@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:07:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:32:05 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:01:49 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ bool			texture_is_door(const enum e_texture id);
 bool			texture_is_sprite(const enum e_texture id);
 bool			texture_is_bgcolor(const enum e_texture id);
 
-void			texture_render(const t_texture *const tex, t_window *const win);
+void			texture_render(t_texture *const tex, t_window *const win, \
+	t_camera *const cam, t_ray *const ray, \
+	const t_map *const map);
+void			texture_render_background(const t_texture *const tex, \
+	t_window *const win);
 
 bool			texture_parse(t_texture *const tex, t_map *const map, \
 	void *mlx, const int fd);

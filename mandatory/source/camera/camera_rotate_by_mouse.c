@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_rotate_by_mouse.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 11:33:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/27 04:36:20 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:37:12 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static bool	camera_rotatable_by_mouse(const t_window *const win, \
 {
 	if ((0 <= y && y < win->height) == false)
 		return (false);
-	if ((win->width / 3 <= x && x < win->width * 2 / 3) == false)
-		return (false);
-	return (true);
+	if ((0 <= x && x < win->width * 1 / 3) || \
+		(win->width * 2 / 3 <= x && x < win->width) == true)
+		return (true);
+	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:17:43 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:30:42 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:22:45 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ bool	window_init(t_window *const win, void *mlx)
 		mlx_destroy_window(mlx, win->ptr);
 		return (false);
 	}
+	win->width = WIN_WIDTH;
+	win->height = WIN_HEIGHT;
 	return (true);
 }

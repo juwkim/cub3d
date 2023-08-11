@@ -1,19 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_init.c                                      :+:      :+:    :+:   */
+/*   texture_render_background.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 19:59:40 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/11 23:43:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/09 14:24:43 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/09 14:25:38 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#include "texture.h"
 
-bool	camera_init(t_camera *const cam, const double aof)
+void	texture_render_background(const t_texture *const tex, \
+	t_window *const win)
 {
-	cam->aof = aof;
-	return (true);
+	int		i;
+	int		j;
+
+	j = 0;
+	while (j < WIN_WIDTH)
+	{
+		i = 0;
+		while (i < WIN_HEIGHT / 2)
+		{
+			*image_address(&win->img, i, j) = tex->bgcolor[T_CEILING - N_BGPAD];
+			++i;
+		}
+		while (i < WIN_HEIGHT)
+		{
+			*image_address(&win->img, i, j) = tex->bgcolor[T_FLOOR - N_BGPAD];
+			++i;
+		}
+		++j;
+	}
 }

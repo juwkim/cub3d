@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 20:54:54 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:44:38 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ typedef struct s_key
 	enum e_key	horizontal;
 	enum e_key	rotation;
 	bool		esc;
+	double		rotation_speed;
+	double		moving_speed;
 }	t_key;
 
 typedef struct s_mouse
@@ -141,8 +143,6 @@ typedef struct s_camera
 	double	j;
 	double	angle;
 	double	aof;
-	double	rotation_speed;
-	double	moving_speed;
 }	t_camera;
 
 typedef struct s_texture
@@ -161,6 +161,17 @@ typedef struct s_map
 	t_dlist			list;
 }	t_map;
 
+typedef struct s_ray
+{
+	double	lr;
+	double	bof;
+	double	angle;
+	t_image	*img;
+	int		off;
+	int		start;
+	int		end;
+}	t_ray;
+
 typedef struct s_cub3d
 {
 	void		*mlx;
@@ -170,8 +181,8 @@ typedef struct s_cub3d
 	t_camera	cam;
 	t_texture	tex;
 	t_map		map;
+	t_ray		ray;
 }	t_cub3d;
-
 
 bool	cub3d_init(t_cub3d *const cub3d, const char *filename);
 int		cub3d_destroy(t_cub3d *const cub3d);

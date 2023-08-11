@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 00:10:31 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/07 02:27:42 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:44:49 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	camera_move_by_key(t_camera *const cam, const t_key *const key, \
 		return (false);
 	camera_get_moving_distance(cam, key, &di, &dj);
 	i_moved = camera_move_to_i(cam, map, tex, di);
-	j_moved = camera_move_to_j(cam, map, tex, di);
+	j_moved = camera_move_to_j(cam, map, tex, dj);
 	return (i_moved | j_moved);
 }
 
@@ -42,8 +42,8 @@ static void	camera_get_moving_distance(t_camera *const cam, \
 {
 	const double	moving_direction = camera_get_moving_direction(cam, key);
 
-	*di = cos(moving_direction) * cam->moving_speed;
-	*dj = sin(moving_direction) * cam->moving_speed;
+	*di = cos(moving_direction) * key->moving_speed;
+	*dj = sin(moving_direction) * key->moving_speed;
 }
 
 static double	camera_get_moving_direction(const t_camera *const cam, \
