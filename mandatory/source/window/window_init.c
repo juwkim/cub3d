@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:17:43 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 02:17:11 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 05:19:55 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,25 @@ static void	window_init_background(t_window *const win, \
 
 bool	window_init(t_window *const win, t_texture *const tex, void *mlx)
 {
+	int	i;
+
 	win->ptr = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, TITLE);
 	if (win->ptr == NULL)
 		return (false);
 	if (image_init(&win->img, mlx, WIN_WIDTH, WIN_HEIGHT) == false)
-	{
-		mlx_destroy_window(mlx, win->ptr);
 		return (false);
-	}
 	if (image_init(&win->bg, mlx, WIN_WIDTH, WIN_HEIGHT) == false)
-	{
-		image_destroy(&win->img, mlx);
-		mlx_destroy_window(mlx, win->ptr);
 		return (false);
+	win->tex_id = ft_calloc(WIN_HEIGHT, sizeof(enum e_texture *));
+	if (win->tex_id == NULL)
+		return (false);
+	i = 0;
+	while (i < WIN_HEIGHT)
+	{
+		win->tex_id[i] = malloc(sizeof(enum e_texture) * WIN_WIDTH);
+		if (win->tex_id[i] == NULL)
+			return (false);
+		++i;
 	}
 	win->width = WIN_WIDTH;
 	win->height = WIN_HEIGHT;

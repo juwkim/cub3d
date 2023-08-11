@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 02:22:28 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 05:39:29 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,13 @@ typedef struct s_img
 
 typedef struct s_window
 {
-	void	*ptr;
-	char	*title;
-	int		width;
-	int		height;
-	t_image	img;
-	t_image	bg;
+	void			*ptr;
+	char			*title;
+	int				width;
+	int				height;
+	t_image			img;
+	t_image			bg;
+	enum e_texture	**tex_id;
 }	t_window;
 
 typedef struct s_key
@@ -166,13 +167,13 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	double	lr;
-	double	winfull_dist;
-	double	angle;
-	t_image	*img;
-	int		off;
-	int		start;
-	int		end;
+	double			lr;
+	double			winfull_dist;
+	double			angle;
+	enum e_texture	tex_id;
+	int				off;
+	int				start;
+	int				end;
 }	t_ray;
 
 typedef struct s_cub3d
