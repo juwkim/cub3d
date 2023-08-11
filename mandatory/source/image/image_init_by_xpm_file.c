@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:43:58 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 03:08:09 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 01:22:00 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ bool	image_init_by_xpm_file(t_image *const img, void *mlx, char *filename)
 		mlx_destroy_image(mlx, img->ptr);
 		return (false);
 	}
+	printf("(img->height, img->len) : %d %d\n", img->height, img->len);
 	return (true);
 }

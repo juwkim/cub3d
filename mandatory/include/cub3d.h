@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/11 23:44:38 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 01:48:47 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ typedef struct s_map
 typedef struct s_ray
 {
 	double	lr;
-	double	bof;
+	double	winfull_dist;
 	double	angle;
 	t_image	*img;
 	int		off;
