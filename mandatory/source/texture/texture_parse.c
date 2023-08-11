@@ -6,13 +6,14 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:50:31 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 14:36:29 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 03:13:45 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "texture.h"
 
 static bool	texture_set(t_texture *const tex, void *mlx, char *line);
+static bool	texture_is_valid(const t_texture *const tex);
 
 bool	texture_parse(t_texture *const tex, t_map *const map, void *mlx, \
 	const int fd)
@@ -38,6 +39,8 @@ bool	texture_parse(t_texture *const tex, t_map *const map, void *mlx, \
 		if (res == false)
 			return (false);
 	}
+	if (texture_is_valid(tex) == false)
+		return (false);
 	dlist_push_back(&map->list, line);
 	return (true);
 }
@@ -56,4 +59,27 @@ static bool	texture_set(t_texture *const tex, void *mlx, char *line)
 		return (texture_set_sprite(tex, mlx, line + 3, id));
 	printf("Error\nUnidentified texture id\n");
 	return (false);
+}
+
+static bool	texture_is_valid(const t_texture *const tex)
+{
+	if (tex->img[T_SOUTH].ptr == NULL || \
+		tex->img[T_EAST].ptr == NULL || \
+		tex->img[T_NORTH].ptr == NULL || \
+		tex->img[T_NORTH].ptr == NULL)
+	{
+		printf("Error\nSome wall texture are omitted\n");
+		return (false);
+	}
+	if (tex->bgcolor[T_FLOOR - N_BGPAD] == 256)
+	{
+		printf("Error\nFloor color are omitted\n");
+		return (false);
+	}
+	if (tex->bgcolor[T_CEILING - N_BGPAD] == 256)
+	{
+		printf("Error\nCeiling color are omitted\n");
+		return (false);
+	}
+	return (true);
 }

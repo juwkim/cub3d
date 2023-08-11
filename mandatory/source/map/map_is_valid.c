@@ -6,21 +6,21 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:09:50 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/11 22:36:25 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 03:13:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static bool	map_is_valid_element(const t_map *const map);
+static bool	map_is_valid_element(const t_map *const map, \
+	const t_texture *const tex);
 static bool	map_is_valid_camera(const t_map *const map);
 static bool	map_is_valid_boundary(const t_map *const map);
-static bool	map_is_boundary(const t_map *const map, \
-	const t_dlist_node *const cur, const int i);
+static bool	map_has_texture(const t_texture *const tex, const char c);
 
-bool	map_is_valid(const t_map *const map)
+bool	map_is_valid(const t_map *const map, const t_texture *const tex)
 {
-	if (map_is_valid_element(map) == false)
+	if (map_is_valid_element(map, tex) == false)
 		return (false);
 	if (map_is_valid_camera(map) == false)
 		return (false);
@@ -29,7 +29,8 @@ bool	map_is_valid(const t_map *const map)
 	return (true);
 }
 
-static bool	map_is_valid_element(const t_map *const map)
+static bool	map_is_valid_element(const t_map *const map, \
+	const t_texture *const tex)
 {
 	const t_dlist *const	list = &map->list;
 	t_dlist_node			*cur;
@@ -46,6 +47,8 @@ static bool	map_is_valid_element(const t_map *const map)
 				printf("Error\nMap includes [%c]\n", *line);
 				return (false);
 			}
+			if (map_has_texture(tex, *line) == false)
+				return (false);
 			++line;
 		}
 		cur = cur->next;
@@ -108,20 +111,17 @@ static bool	map_is_valid_boundary(const t_map *const map)
 	return (true);
 }
 
-static bool	map_is_boundary(const t_map *const map, \
-	const t_dlist_node *const cur, const int i)
+static bool	map_has_texture(const t_texture *const tex, const char c)
 {
-	const t_dlist *const	list = &map->list;
-
-	if (cur->prev == list->head || cur->next == list->tail)
-		return (true);
-	if (i == 0 || cur->item[i + 1] == '\0')
-		return (true);
-	if (cur->item[i - 1] == C_EMPTY || cur->item[i + 1] == C_EMPTY)
-		return (true);
-	if (cur->prev->size <= i || cur->prev->item[i] == C_EMPTY)
-		return (true);
-	if (cur->next->size <= i || cur->next->item[i] == C_EMPTY)
-		return (true);
-	return (false);
+	if (c == 'D' && tex->img[T_DOOR].ptr == NULL)
+	{
+		printf("Error\nDoor texture are omitted\n");
+		return (false);
+	}
+	if (c == 'I' && tex->img[T_ITEM].ptr == NULL)
+	{
+		printf("Error\nItem texture are omitted\n");
+		return (false);
+	}
+	return (true);
 }

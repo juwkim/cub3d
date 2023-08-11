@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:00:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 21:24:34 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 02:44:09 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 
 bool	map_init(t_map *const map);
 void	map_destroy(t_map *const map);
-bool	map_parse(t_map *const map, t_camera *const cam, const int fd);
-bool	map_is_valid(const t_map *const map);
+bool	map_parse(t_map *const map, t_camera *const cam, t_texture *const tex, \
+	const int fd);
+bool	map_is_valid(const t_map *const map, const t_texture *const tex);
+bool	map_is_boundary(const t_map *const map, const t_dlist_node *const cur, \
+	const int i);
+
 bool	map_list_to_array(t_map *const map);
 void	map_block_fill(t_map *const map, enum e_mapchar c, const int i, \
 	const int j);
