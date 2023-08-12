@@ -6,18 +6,14 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:27:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 05:34:17 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 14:31:44 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
-void	window_texture_print(t_window *const win)
+void	window_texture_print(t_window *const win, const int x, const int y)
 {
-	int	x;
-	int	y;
-
-	mlx_mouse_get_pos(win->ptr, &x, &y);
 	if (x < 0 || x >= win->width)
 		return ;
 	if (y < 0 || y >= win->height)

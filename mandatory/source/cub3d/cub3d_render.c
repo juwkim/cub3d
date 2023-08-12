@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 05:49:29 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 06:25:04 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,4 @@ void	cub3d_render(t_cub3d *const cub3d)
 	window_render_background(win);
 	texture_render(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, win->ptr, win->img.ptr, 0, 0);
-	window_texture_print(win);
 }
