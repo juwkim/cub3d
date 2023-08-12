@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_click.c                                      :+:      :+:    :+:   */
+/*   mouse_press.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:54:59 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 14:31:52 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 14:54:21 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 
 int	mouse_press(int keycode, int x, int y, t_cub3d *const cub3d)
 {
-	window_texture_print(&cub3d->win, x, y);
+	t_mouse *const	mouse = &cub3d->mouse;
+
 	if (keycode == Button1)
-		printf("MOUSE_LEFT_BUTTON\n");
+		mouse->left = true;
 	else if (keycode == Button2)
-		printf("MOUSE_RIGHT_BUTTON\n");
+		mouse->right = true;
 	else if (keycode == Button3)
-		printf("MOUSE_SCROLL_BUTTON\n");
+		mouse->scroll = true;
 	else if (keycode == Button4)
-		printf("MOUSE_SCROLL_UP\n");
+		mouse->scroll_up = true;
 	else if (keycode == Button5)
-		printf("MOUSE_SCROLL_DOWN\n");
+		mouse->scroll_down = true;
+	mouse->x = x;
+	mouse->y = y;
 	return (0);
 }

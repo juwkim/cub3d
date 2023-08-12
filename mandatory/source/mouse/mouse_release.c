@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_update.c                                      :+:      :+:    :+:   */
+/*   mouse_release.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 15:03:16 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/12 05:54:59 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/12 14:54:22 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "door.h"
+#include "mouse.h"
 #include "window.h"
 
-bool	door_update(t_cub3d *const cub3d)
+int	mouse_release(int keycode, int x, int y, t_cub3d *const cub3d)
 {
 	t_mouse *const	mouse = &cub3d->mouse;
-	static	int a = 0;
 
-	if (mouse->left == true && cub3d->win.tex_id[mouse->y][mouse->x] == T_DOOR)
-		printf("DOOR %d\n", a++);
-	return (true);
+	if (keycode == Button1)
+		mouse->left = false;
+	else if (keycode == Button2)
+		mouse->right = false;
+	else if (keycode == Button3)
+		mouse->scroll = false;
+	else if (keycode == Button4)
+		mouse->scroll_up = false;
+	else if (keycode == Button5)
+		mouse->scroll_down = false;
+	mouse->x = x;
+	mouse->y = y;
+	return (0);
 }

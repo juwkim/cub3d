@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 05:39:29 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/12 14:46:06 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@ typedef struct s_mouse
 {
 	int		x;
 	int		y;
+	bool	left;
+	bool	right;
+	bool	scroll;
+	bool	scroll_up;
+	bool	scroll_down;
 	double	rotation_speed;
 }	t_mouse;
 
