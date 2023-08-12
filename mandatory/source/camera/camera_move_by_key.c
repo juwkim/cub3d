@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 00:10:31 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 01:53:17 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/13 00:00:00 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,17 @@ static bool	camera_move_to_i(t_camera *const cam, const t_map *const map, \
 		return (false);
 	if (di > 0.0f)
 	{
-		s = _round(cam->i);
-		e = _round(cam->i + di + tex->barrior_dist);
+		s = round(cam->i);
+		e = round(cam->i + di + tex->barrior_dist);
 	}
 	else
 	{
-		s = _round(cam->i + di - tex->barrior_dist);
-		e = _round(cam->i);
+		s = round(cam->i + di - tex->barrior_dist);
+		e = round(cam->i);
 	}
 	while (s <= e)
 	{
-		if (map->tex_id[s][_round(cam->j)] != T_SPACE)
+		if (map->tex_id[s][(int)round(cam->j)] != T_SPACE)
 			return (false);
 		++s;
 	}
@@ -110,17 +110,17 @@ static bool	camera_move_to_j(t_camera *const cam, const t_map *const map, \
 		return (false);
 	if (dj > 0.0f)
 	{
-		s = _round(cam->j);
-		e = _round(cam->j + dj + tex->barrior_dist);
+		s = round(cam->j);
+		e = round(cam->j + dj + tex->barrior_dist);
 	}
 	else
 	{
-		s = _round(cam->j + dj - tex->barrior_dist);
-		e = _round(cam->j);
+		s = round(cam->j + dj - tex->barrior_dist);
+		e = round(cam->j);
 	}
 	while (s <= e)
 	{
-		if (map->tex_id[_round(cam->i)][s] != T_SPACE)
+		if (map->tex_id[(int)round(cam->i)][s] != T_SPACE)
 			return (false);
 		++s;
 	}
