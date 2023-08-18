@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:36:15 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 02:07:38 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 02:55:31 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ t_door	*door_create(const int i, const int j, const double angle)
 	door->i = i;
 	door->j = j;
 	door->angle = angle;
+	door->b_update = false;
 	return (door);
 }
