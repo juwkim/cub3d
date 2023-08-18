@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_update.c                                      :+:      :+:    :+:   */
+/*   map_block_fill.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 00:58:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/08 20:22:48 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/19 01:17:39 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "map.h"
+#include "wall.h"
 #include "door.h"
-#include "window.h"
 
-bool	door_update(t_cub3d *const cub3d)
+void	map_fill(t_cub3d *const cub3d, enum e_mapchar c, const int i, \
+	const int j)
 {
-	t_mouse *const	mouse = &cub3d->mouse;
-
-	if (mouse->left == true && cub3d->win.tex_id[mouse->y][mouse->x] == T_DOOR)
-		printf("DOOR %d\n", cub3d->win.door_idx[mouse->y][mouse->x]);
-	return (true);
+	if (c == C_WALL || c == C_EMPTY)
+		wall_fill_map(cub3d, i, j);
+	else if (c == C_DOOR)
+		door_fill_map(cub3d, i, j);
 }

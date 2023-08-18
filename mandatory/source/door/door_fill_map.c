@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_update.c                                      :+:      :+:    :+:   */
+/*   door_fill_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 00:58:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/08 20:22:48 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/19 01:44:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "door.h"
-#include "window.h"
 
-bool	door_update(t_cub3d *const cub3d)
+void	door_fill_map(t_cub3d *const cub3d, int i, int j)
 {
-	t_mouse *const	mouse = &cub3d->mouse;
+	const int		type = door_type(dlist_get_iterator(&cub3d->map.list, \
+		i / TEX_HEIGHT), j / TEX_WIDTH);
 
-	if (mouse->left == true && cub3d->win.tex_id[mouse->y][mouse->x] == T_DOOR)
-		printf("DOOR %d\n", cub3d->win.door_idx[mouse->y][mouse->x]);
-	return (true);
+	if (type == 0)
+	{
+		door_fill_map_south(cub3d, i, j);
+		door_fill_map_north(cub3d, i + TEX_HEIGHT - 1, j);
+	}
+	else if (type == 1)
+	{
+		door_fill_map_east(cub3d, i, j);
+		door_fill_map_west(cub3d, i, j + TEX_WIDTH - 1);
+	}
 }

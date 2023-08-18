@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:00:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/18 20:11:04 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 01:23:47 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,8 @@ bool	map_is_boundary(const t_map *const map, const t_dlist_node *const cur, \
 bool	map_has_texture(const t_texture *const tex, const char c);
 
 bool	map_list_to_array(t_cub3d *const cub3d, t_map *const map);
-void	map_block_fill(t_cub3d *const cub3d, enum e_mapchar c, const int i, \
+void	map_fill(t_cub3d *const cub3d, enum e_mapchar c, const int i, \
 	const int j);
-void	map_block_fill_south(t_cub3d *const cub3d, const enum e_texture tex, \
-	const int i, int j);
-void	map_block_fill_east(t_cub3d *const cub3d, const enum e_texture tex, \
-	int i, const int j);
-void	map_block_fill_north(t_cub3d *const cub3d, const enum e_texture tex, \
-	const int i, int j);
-void	map_block_fill_west(t_cub3d *const cub3d, const enum e_texture tex, \
-	int i, const int j);
 void	map_trim(t_map *const map);
 
 #endif // __MAP_H__

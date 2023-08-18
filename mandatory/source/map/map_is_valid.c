@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:09:50 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/18 18:35:36 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 00:36:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static bool	map_is_valid_camera(const t_map *const map)
 	cur = map->list.head->next;
 	while (cur != map->list.tail)
 	{
-		line = cur->item;
-		while (*line)
+		line = cur->item - 1;
+		while (*++line)
 		{
 			if (ft_strchr("SENW", *line) && b_cam)
 			{
@@ -79,7 +79,6 @@ static bool	map_is_valid_camera(const t_map *const map)
 			}
 			else if (ft_strchr("SENW", *line))
 				b_cam = true;
-			++line;
 		}
 		cur = cur->next;
 	}

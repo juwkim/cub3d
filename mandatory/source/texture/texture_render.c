@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_render.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:28:05 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 05:52:49 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 00:50:24 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	texture_render(t_cub3d *const cub3d)
 				ray->off);
 			*image_address(&cub3d->win.img, i, j) = *color_addr;
 			cub3d->win.tex_id[i][j] = ray->tex_id;
+			cub3d->win.door_idx[i][j] = ray->door_idx;
 			++i;
 		}
 		++j;

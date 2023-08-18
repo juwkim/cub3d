@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_update.c                                      :+:      :+:    :+:   */
+/*   door_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 00:58:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/19 01:36:15 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/19 01:39:01 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "door.h"
-#include "window.h"
 
-bool	door_update(t_cub3d *const cub3d)
+t_door	*door_create(const int i, const int j, const double angle)
 {
-	t_mouse *const	mouse = &cub3d->mouse;
+	t_door *const	door = malloc(sizeof(t_door));
 
-	if (mouse->left == true && cub3d->win.tex_id[mouse->y][mouse->x] == T_DOOR)
-		printf("DOOR %d\n", cub3d->win.door_idx[mouse->y][mouse->x]);
-	return (true);
+	if (door == NULL)
+		return (NULL);
+	door->i = i;
+	door->j = j;
+	door->angle = angle;
+	return (door);
 }

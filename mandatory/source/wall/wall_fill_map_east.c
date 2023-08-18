@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_block_fill_north.c                             :+:      :+:    :+:   */
+/*   wall_fill_map_east.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:36:28 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/18 20:13:23 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 01:46:00 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "wall.h"
 
-void	map_block_fill_north(t_cub3d *const cub3d, const enum e_texture tex, \
-	const int i, int j)
+void	wall_fill_map_east(t_cub3d *const cub3d, int i, const int j)
 {
 	int				off;
 	t_map *const	map = &cub3d->map;
 
 	off = 0;
-	while (off < TEX_WIDTH)
+	while (off < TEX_HEIGHT)
 	{
-		map->tex_id[i][j] = tex;
+		map->tex_id[i][j] = T_EAST;
 		map->off[i][j] = off;
-		++j;
+		++i;
 		++off;
 	}
 }

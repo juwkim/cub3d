@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_update.c                                      :+:      :+:    :+:   */
+/*   wall_fill_map_north.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 00:58:53 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/08 20:36:28 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/19 01:46:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "door.h"
-#include "window.h"
+#include "wall.h"
 
-bool	door_update(t_cub3d *const cub3d)
+void	wall_fill_map_north(t_cub3d *const cub3d, const int i, int j)
 {
-	t_mouse *const	mouse = &cub3d->mouse;
+	int				off;
+	t_map *const	map = &cub3d->map;
 
-	if (mouse->left == true && cub3d->win.tex_id[mouse->y][mouse->x] == T_DOOR)
-		printf("DOOR %d\n", cub3d->win.door_idx[mouse->y][mouse->x]);
-	return (true);
+	off = 0;
+	while (off < TEX_WIDTH)
+	{
+		map->tex_id[i][j] = T_NORTH;
+		map->off[i][j] = off;
+		++j;
+		++off;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 01:39:12 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/13 00:00:07 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 01:00:36 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ray_set(t_cub3d *const cub3d, const double i, const double j)
 	ray->end = cub3d->win.height * (1 + ray->winfull_dist / dist) / 2.0f;
 	ray->tex_id = cub3d->map.tex_id[int_i][int_j];
 	ray->off = cub3d->map.off[int_i][int_j];
+	if (ray->tex_id == T_DOOR)
+		ray->door_idx = cub3d->map.door_idx[int_i][int_j];
 }
 
 static double	norm(const double di, const double dj)

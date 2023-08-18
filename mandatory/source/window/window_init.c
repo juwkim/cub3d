@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:17:43 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 05:19:55 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 00:56:32 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ bool	window_init(t_window *const win, t_texture *const tex, void *mlx)
 	win->ptr = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, TITLE);
 	if (win->ptr == NULL)
 		return (false);
-	if (image_init(&win->img, mlx, WIN_WIDTH, WIN_HEIGHT) == false)
-		return (false);
-	if (image_init(&win->bg, mlx, WIN_WIDTH, WIN_HEIGHT) == false)
+	if (image_init(&win->img, mlx, WIN_WIDTH, WIN_HEIGHT) == false || \
+		image_init(&win->bg, mlx, WIN_WIDTH, WIN_HEIGHT) == false)
 		return (false);
 	win->tex_id = ft_calloc(WIN_HEIGHT, sizeof(enum e_texture *));
-	if (win->tex_id == NULL)
+	win->door_idx = ft_calloc(WIN_HEIGHT, sizeof(int *));
+	if (win->tex_id == NULL || win->door_idx == NULL)
 		return (false);
 	i = 0;
 	while (i < WIN_HEIGHT)
 	{
 		win->tex_id[i] = malloc(sizeof(enum e_texture) * WIN_WIDTH);
-		if (win->tex_id[i] == NULL)
+		win->door_idx[i] = malloc(sizeof(int) * WIN_WIDTH);
+		if (win->tex_id[i] == NULL || win->door_idx[i] == NULL)
 			return (false);
 		++i;
 	}

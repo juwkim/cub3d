@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/18 19:56:39 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 01:37:19 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_window
 	t_image			img;
 	t_image			bg;
 	enum e_texture	**tex_id;
+	int				**door_idx;
 }	t_window;
 
 typedef struct s_key
@@ -166,7 +167,7 @@ typedef struct s_map
 {
 	enum e_texture	**tex_id;
 	uint8_t			**off;
-	int				**idx;
+	int				**door_idx;
 	int				width;
 	int				height;
 	t_dlist			list;
@@ -181,12 +182,14 @@ typedef struct s_ray
 	int				off;
 	int				start;
 	int				end;
+	int				door_idx;
 }	t_ray;
 
 typedef struct s_door
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	angle;
 }	t_door;
 
 typedef struct s_cub3d
