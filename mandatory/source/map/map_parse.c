@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 04:05:19 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/18 20:12:00 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 02:25:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ bool	map_parse(t_cub3d *const cub3d, const int fd)
 	if (map_is_valid(&cub3d->map, &cub3d->tex) == false)
 		return (false);
 	camera_set(&cub3d->cam, &cub3d->map);
-	dlist_print(&cub3d->map.list);
 	if (map_list_to_array(cub3d, &cub3d->map) == false)
 		return (false);
 	return (true);

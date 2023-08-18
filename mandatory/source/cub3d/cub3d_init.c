@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:54:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 00:35:25 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 02:36:13 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 	}
 	ft_bzero(cub3d, sizeof(t_cub3d));
 	cub3d->mlx = mlx_init();
+	list_init(&cub3d->doors);
 	failed = (cub3d->mlx == NULL || \
 		key_init(&cub3d->key, M_PI / 128.0f, 4.0f) == false || \
 		mouse_init(&cub3d->mouse, 0.00005f) == false || \
@@ -41,7 +42,6 @@ bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 		texture_parse(&cub3d->tex, &cub3d->map, cub3d->mlx, fd) == false || \
 		map_parse(cub3d, fd) == false || \
 		window_init(&cub3d->win, &cub3d->tex, cub3d->mlx) == false);
-	list_init(&cub3d->doors);
 	if (failed == true)
 		cub3d_destroy(cub3d);
 	close(fd);

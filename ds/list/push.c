@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 06:43:01 by juwkim            #+#    #+#             */
-/*   Updated: 2023/03/01 07:17:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/19 02:37:07 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	list_insert(t_list *list, int pos, t_list_data item)
 		cur = cur->next;
 	new_node->next = cur->next;
 	cur->next = new_node;
-	++list->size;
+	list->size++;
 }
 
 t_list_node	*list_insert_list(t_list *list1, t_list_node *prev, t_list *list2)
