@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:52:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/18 18:44:56 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/18 20:10:08 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	map_init_array(t_map *const map);
 static int	get_map_width(const t_map *const map);
 
-bool	map_list_to_array(t_map *const map)
+bool	map_list_to_array(t_cub3d *const cub3d, t_map *const map)
 {
 	int						i;
 	int						j;
@@ -32,9 +32,9 @@ bool	map_list_to_array(t_map *const map)
 		while (j < map->width / TEX_WIDTH)
 		{
 			if (line[j])
-				map_block_fill(map, line[j], i * TEX_HEIGHT, j * TEX_WIDTH);
+				map_block_fill(cub3d, line[j], i * TEX_HEIGHT, j * TEX_WIDTH);
 			else
-				map_block_fill(map, C_EMPTY, i * TEX_HEIGHT, j * TEX_WIDTH);
+				map_block_fill(cub3d, C_EMPTY, i * TEX_HEIGHT, j * TEX_WIDTH);
 			++j;
 		}
 		++i;
@@ -53,21 +53,20 @@ static bool	map_init_array(t_map *const map)
 	map->height = map->list.size * TEX_HEIGHT;
 	map->tex_id = malloc(map->height * sizeof(enum e_texture *));
 	map->off = malloc(map->height * sizeof(uint8_t *));
-	if (map->tex_id == NULL || map->off == NULL)
+	map->idx = malloc(map->height * sizeof(int *));
+	if (map->tex_id == NULL || map->off == NULL || map->idx == NULL)
 		return (false);
 	i = 0;
 	while (i < map->height)
 	{
 		map->tex_id[i] = malloc(map->width * sizeof(enum e_texture));
 		map->off[i] = malloc(map->width * sizeof(uint8_t));
-		if (map->tex_id[i] == NULL)
+		map->idx[i] = malloc(map->width * sizeof(int));
+		if (!map->tex_id[i] || !map->off[i] || !map->idx[i])
 			return (false);
 		j = 0;
 		while (j < map->width)
-		{
-			map->tex_id[i][j] = T_SPACE;
-			++j;
-		}
+			map->tex_id[i][j++] = T_SPACE;
 		++i;
 	}
 	return (true);

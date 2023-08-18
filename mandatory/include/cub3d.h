@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 14:46:06 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/18 19:56:39 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "list.h"
 # include "dlist.h"
 
 # define TITLE		"cub3D"
@@ -165,6 +166,7 @@ typedef struct s_map
 {
 	enum e_texture	**tex_id;
 	uint8_t			**off;
+	int				**idx;
 	int				width;
 	int				height;
 	t_dlist			list;
@@ -181,6 +183,12 @@ typedef struct s_ray
 	int				end;
 }	t_ray;
 
+typedef struct s_door
+{
+	int	i;
+	int	j;
+}	t_door;
+
 typedef struct s_cub3d
 {
 	void		*mlx;
@@ -191,6 +199,7 @@ typedef struct s_cub3d
 	t_texture	tex;
 	t_map		map;
 	t_ray		ray;
+	t_list		doors;
 }	t_cub3d;
 
 bool	cub3d_init(t_cub3d *const cub3d, const char *filename);
