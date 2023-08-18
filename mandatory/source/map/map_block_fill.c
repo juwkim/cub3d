@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:22:48 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 05:08:35 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/18 18:35:45 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	map_block_fill_door(t_map *const map, int i, int j);
 void	map_block_fill(t_map *const map, enum e_mapchar c, const int i, \
 	const int j)
 {
-	if (c == C_WALL)
+	if (c == C_WALL || c == C_EMPTY)
 		map_block_fill_wall(map, i, j);
 	else if (c == C_DOOR)
 		map_block_fill_door(map, i, j);

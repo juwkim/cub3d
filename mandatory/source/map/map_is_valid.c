@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:09:50 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 04:12:28 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/18 18:35:36 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,21 @@ static bool	map_is_valid_camera(const t_map *const map)
 		line = cur->item;
 		while (*line)
 		{
-			if (ft_strchr("SENW", *line))
+			if (ft_strchr("SENW", *line) && b_cam)
 			{
-				if (b_cam == true)
-				{
-					printf("Error\nMap includes multiple camera\n");
-					return (false);
-				}
-				b_cam = true;
+				printf("Error\nMap includes multiple camera\n");
+				return (false);
 			}
+			else if (ft_strchr("SENW", *line))
+				b_cam = true;
 			++line;
 		}
 		cur = cur->next;
 	}
-	return (true);
+	if (b_cam)
+		return (true);
+	printf("Error\nMap includes no camera\n");
+	return (false);
 }
 
 static bool	map_is_valid_boundary(const t_map *const map)

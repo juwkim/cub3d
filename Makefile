@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/08/09 00:34:57 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/18 18:47:23 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,7 +143,7 @@ debug: fclean
 	@ $(MAKE) all DEBUG=1
 
 test:
-	@ ./cub3D asset/correct.cub
+	@ ./cub3D asset/test/default.cub
 
 .PHONY: all clean fclean bonus re dir_guard norm debug $(LIBFT) $(LIBDS) $(LIBMLX)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_list_to_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:52:54 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/08 21:13:41 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/18 18:44:56 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@ bool	map_list_to_array(t_map *const map)
 {
 	int						i;
 	int						j;
-	const t_dlist *const	list = &map->list;
-	const t_dlist_node		*cur = list->head->next;
+	const t_dlist_node		*cur = map->list.head->next;
 	char					*line;
 
 	if (map_init_array(map) == false)
 		return (false);
 	i = 0;
-	while (i < list->size)
+	while (i < map->list.size)
 	{
 		j = 0;
 		line = cur->item;
-		while (line[j] != '\0')
+		while (j < map->width / TEX_WIDTH)
 		{
-			map_block_fill(map, line[j], i * TEX_HEIGHT, j * TEX_WIDTH);
+			if (line[j])
+				map_block_fill(map, line[j], i * TEX_HEIGHT, j * TEX_WIDTH);
+			else
+				map_block_fill(map, C_EMPTY, i * TEX_HEIGHT, j * TEX_WIDTH);
 			++j;
 		}
 		++i;
