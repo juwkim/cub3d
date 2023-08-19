@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_fill.c                                         :+:      :+:    :+:   */
+/*   item.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 20:22:48 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 02:41:55 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 02:40:53 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 02:41:38 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-#include "wall.h"
-#include "door.h"
-#include "item.h"
+#ifndef ITEM_H
+# define ITEM_H
 
-void	map_fill(t_cub3d *const cub3d, enum e_mapchar c, const int i, \
-	const int j)
-{
-	if (c == C_WALL || c == C_EMPTY)
-		wall_fill_map(cub3d, i, j);
-	else if (c == C_DOOR)
-		door_fill_map(cub3d, i, j);
-	else if (c == C_ITEM)
-		item_fill_map(cub3d, i, j);
-}
+# include "cub3d.h"
 
+void	item_fill_map(t_cub3d *const cub3d, int i, int j);
+
+#endif // __ITEM_H__
