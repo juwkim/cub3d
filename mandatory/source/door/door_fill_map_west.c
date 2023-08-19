@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 20:36:28 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 02:48:11 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 00:08:53 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	door_fill_map_west(t_cub3d *const cub3d, int i, const int j)
 	int				off;
 	t_map *const	map = &cub3d->map;
 
-	list_push_back(&cub3d->doors, door_create(i, j, 0.0f));
-	list_push_back(&cub3d->doors, door_create(i + TEX_HEIGHT - 1, j, M_PI));
+	list_push_back(&cub3d->doors, door_create(i, j, 0));
+	list_push_back(&cub3d->doors, door_create(i + TEX_HEIGHT - 1, j, 180));
 	off = TEX_HEIGHT - 1;
 	while (off >= TEX_HEIGHT / 2)
 	{

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 11:33:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 02:32:06 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 01:35:45 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ bool	camera_rotate_by_mouse(t_camera *const cam, const t_window *const win, \
 	int	x;
 	int	y;
 
+	if (mouse->window_rotatable == false)
+		return (false);
 	mlx_mouse_get_pos(win->ptr, &x, &y);
 	if (camera_rotatable_by_mouse(win, x, y) == false)
 		return (false);

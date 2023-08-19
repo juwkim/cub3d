@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 02:55:08 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 01:38:15 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ enum e_key
 	KEY_A = 97,
 	KEY_S = 115,
 	KEY_D = 100,
+	KEY_P = 35,
 	KEY_ESC = 65307,
 	KEY_LEFT = 65361,
 	KEY_RIGHT = 65363,
@@ -68,6 +69,7 @@ enum e_key
 	KEY_A = 0,
 	KEY_S = 1,
 	KEY_D = 2,
+	KEY_P = 35,
 	KEY_ESC = 53,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
@@ -145,6 +147,7 @@ typedef struct s_mouse
 	bool	scroll;
 	bool	scroll_up;
 	bool	scroll_down;
+	bool	window_rotatable;
 	double	rotation_speed;
 }	t_mouse;
 
@@ -189,8 +192,9 @@ typedef struct s_door
 {
 	int		i;
 	int		j;
-	double	angle;
-	bool	b_update;
+	int		angle;
+	int		angle_closed;
+	int		angle_target;
 }	t_door;
 
 typedef struct s_cub3d

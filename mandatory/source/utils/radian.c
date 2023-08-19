@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   radian.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 20:45:36 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 01:17:23 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 00:21:29 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 01:15:12 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include "cub3d.h"
+double	radian(const int degree)
+{
+	const double	rad = degree * M_PI / 180.0f;
 
-bool	is_extension(const char *filename, const char *extension);
-double	radian(const int degree);
-int		degree(const double radian);
-
-#endif // __UTILS_H__
+	return (rad);
+}

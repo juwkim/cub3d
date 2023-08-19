@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 03:57:34 by juwkim            #+#    #+#             */
-/*   Updated: 2023/07/26 18:58:23 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 01:40:06 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 
-int	key_press(const int keycode, t_key *const key)
+int	key_press(const int keycode, t_cub3d *const cub3d)
 {
+	t_key *const	key = &cub3d->key;
+	t_mouse *const	mouse = &cub3d->mouse;
+
 	if (keycode == KEY_W || keycode == KEY_S)
 		key->vertical = keycode;
 	else if (keycode == KEY_A || keycode == KEY_D)
@@ -22,5 +25,7 @@ int	key_press(const int keycode, t_key *const key)
 		key->rotation = keycode;
 	else if (keycode == KEY_ESC)
 		key->esc = true;
+	else if (keycode == KEY_P)
+		mouse->window_rotatable ^= 1;
 	return (0);
 }

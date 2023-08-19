@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 11:33:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/12 14:46:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 01:35:04 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ bool	mouse_init(t_mouse *const mouse, const double rotate_speed)
 	mouse->scroll = false;
 	mouse->scroll_up = false;
 	mouse->scroll_down = false;
+	mouse->window_rotatable = true;
 	return (true);
 }

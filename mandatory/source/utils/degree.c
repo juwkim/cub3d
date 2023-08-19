@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   degree.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 20:45:36 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 01:17:23 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 01:14:47 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 01:17:17 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include "cub3d.h"
+int	degree(const double radian)
+{
+	const int	deg = (int)round(radian * 180.0f / M_PI);
 
-bool	is_extension(const char *filename, const char *extension);
-double	radian(const int degree);
-int		degree(const double radian);
-
-#endif // __UTILS_H__
+	return (deg);
+}
