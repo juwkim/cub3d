@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door_update.c                                      :+:      :+:    :+:   */
+/*   item_update.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 00:03:21 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 05:00:45 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 05:00:29 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 14:43:06 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "door.h"
+#include "item.h"
 
-bool	door_update(t_cub3d *const cub3d)
+bool	item_update(t_cub3d *const cub3d)
 {
 	t_list_node		*cur;
-	t_door			*door;
-	bool			updated;
-	int				door_idx;
+	t_item			*item;
 
-	updated = false;
-	cur = cub3d->doors.head->next;
-	door_idx = 0;
+	cur = cub3d->items.head->next;
 	while (cur != NULL)
 	{
-		door = cur->item;
-		if (door->angle != door->angle_target)
-		{
-			door_remove_map(cub3d, door);
-			if (door->angle > door->angle_target)
-				door->angle--;
-			else
-				door->angle++;
-			door_render_map(cub3d, door, door_idx);
-			updated = true;
-		}
+		item = cur->item;
+		item_remove_map(cub3d, item);
+		item_render_map(cub3d, item);
 		cur = cur->next;
-		++door_idx;
 	}
-	return (updated);
+	return (true);
 }

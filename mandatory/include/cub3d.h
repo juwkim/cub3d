@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 01:38:15 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 05:31:38 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,13 @@ typedef struct s_door
 	int		angle_target;
 }	t_door;
 
+typedef struct s_item
+{
+	int		i;
+	int		j;
+	double	angle;
+}	t_item;
+
 typedef struct s_cub3d
 {
 	void		*mlx;
@@ -208,6 +215,7 @@ typedef struct s_cub3d
 	t_map		map;
 	t_ray		ray;
 	t_list		doors;
+	t_list		items;
 }	t_cub3d;
 
 bool	cub3d_init(t_cub3d *const cub3d, const char *filename);

@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 00:12:48 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 02:33:28 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 14:16:19 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	door_render_map(t_cub3d *const cub3d, const t_door *const door, \
 		k = -2;
 		while (k <= 2)
 		{
-			i = _get_i(door, cnt, k);
-			j = _get_j(door, cnt, k);
+			i = _door_get_i(door, cnt, k);
+			j = _door_get_j(door, cnt, k);
 			if (cub3d->map.tex_id[i][j] == T_SPACE)
 				cub3d->map.tex_id[i][j] = T_DOOR;
 			cub3d->map.off[i][j] = cnt;
@@ -39,18 +39,20 @@ void	door_render_map(t_cub3d *const cub3d, const t_door *const door, \
 	}
 }
 
-int	_get_i(const t_door *const door, const int cnt, const int d)
+int	_door_get_i(const t_door *const door, const int cnt, const int d)
 {
 	double	i;
 
-	i = door->i + cnt * cos(radian(door->angle)) + d * sin(radian(door->angle));
+	i = door->i + cnt * cos(radian(door->angle));
+	i += d * sin(radian(door->angle));
 	return ((int)round(i));
 }
 
-int	_get_j(const t_door *const door, const int cnt, const int d)
+int	_door_get_j(const t_door *const door, const int cnt, const int d)
 {
 	double	j;
 
-	j = door->j + cnt * sin(radian(door->angle)) + d * cos(radian(door->angle));
+	j = door->j + cnt * sin(radian(door->angle));
+	j += d * cos(radian(door->angle));
 	return ((int)round(j));
 }

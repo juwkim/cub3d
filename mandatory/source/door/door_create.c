@@ -6,13 +6,13 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 01:36:15 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 00:01:51 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 04:34:49 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "door.h"
 
-t_door	*door_create(const int i, const int j, const double angle)
+t_door	*door_create(const int i, const int j, const int angle)
 {
 	t_door *const	door = malloc(sizeof(t_door));
 

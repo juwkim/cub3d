@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_render.c                                     :+:      :+:    :+:   */
+/*   item_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 04:44:24 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 05:11:47 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 04:33:41 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 04:35:37 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "window.h"
-#include "texture.h"
+#include "item.h"
 
-void	cub3d_render(t_cub3d *const cub3d)
+t_item	*item_create(const int i, const int j, const int angle)
 {
-	t_window *const	win = &cub3d->win;
+	t_item *const	item = malloc(sizeof(t_item));
 
-	window_render_background(win);
-	texture_render(cub3d);
-	texture_render_sprite(cub3d);
-	mlx_put_image_to_window(cub3d->mlx, win->ptr, win->img.ptr, 0, 0);
+	if (item == NULL)
+		return (NULL);
+	item->i = i;
+	item->j = j;
+	item->angle = angle;
+	return (item);
 }

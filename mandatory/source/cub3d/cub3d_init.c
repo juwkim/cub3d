@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:54:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/19 02:36:13 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 04:36:53 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 		perror("Error\n");
 		return (false);
 	}
-	ft_bzero(cub3d, sizeof(t_cub3d));
 	cub3d->mlx = mlx_init();
 	list_init(&cub3d->doors);
+	list_init(&cub3d->items);
 	failed = (cub3d->mlx == NULL || \
 		key_init(&cub3d->key, M_PI / 128.0f, 4.0f) == false || \
 		mouse_init(&cub3d->mouse, 0.00005f) == false || \
