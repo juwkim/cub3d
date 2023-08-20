@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 16:24:51 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 17:15:57 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ typedef struct s_minimap
 	int				width;
 	int				height;
 	int				alpha;
+	int				cam_i;
+	int				cam_j;
 	t_image			img;
 }	t_minimap;
 

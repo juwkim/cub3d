@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:54:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 16:27:40 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 17:19:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 		map_init(&cub3d->map) == false || \
 		texture_parse(&cub3d->tex, &cub3d->map, cub3d->mlx, fd) == false || \
 		map_parse(cub3d, fd) == false || \
-		minimap_init(&cub3d->minimap, &cub3d->map, 64, cub3d->mlx) == false || \
+		minimap_init(cub3d, 64, cub3d->mlx) == false || \
 		window_init(&cub3d->win, &cub3d->tex, cub3d->mlx) == false)
 		cub3d_destroy(cub3d);
 	close(fd);

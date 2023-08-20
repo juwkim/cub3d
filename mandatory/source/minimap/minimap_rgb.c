@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_render.c                                   :+:      :+:    :+:   */
+/*   minimap_rgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 15:48:23 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 17:30:21 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 16:57:25 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 16:57:56 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minimap.h"
-#include "image.h"
 
-void	minimap_render(t_minimap *const minimap, const t_map *const map, \
-	const t_camera *const cam)
+t_color	minimap_rgb(const t_minimap *const minimap, const unsigned int r, \
+	const unsigned int g, const unsigned int b)
 {
-	int		i;
-	int		j;
+	const t_color	color = (minimap->alpha << 24) | (r << 16) | (g << 8) | b;
 
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			minimap_fill(minimap, map, i, j);
-			j += TEX_WIDTH;
-		}
-		i += TEX_HEIGHT;
-	}
-	minimap_render_camera(minimap, map, (int)cam->i, (int)cam->j);
+	return (color);
 }
