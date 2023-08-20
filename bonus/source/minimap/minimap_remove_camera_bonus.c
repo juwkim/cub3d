@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_remove_camera.c                            :+:      :+:    :+:   */
+/*   minimap_remove_camera_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:28:26 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 17:42:31 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 19:42:34 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	minimap_remove_camera(t_minimap *const minimap, const t_map *const map, \
 	int				minimap_i;
 	int				minimap_j;
 
-	x = 0;
-	while (x < TEX_HEIGHT)
+	x = -TEX_HEIGHT / 2;
+	while (x < TEX_HEIGHT / 2)
 	{
 		minimap_i = (cam_i + x) * minimap->height / map->height;
-		y = 0;
-		while (y < TEX_WIDTH)
+		y = -TEX_WIDTH / 2;
+		while (y < TEX_WIDTH / 2)
 		{
 			minimap_j = (cam_j + y) * minimap->width / map->width;
 			if (*image_address(&minimap->img, minimap_i, minimap_j) == \
