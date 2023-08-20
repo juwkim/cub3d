@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_destroy.c                                    :+:      :+:    :+:   */
+/*   minimap_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 03:27:03 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 15:36:50 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 15:03:33 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 16:25:39 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "window.h"
-#include "key.h"
-#include "mouse.h"
-#include "camera.h"
-#include "texture.h"
-#include "map.h"
-#include "ray.h"
+#include "minimap.h"
+#include "image.h"
 
-int	cub3d_destroy(t_cub3d *const cub3d)
+bool	minimap_init(t_minimap *const minimap, const t_map *const map, \
+	const int alpha, void *mlx)
 {
-	(void)cub3d;
-	exit(EXIT_SUCCESS);
-	return (0);
+	minimap->alpha = alpha;
+	minimap->width = WIN_WIDTH / 4;
+	minimap->height = WIN_HEIGHT / 4;
+	if (image_init(&minimap->img, mlx, minimap->width, \
+		minimap->height) == false)
+		return (false);
+	minimap_render(minimap, map);
+	return (true);
 }

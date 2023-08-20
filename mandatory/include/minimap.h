@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_destroy.c                                    :+:      :+:    :+:   */
+/*   minimap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 03:27:03 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 15:36:50 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 14:50:33 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 16:25:36 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "window.h"
-#include "key.h"
-#include "mouse.h"
-#include "camera.h"
-#include "texture.h"
-#include "map.h"
-#include "ray.h"
+#ifndef MINIMAP_H
+# define MINIMAP_H
 
-int	cub3d_destroy(t_cub3d *const cub3d)
-{
-	(void)cub3d;
-	exit(EXIT_SUCCESS);
-	return (0);
-}
+# include "cub3d.h"
+
+bool	minimap_init(t_minimap *const minimap, const t_map *const map, \
+	const int alpha, void *mlx);
+void	minimap_destroy(const t_minimap *const minimap, void *mlx);
+void	minimap_render(t_minimap *const minimap, const t_map *const map);
+
+#endif // __MINIMAP_H__

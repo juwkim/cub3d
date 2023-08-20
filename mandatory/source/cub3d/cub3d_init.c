@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:54:13 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 04:36:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 16:27:40 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 #include "camera.h"
 #include "texture.h"
 #include "map.h"
+#include "minimap.h"
 #include "ray.h"
 
 bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 {
 	const int	fd = open(filename, O_RDONLY);
-	bool		failed;
 
 	if (fd == -1)
 	{
@@ -32,7 +32,7 @@ bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 	cub3d->mlx = mlx_init();
 	list_init(&cub3d->doors);
 	list_init(&cub3d->items);
-	failed = (cub3d->mlx == NULL || \
+	if (cub3d->mlx == NULL || \
 		key_init(&cub3d->key, M_PI / 128.0f, 4.0f) == false || \
 		mouse_init(&cub3d->mouse, 0.00005f) == false || \
 		camera_init(&cub3d->cam, M_PI / 3.0f) == false || \
@@ -41,9 +41,9 @@ bool	cub3d_init(t_cub3d *const cub3d, const char *filename)
 		map_init(&cub3d->map) == false || \
 		texture_parse(&cub3d->tex, &cub3d->map, cub3d->mlx, fd) == false || \
 		map_parse(cub3d, fd) == false || \
-		window_init(&cub3d->win, &cub3d->tex, cub3d->mlx) == false);
-	if (failed == true)
+		minimap_init(&cub3d->minimap, &cub3d->map, 64, cub3d->mlx) == false || \
+		window_init(&cub3d->win, &cub3d->tex, cub3d->mlx) == false)
 		cub3d_destroy(cub3d);
 	close(fd);
-	return (!failed);
+	return (true);
 }

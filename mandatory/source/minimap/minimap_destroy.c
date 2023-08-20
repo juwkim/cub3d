@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_destroy.c                                    :+:      :+:    :+:   */
+/*   minimap_destroy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 03:27:03 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 15:36:50 by juwkim           ###   ########.fr       */
+/*   Created: 2023/08/20 15:37:51 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 15:39:12 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "window.h"
-#include "key.h"
-#include "mouse.h"
-#include "camera.h"
-#include "texture.h"
-#include "map.h"
-#include "ray.h"
+#include "minimap.h"
+#include "image.h"
 
-int	cub3d_destroy(t_cub3d *const cub3d)
+void	minimap_destroy(const t_minimap *const minimap, void *mlx)
 {
-	(void)cub3d;
-	exit(EXIT_SUCCESS);
-	return (0);
+	if (minimap->img.ptr)
+		image_destroy(&minimap->img, mlx);
 }

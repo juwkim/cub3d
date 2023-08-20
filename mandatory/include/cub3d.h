@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 05:31:38 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 16:24:51 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,14 @@ typedef struct s_window
 	int				**door_idx;
 }	t_window;
 
+typedef struct s_minimap
+{
+	int				width;
+	int				height;
+	int				alpha;
+	t_image			img;
+}	t_minimap;
+
 typedef struct s_key
 {
 	enum e_key	vertical;
@@ -213,6 +221,7 @@ typedef struct s_cub3d
 	t_camera	cam;
 	t_texture	tex;
 	t_map		map;
+	t_minimap	minimap;
 	t_ray		ray;
 	t_list		doors;
 	t_list		items;
