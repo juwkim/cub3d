@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/26 19:07:13 by juwkim            #+#    #+#             */
+/*   Updated: 2023/08/20 17:45:26 by juwkim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef TEXTURE_BONUS_H
+# define TEXTURE_BONUS_H
+
+# include "cub3d_bonus.h"
+# include "image_bonus.h"
+
+bool			texture_init(t_texture *const tex, const int barrior_dist);
+void			texture_destroy(t_texture *const tex, void *mlx);
+
+enum e_texture	texture_get_id(const char *str);
+
+bool			texture_is_wall(const enum e_texture id);
+bool			texture_is_door(const enum e_texture id);
+bool			texture_is_sprite(const enum e_texture id);
+bool			texture_is_bgcolor(const enum e_texture id);
+
+void			texture_render(t_cub3d *const cub3d);
+void			texture_render_sprite(t_cub3d *const cub3d);
+
+bool			texture_parse(t_texture *const tex, t_map *const map, \
+	void *mlx, const int fd);
+bool			texture_set_bgcolor(t_texture *const tex, const char *line, \
+	const enum e_texture id);
+bool			texture_set_wall(t_texture *const tex, void *mlx, \
+	char *filename, const enum e_texture id);
+bool			texture_set_door(t_texture *const tex, void *mlx, \
+	char *filename, const enum e_texture id);
+bool			texture_set_sprite(t_texture *const tex, void *mlx, \
+	char *filename, const enum e_texture id);
+
+#endif // __TEXTURE_BONUS_H__
