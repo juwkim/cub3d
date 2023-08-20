@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/08/19 02:01:48 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/20 18:05:40 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,6 @@ NAME            :=	cub3D
 
 all: $(LIBFT) $(LIBDS) $(LIBMLX)
 	@ $(MAKE) $(NAME)
-	@ $(MAKE) test
 
 $(NAME): $(OBJS)
 	@ $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
