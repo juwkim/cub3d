@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 05:54:59 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/13 00:02:34 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 19:33:20 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	mouse_release(int keycode, int x, int y, t_cub3d *const cub3d)
 
 	if (x < 0 || x >= cub3d->win.width || y < 0 || y >= cub3d->win.height)
 		return (0);
-	if (keycode == Button1)
+	if (keycode == BUTTON1)
 		mouse->left = false;
-	else if (keycode == Button2)
+	else if (keycode == BUTTON2)
 		mouse->right = false;
-	else if (keycode == Button3)
+	else if (keycode == BUTTON3)
 		mouse->scroll = false;
-	else if (keycode == Button4)
+	else if (keycode == BUTTON4)
 		mouse->scroll_up = false;
-	else if (keycode == Button5)
+	else if (keycode == BUTTON5)
 		mouse->scroll_down = false;
 	mouse->x = x;
 	mouse->y = y;

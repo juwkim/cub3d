@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 10:26:53 by yeongo            #+#    #+#              #
-#    Updated: 2023/08/20 18:05:40 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/20 19:22:12 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@
 CC              :=	cc
 CFLAGS          =	-Wall -Wextra -Werror -pipe
 CPPFLAGS        =	-I$(PROJECT_DIR)/include -I$(LIBFT)/include -I$(LIBDS)/include -I$(LIBMLX)
-CPPFLAGS		+=	-I/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers
 DEPFLAGS        =	-MMD -MP -MF $(DEP_DIR)/$*.d
 LDFLAGS         =	-L$(LIBFT) -L$(LIBDS) -L$(LIBMLX)
 LDLIBS          =	-l$(LIBFT) -l$(LIBDS) -l$(LIBMLX)

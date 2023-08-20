@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 02:59:47 by juwkim            #+#    #+#             */
-/*   Updated: 2023/08/20 17:38:01 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/08/20 19:34:23 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <unistd.h>	// To use primitive system calls
 # include <stdbool.h>	// To use true and false
 # include <sys/fcntl.h> // TO use file related system calls
-# include <X11/X.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -39,6 +38,23 @@
 # define N_SPRITE	1
 # define N_BGCOLOR	2
 # define N_BGPAD    6
+
+# define KEY_PRESS		2
+# define KEY_RELEASE	3
+# define BUTTON_PRESS	4
+# define BUTTON_RELEASE	5
+# define DESTROY_NOTIFY	17
+
+# define KEY_PRESS_MASK 		1
+# define KEY_RELEASE_MASK		2  
+# define BUTTON_PRESS_MASK		4  
+# define BUTTON_RELEASE_MASK	8
+
+# define BUTTON1	1
+# define BUTTON2	2
+# define BUTTON3	3
+# define BUTTON4	4
+# define BUTTON5	5
 
 # ifndef M_PI
 #  define M_PI		3.14159265358979323846	/* pi */
