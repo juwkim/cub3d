@@ -6,7 +6,7 @@
 #    By: juwkim <juwkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 01:13:13 by juwkim            #+#    #+#              #
-#    Updated: 2023/08/23 01:13:16 by juwkim           ###   ########.fr        #
+#    Updated: 2023/08/23 22:10:45 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ endif
 
 ifdef DEBUG
     CFLAGS      +=	-g -O0 -DDEBUG -march=native -fsanitize=address,undefined
+	LDFLAGS     +=	-fsanitize=address,undefined
 else
     CFLAGS      +=	-O2 -DNDEBUG
 endif
@@ -86,10 +87,10 @@ NAME            :=	cub3D
 # ---------------------------------------------------------------------------- #
 
 all: $(LIBFT) $(LIBDS) $(LIBMLX)
-	@ $(MAKE) $(NAME)
+	@ $(MAKE) -j $(NAME)
 
 $(NAME): $(OBJS)
-	@ $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+	@ $(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 	@ printf "\n$(MAGENTA)[$(NAME)] Linking Success\n$(WHITE)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | dir_guard
